@@ -1,0 +1,42 @@
+@use '../shared' as v;
+
+.btn {
+  height: 34px;
+  border: none;
+  outline: none;
+  border-radius: 6px;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 15px;
+  font-family: inherit;
+  font-size: 0.75rem;
+  gap: 8px;
+  .icon {
+    display: inline-flex;
+  }
+  &.small {
+    height: 26px;
+  }
+
+  &.large {
+    height: 60px;
+  }
+
+  &:not(:disabled) {
+    cursor: pointer;
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+  }
+
+  @import './solid';
+  @import './secondary';
+  @import './link';
+  @import './square';
+  @import './circle';
+  @import './tab';
+  @import './gray';
+  @import './ghost';
+}

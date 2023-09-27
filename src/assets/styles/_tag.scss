@@ -1,0 +1,54 @@
+.tag {
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    background-color: var(--disabledBg);
+    border: 1px solid var(--border);
+    border-radius: 100px;
+    padding: 0 10px;
+    font-weight: 400;
+    font-size: 10px;
+    line-height: 22px;
+    color: var(--text);
+    &.hoverable{
+        &:hover{
+            color: var(--blue);
+        }
+    }
+    .children{
+        white-space: nowrap;
+    }
+    &.cursor-p:hover:not(.disabled):not(:focus):not(.active) {
+        .children {
+            color: var(--blue);
+        }
+    }
+    &:focus:not(.disabled),
+    &.active:not(.disabled) {
+        background-color: var(--blue);
+        color: var(--bg);
+        .btn-close {
+            svg > path {
+                stroke: var(--bg);
+            }
+        }
+    }
+    &.disabled {
+        color: var(--disabledText);
+        border-color: var(--disabledBorder);
+        .btn-close {
+            svg > path {
+                stroke: var(--disabledText);
+            }
+        }
+    }
+    .btn-close {
+        border: none;
+        outline: none;
+        cursor: pointer;
+        padding: 0;
+        margin: 0;
+        background-color: transparent;
+    }
+}

@@ -1,0 +1,122 @@
+@use '../shared' as v;
+
+.select-control {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0.625rem;
+  @include v.inputWrapper;
+
+  .input-wrapper {
+    .indicator {
+      transition-duration: 0.5s;
+      ;
+    }
+
+    &:not(.disabled) {
+      cursor: pointer;
+    }
+
+    .placeholder {
+      opacity: 0.4;
+    }
+  }
+
+  &.is-open {
+    .input-wrapper {
+      border-color: var(--blue) !important;
+    }
+
+    .options {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .indicator {
+      transform: rotate(180deg);
+    }
+  }
+
+  &.clearable {
+    .input-wrapper {
+      .clear-icon {
+        display: none;
+      }
+
+      &:hover {
+        .indicator {
+          display: none;
+        }
+
+        .clear-icon {
+          display: inline-flex;
+        }
+      }
+    }
+  }
+
+  @include v.disabledInput;
+
+}
+
+.select-options {
+  @include v.menuCard;
+  position: fixed;
+  max-height: 12.5rem;
+  overflow: auto;
+  z-index: 9999;
+
+  li {
+    gap: 0.25rem;
+
+    .option-content {
+      display: inline-flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      padding: 0.625rem;
+
+      .check:last-child {
+        display: none;
+      }
+    }
+
+    &.selected {
+      background-color: var(--selected);
+
+      .check:last-child {
+        display: inline-flex;
+      }
+    }
+
+    &.disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    &:hover {
+      background-color: var(--hover);
+    }
+
+    &:not(.disabled) {
+      cursor: pointer;
+
+      .check {
+        path {
+          stroke: var(--blue);
+        }
+      }
+    }
+  }
+
+  .search-wrapper {
+    input {
+      outline: none;
+      border: none;
+      flex: 1;
+      width: 100%;
+      padding: 0.625rem;
+      font-family: inherit;
+    }
+  }
+}

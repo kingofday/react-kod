@@ -1,0 +1,30 @@
+.avatar {
+    background-color: var(--hover);
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+
+    &.small {
+        width: 1.5rem;
+        height: 1.5rem;
+    }
+
+    &.medium {
+        width: 2.375rem;
+        height: 2.375rem;
+    }
+
+    &.large {
+        width: 3.25rem;
+        height: 3.25rem;
+    }
+
+    &.circle {
+        border-radius: 50%;
+
+        img {
+            border-radius: 50%;
+        }
+    }
+}

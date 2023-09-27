@@ -1,0 +1,17 @@
+body {
+  font-size: 12px;
+}
+.row{
+  display: flex;
+}
+.card {
+  border: solid 1px #eee;
+  padding: 10px;
+  border-radius: 6px;
+  width: 50%;
+  margin: 20px;
+}
+.title {
+  margin-bottom: 20px;
+  font-size: 14px;
+}

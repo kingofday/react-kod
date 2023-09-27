@@ -1,0 +1,82 @@
+@use "../shared" as v;
+
+.form-control {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 0.625rem;
+
+    &.inline {
+        flex-direction: row;
+        align-items: center;
+    }
+
+    @include v.inputWrapper;
+
+    .input-wrapper {
+        input {
+            flex: 1;
+            outline: none;
+            border: none;
+            color: var(--text);
+            background: transparent;
+            width: 100%;
+            font-family: inherit;
+            @include v.inputPlaceholder(var(--text), 0.4);
+        }
+
+        .input-suffix-container {
+            display: flex;
+            gap: .3125rem;
+            color: #323e544d;
+        }
+
+        .suffix,
+        .prefix {
+            color: #323e544d;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+    }
+
+    &.disabled {
+        color: var(--disabledText);
+
+        .input-wrapper {
+            background-color: var(--disabledBg);
+
+            input {
+                color: var(--disabledText);
+                @include v.inputPlaceholder(var(--disabledText), 1);
+            }
+        }
+    }
+
+    &.error {
+        .input-wrapper {
+            border-color: var(--red);
+        }
+    }
+
+    .error-message {
+        margin: 0;
+        color: var(--red);
+        font-size: 0.9rem;
+    }
+}
+
+// [dir="ltr"]{
+//     .form-control{
+//         .input-wrapper {
+//             > :first-child{
+//                 padding-left: 0.625rem;
+//                 padding-right: unset;
+//               }
+//               > :last-child{
+//                 padding-right: 0.625rem;
+//                 padding-left: unset;
+//               }
+//         }
+//     }
+// }

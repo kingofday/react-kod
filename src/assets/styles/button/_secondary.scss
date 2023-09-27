@@ -1,0 +1,30 @@
+@mixin sedo($hover, $active) {
+  &:hover {
+    background-color: $hover;
+    border-color: $hover;
+    color:#fff;
+  }
+  &:focus {
+    background-color: $active;
+    border-color: $active;
+    color:#fff;
+  }
+  &:disabled {
+    background-color: var(--border);
+    color: var(--disabledText);
+    border-width: 0;
+  }
+}
+&.secondary {
+  border-width: 1px;
+  border-style: solid;
+  background-color: transparent;
+  border-color: var(--blue);
+  color: var(--blue);
+  @include sedo(var(--blueHover), var(--blueActive));
+  &.danger {
+    color:var(--red);
+    border-color: var(--red);
+    @include sedo(var(--redHover), var(--redActive));
+  }
+}

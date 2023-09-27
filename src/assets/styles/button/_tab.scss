@@ -1,0 +1,20 @@
+&.tab {
+  background-color: transparent;
+  padding: 0.25rem 0.625rem;
+  height: auto;
+  line-height: normal;
+  &.active {
+    background-color: var(--blue);
+    color: var(--bg);
+    svg{
+      color: var(--bg);
+    }
+  }
+  &:not(.active) {
+    color: var(--text);
+    &:hover {
+      background-color: var(--hover);
+      color: var(--text);
+    }
+  }
+}

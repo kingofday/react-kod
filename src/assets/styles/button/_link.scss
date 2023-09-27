@@ -1,0 +1,19 @@
+&.link {
+  background-color: transparent;
+  padding-left: 0;
+  padding-right: 0;
+  line-height: normal;
+  &:hover {
+    color: var(--blueHover);
+  }
+  &:active {
+    color: var(--blueActive);
+  }
+  &:disabled {
+    color: var(--disabledText);
+  }
+  &.danger {
+    color: var(--red);
+    @include sedo(var(--redHover), var(--redActive));
+  }
+}

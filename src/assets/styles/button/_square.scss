@@ -1,0 +1,30 @@
+@mixin square {
+    width: 34px;
+    height: 34px;
+    padding: 0;
+    color: var(--text);
+    border-radius: 6px;
+    &.small {
+        height: 24px;
+        width: 24px;
+    }
+    &.large {
+        height: 60px;
+        width: 60px;
+    }
+    background-color: transparent;
+    &:hover,
+    &:focus {
+        background-color: var(--hover);
+    }
+    &:disabled {
+        color: var(--disabledText);
+    }
+}
+&.square {
+    @include square;
+}
+&.secondary-square {
+    @include square;
+    border:solid 1px var(--border);
+}

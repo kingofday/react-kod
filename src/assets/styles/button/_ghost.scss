@@ -1,0 +1,28 @@
+&.ghost {
+  background-color: transparent;
+  padding-left: 0;
+  padding-right: 0;
+  line-height: normal;
+  color: var(--text);
+
+  svg {
+    color: var(--text);
+  }
+
+  &:hover {
+    color: var(--hover);
+  }
+
+  &:active {
+    color: var(--blueActive);
+  }
+
+  &:disabled {
+    color: var(--disabledText);
+  }
+
+  &.danger {
+    color: var(--red);
+    @include sedo(var(--redHover), var(--redActive));
+  }
+}

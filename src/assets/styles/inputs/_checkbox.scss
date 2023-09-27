@@ -1,0 +1,63 @@
+.checkbox-control {
+  display: block;
+  position: relative;
+  padding-right: 1.5rem;
+  cursor: pointer;
+  font-size: 0.75rem;
+
+  input {
+    position: absolute;
+    z-index: -1;
+    opacity: 0;
+  }
+  &.disabled {
+    color: var(--disabledText);
+  }
+  .indicator {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 0;
+    height: 1.125rem;
+    width: 1.125rem;
+    background: transparent;
+    border: solid 1px var(--border);
+    border-radius: 3px;
+  }
+  // &:hover input ~ .indicator,
+  // & input:focus ~ .indicator {
+  //     background: #ccc;
+  // }
+  & input:checked ~ .indicator {
+    background: var(--blue);
+  }
+  &:hover input:not([disabled]):checked ~ .indicator,
+  & input:checked:focus ~ .indicator {
+    background: var(--blue);
+  }
+  & input:disabled ~ .indicator {
+    background: var(--disabledBg);
+    opacity: 0.6;
+    pointer-events: none;
+  }
+  .indicator:after {
+    content: '';
+    position: absolute;
+    display: none;
+    left: 50%;
+    top: 50%;
+    width: 3px;
+    height: 8px;
+    border: solid #fff;
+    border-width: 0 2px 2px 0;
+    transform: translate(-50%, calc(-50% - 1px)) rotate(45deg);
+  }
+  & input:checked ~ .indicator:after {
+    display: block;
+  }
+  & input:disabled ~ .indicator:after {
+    border-color: var(--text);
+  }
+}
+[dir='ltr'] {
+}

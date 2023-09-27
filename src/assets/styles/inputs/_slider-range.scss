@@ -1,0 +1,149 @@
+.range-group {
+  $borderHeight: 0.25rem;
+  min-width: 12.5rem;
+  &.disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+  .multi-range {
+    position: relative;
+    height: 50px;
+    display: block;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    input[type='range'] {
+      position: absolute;
+      left: 0;
+    }
+    input[type='range'] {
+      box-sizing: border-box;
+      appearance: none;
+      width: 100%;
+      height: $borderHeight;
+      background-color: var(--border);
+      border-radius: 50px;
+      border-radius: 16px;
+      margin: 0;
+      border: 0;
+      outline: none;
+      background-size: 100% 2px;
+      pointer-events: none;
+
+      &:active,
+      &:focus {
+        outline: none;
+      }
+    }
+
+    input[type='range'] {
+      -webkit-appearance: none; /* Hides the slider so that custom slider can be made */
+      width: 100%; /* Specific width is required for Firefox. */
+    }
+
+    input[type='range']::-webkit-slider-thumb {
+      -webkit-appearance: none;
+    }
+
+    input[type='range']:focus {
+      outline: none; /* Removes the blue border. You should probably do some kind of focus styling for accessibility reasons though. */
+    }
+
+    input[type='range']::-ms-track {
+      width: 100%;
+      cursor: pointer;
+
+      /* Hides the slider so custom styles can be added */
+      background: transparent;
+      border-color: transparent;
+      color: transparent;
+    }
+
+    /* Special styling for WebKit/Blink */
+    input[type='range']::-webkit-slider-thumb {
+      height: 1.25rem;
+      width: 1.25rem;
+      border-radius: 50%;
+      border: solid 1px #b2b2b2;
+      background-color: var(--bg);
+      position: relative;
+      z-index: 50;
+      cursor: pointer;
+      appearance: none;
+      pointer-events: all;
+      box-shadow: 0 1px 4px 0.5px rgba(0, 0, 0, 0.25);
+      &:hover {
+        height: 1.35rem;
+        width: 1.35rem;
+      }
+    }
+
+    /* All the same stuff for Firefox */
+    input[type='range']::-moz-range-thumb {
+      height: 28px;
+      width: 28px;
+      border-radius: 28px;
+      border: solid 1px #b2b2b2;
+      background-color: #fff;
+      position: relative;
+      z-index: 50;
+      cursor: pointer;
+      appearance: none;
+      pointer-events: all;
+      box-shadow: 0 1px 4px 0.5px rgba(0, 0, 0, 0.25);
+    }
+
+    /* All the same stuff for IE */
+    input[type='range']::-ms-thumb {
+      height: 28px;
+      width: 28px;
+      border-radius: 28px;
+      border: solid 1px #b2b2b2;
+      background-color: #fff;
+      position: relative;
+      z-index: 10000;
+      cursor: pointer;
+      appearance: none;
+      pointer-events: all;
+      box-shadow: 0 1px 4px 0.5px rgba(0, 0, 0, 0.25);
+    }
+  }
+
+  .range-color {
+    background-color: var(--blue);
+    border-radius: 50px;
+    width: 100%;
+    display: block;
+    height: $borderHeight;
+    position: absolute;
+    z-index: 10;
+  }
+
+  input[type='range']::-ms-track {
+    width: 100%;
+    height: 8.4px;
+    cursor: pointer;
+    background: transparent;
+    border-color: transparent;
+    border-width: 16px 0;
+    color: transparent;
+  }
+  input[type='range']::-ms-fill-lower {
+    background: #2a6495;
+    border: 0.2px solid #010101;
+    border-radius: 2.6px;
+    box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+  }
+  input[type='range']:focus::-ms-fill-lower {
+    background: #3071a9;
+  }
+  input[type='range']::-ms-fill-upper {
+    background: #3071a9;
+    border: 0.2px solid #010101;
+    border-radius: 2.6px;
+    box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+  }
+  input[type='range']:focus::-ms-fill-upper {
+    background: #367ebd;
+  }
+}

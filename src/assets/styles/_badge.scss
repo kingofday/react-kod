@@ -1,0 +1,35 @@
+.badge {
+    color: white;
+    border-radius: 100px;
+    min-width: 16px;
+    min-height: 16px;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 0.625rem;
+    padding: 0 8px;
+    font-weight: 700;
+
+    &.primary {
+        background-color: var(--blue);
+    }
+
+    &.danger {
+        background-color: var(--red);
+    }
+
+    &.small {
+        width: 16px;
+        height: 16px;
+    }
+
+    &.medium {
+        width: 18px;
+        height: 18px;
+    }
+
+    &.large {
+        width: 20px;
+        height: 20px;
+    }
+}

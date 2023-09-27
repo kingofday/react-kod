@@ -1,0 +1,12 @@
+.accordion_details {
+  transition: all 0.5s cubic-bezier(0.445, 0.05, 0.55, 0.95),opacity 0.5s cubic-bezier(0.445, 0.05, 0.55, 0.95);
+  height: 0;
+  overflow: hidden;
+  opacity: 0;
+  padding: 0 1.375rem;
+  background-color: white;
+}
+.open_details {
+  padding: 0.75rem 1.375rem;
+  opacity: 1;
+}

@@ -1,0 +1,178 @@
+:root {
+  --bg: #fff;
+  --text: #323e54;
+  --hover: #f3f5f9;
+  --border: #e0e3eb;
+  --icon: #787b86;
+  --selected: #d5f1ff;
+  --tooltip: #2a2e39;
+  --gray: #a3a6af;
+  --modalBg: #fefefe;
+  --disabledText: #b2b5be;
+  --disabledBorder: #d1d4dc;
+  --disabledBg: #f0f3fa;
+  --pics: #143366;
+  --cardShadow:rgba(0, 0, 0, 0.2);
+  //=== co colors
+  --blue: #448aff;
+  --blueHover: #3d7ce5;
+  --blueActive: #3367bf;
+  --red: #f7525f;
+  --redHover: #de4a55;
+  --redActive: #b93d47;
+  --redTooltip: #f7525fcc;
+  --green: #00a97f;
+  --greenHover: #009872;
+  --greenActive: #007f5f;
+  --greenTooltip: #00a97fcc;
+  --orange: #ff9800;
+  --turquise: #26c6da;
+  --purple: #9575cd;
+}
+
+.dark {
+  --bg: #131722;
+  --text: #d1d4dc;
+  --hover: #2f3241;
+  --border: #434651;
+  --icon: #787b86;
+  --selected: #21384d;
+  --tooltip: #363a45;
+  --gray: #4f525d;
+  --modalBg: #1e222d;
+  --disabledText: #50535e;
+  --disabledBorder: #50535e;
+  --disabledBg: #2a2e39;
+  --pics: #7f9ef3;
+  --cardShadow:rgba(f, f, f, 0.2);
+}
+
+//=== Spacing
+$spacing1: 0.25rem;
+$spacing2: 0.625rem;
+$spacing3: 1rem;//16px
+$spacing4: 1.25rem;//20px
+$spacing5: 1.875rem;//30px
+$spacing6: 2.5rem;
+$spacing7: 4rem;
+
+$xs: 36rem;
+$md: 48rem;
+$lg: 62rem;
+$xl: 75rem;
+$xxl: 100rem;
+.chevron {
+  path {
+    stroke: var(--text);
+  }
+}
+.cursor-p{
+  cursor: pointer;
+}
+@mixin hideScrollBar {
+  -ms-overflow-style: none;
+  /* IE and Edge */
+  scrollbar-width: none;
+
+  /* Firefox */
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+@mixin menuCard {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  flex-direction: column;
+  width: 100%;
+  background-color: var(--bg);
+  z-index: 999;
+  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.2);
+  border-radius: 6px;
+  // transition: height 0.5s linear;
+  // -webkit-transition: height, 0.5s linear;
+  > li {
+    margin-left: 0;
+    margin-right: 0;
+  }
+}
+@mixin inputWrapper {
+  .input-wrapper {
+    border-radius: 6px;
+    border: solid 1px var(--border);
+    display: inline-flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 5px;
+    padding: 10px;
+    width: 100%;
+    height: 2.125rem;
+  }
+  &:not(.disabled) {
+    .input-wrapper:hover {
+      border-color: var(--gray);
+    }
+    .input-wrapper.focused {
+      border-color: var(--blue);
+    }
+  }
+}
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(startYposition);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(endYposition);
+  }
+}
+
+@keyframes fadeOut {
+  0% {
+    opacity: 1;
+    transform: translateY(startYposition);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translateY(endYposition);
+  }
+}
+@mixin inputPlaceholder($color, $opacity) {
+  &::placeholder {
+      color: $color;
+      opacity: $opacity;
+      font-family: inherit;
+      font-size: 0.75rem;
+  }
+
+  &::-webkit-input-placeholder {
+      color: $color;
+      opacity: $opacity;
+      font-family: inherit;
+      font-size: 0.75rem;
+  }
+
+  &:-ms-input-placeholder {
+      color: $color;
+      opacity: $opacity;
+      font-family: inherit;
+      font-size: 0.75rem;
+  }
+}
+@mixin disabledInput{
+  &.disabled {
+    color: var(--disabledText);
+  
+    .input-wrapper {
+      background-color: var(--disabledBg);
+  
+      input {
+        color: var(--disabledText);
+        @include inputPlaceholder(var(--disabledText), 1);
+      }
+    }
+  }
+}

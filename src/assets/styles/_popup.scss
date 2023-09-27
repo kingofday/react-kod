@@ -1,0 +1,19 @@
+#pop-up {
+    position: absolute;
+
+    .card {
+        padding: .625rem;
+
+        ul {
+            display: flex;
+            flex-flow: column;
+            gap: .625rem;
+
+            li {
+                display: flex;
+                align-items: center;
+                gap: .625rem;
+            }
+        }
+    }
+}

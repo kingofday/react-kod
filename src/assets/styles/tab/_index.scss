@@ -1,0 +1,179 @@
+@use "../shared";
+
+@mixin tabTitle {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 15px;
+    cursor: pointer;
+    position: relative;
+
+    &.active {
+        color: var(--blue);
+        background-color: transparent;
+
+        &:after {
+            content: "";
+            width: calc(100% - 30px);
+        }
+
+        &:hover {
+            color: var(--blueHover);
+
+            &:after {
+                background-color: var(--blueHover);
+                width: 100%;
+            }
+        }
+    }
+
+    &:hover {
+        color: var(--blue);
+    }
+
+    &.disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+    }
+}
+
+.tabs {
+    display: flex;
+    flex-direction: column;
+
+    &.center {
+        align-items: center;
+
+        &.bordered-pill {
+            .tab-nav-list {
+                display: inline-flex;
+            }
+        }
+    }
+
+    >.tab-nav-list {
+        display: flex;
+        overflow-x: auto;
+        overflow-y: hidden;
+        max-width: 100%;
+
+        .tab-title {
+            color: var(--text);
+            white-space: nowrap;
+
+            >* {
+                font-size: inherit;
+            }
+
+            &:after {
+                transition: all 0.1s linear;
+                bottom: 0;
+                position: absolute;
+                height: 3px;
+                background-color: var(--blue);
+            }
+        }
+    }
+
+    &.normal {
+        >.tab-nav-list {
+            border-bottom: 1px solid var(--border);
+
+            .tab-title {
+                @include tabTitle;
+            }
+        }
+    }
+
+    &.pill {
+        .tab-nav-list {
+            gap: 10px;
+
+            .tab-title {
+                display: inline-flex;
+                justify-content: center;
+                align-items: center;
+                gap: 10px;
+                padding: 5px 10px;
+                cursor: pointer;
+                color: var(--text);
+                border-radius: 6px;
+
+                // position: relative;
+                &.active {
+                    background-color: var(--blue);
+                    color: var(--bg);
+                }
+
+                &:not(.active):hover {
+                    background-color: var(--hover);
+                }
+            }
+        }
+    }
+
+    &.bordered-pill {
+        .tab-nav-list {
+            gap: 10px;
+            border-radius: 6px;
+            border: solid 1px var(--border);
+            padding: 5px;
+            display: inline-flex;
+
+            .tab-title {
+                display: inline-flex;
+                justify-content: center;
+                align-items: center;
+                gap: 10px;
+                padding: 5px 10px;
+                cursor: pointer;
+                color: var(--text);
+                border-radius: 6px;
+
+                // position: relative;
+                &.active {
+                    background-color: var(--blue);
+                    color: var(--bg);
+                }
+
+                &:not(.active):hover {
+                    background-color: var(--hover);
+                }
+            }
+        }
+    }
+
+    .tab-content-list {
+        display: flex;
+        padding-top: 20px;
+        width: 100%;
+
+        .tab-content {
+            width: 100%;
+
+            &.d-none {
+                display: none;
+            }
+        }
+    }
+
+    &.visibility {
+        .tab-content-list {
+            .tab-content {
+                &.d-none {
+                    display: inherit;
+                    position: absolute;
+                    visibility: hidden;
+                    bottom: -100%;
+                    left: 0;
+                }
+            }
+        }
+    }
+    &.hide-scroll-bar{
+        @include shared.hideScrollBar;
+    }
+}
+
+@import "./tab-buttons"

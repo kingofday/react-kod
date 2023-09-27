@@ -1,0 +1,56 @@
+.paginationWrapper {
+  padding: 2rem 0;
+  display: flex;
+  justify-content: center;
+  direction: ltr;
+
+
+  .separator {
+    width: 1rem;
+    margin: 0 0.25rem;
+    line-height: 35px;
+  }
+
+  .pageItem {
+    background: transparent;
+    border: none;
+    margin: 0 0.25rem;
+    border-radius: 100%;
+    font-weight: 400;
+    height: 34px;
+    width: 34px;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+
+    &.prev {
+      background-color: var(--hover);
+    }
+
+    svg {
+      vertical-align: middle;
+    }
+
+    &:hover {
+      cursor: pointer;
+      background-color: var(--hover);
+    }
+
+    &:focus {
+      outline: 0;
+    }
+  }
+
+  .active {
+    background-color: var(--selected) !important;
+    color: var(--text)
+  }
+
+  .sides {
+    border: 1px solid var(--border);
+
+    &:hover {
+      text-decoration: none;
+    }
+  }
+}

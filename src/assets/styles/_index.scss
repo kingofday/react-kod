@@ -1,0 +1,97 @@
+@forward "./shared";
+@import "./spinner";
+@import "./griding";
+@import "./button";
+@import "./menu";
+@import "./drawer";
+@import "./switch";
+@import "./tooltip";
+@import "./tab";
+@import "./tag";
+@import "./card";
+@import "./breadcrumb";
+@import "./modal";
+@import "./inputs/checkbox";
+@import "./inputs/input";
+@import "./inputs/radio";
+@import "./inputs/select";
+@import "./inputs/multiselect";
+@import "./inputs/slider-range";
+@import "./pagination";
+@import "./badge";
+@import "./toast";
+@import "./avatar";
+@import "./popup";
+@import "./accordion";
+
+
+* {
+  box-sizing: border-box;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+body {
+  font-size: 12px;
+  color: var(--text)
+}
+
+.border {
+  padding: 20px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+}
+.vertical-scroll-bar {
+  overflow-y: auto;
+
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  /* Handle */
+  &::-webkit-scrollbar-thumb {
+    background: var(--disabledBorder);
+    border-radius: 3px;
+    width: 6px;
+  }
+
+  /* Handle on hover */
+  &::-webkit-scrollbar-thumb:hover {
+    background: var(--gray);
+  }
+}
+
+.horizontal-scroll-bar {
+  overflow-x: auto;
+  height: 100%;
+
+  &::-webkit-scrollbar {
+    height: 6px;
+    margin-bottom: .3125rem;
+  }
+
+  &::-webkit-scrollbar-track {
+    background-color: transparent;
+    margin-bottom: .3125rem;
+  }
+
+  /* Handle */
+  &::-webkit-scrollbar-thumb {
+    background: var(--disabledBorder);
+    border-radius: 3px;
+    height: 6px;
+  }
+
+  /* Handle on hover */
+  &::-webkit-scrollbar-thumb:hover {
+    background: var(--gray);
+  }
+}

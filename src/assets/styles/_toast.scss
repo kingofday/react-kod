@@ -1,0 +1,96 @@
+@mixin progress($color, $bgColor) {
+  progress::-webkit-progress-bar {
+    background-color: $bgColor;
+  }
+  progress::-webkit-progress-value {
+    background-color: $color !important;
+  }
+  progress {
+    background-color: $bgColor;
+  }
+  progress::-moz-progress-bar {
+    background-color: $color !important;
+  }
+  progress {
+    background-color: $bgColor;
+  }
+}
+.toasts-wrapper {
+  position: fixed;
+  z-index: 9999;
+  display: none;
+  gap: 10px;
+  flex-direction: column;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 20px;
+  &:has(.toast) {
+    display: flex;
+  }
+  &.d-flex{
+    display: flex;
+  }
+  .toast {
+    display: inline-flex;
+    gap: 0.625rem;
+    overflow: hidden;
+    position: relative;
+    background: white;
+    z-index: 99;
+    box-shadow: 0px 2px 6px rgb(0 0 0 / 20%);
+    border-radius: 6px;
+    padding: 15px;
+    overflow: hidden;
+    .icon {
+      display: flex;
+      align-items: center;
+    }
+    .toast-content {
+      display: inline-flex;
+      flex-direction: column;
+      .title {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        line-height: 21px;
+        font-weight: 700;
+        .title-content {
+          display: inline-flex;
+          align-items: center;
+        }
+        .btn-close {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          cursor: pointer;
+          &:hover svg {
+            color: var(--blue);
+          }
+        }
+      }
+      .message {
+        line-height: 21px;
+      }
+    }
+
+    progress {
+      position: absolute;
+      left: 0;
+      width: 100%;
+      bottom: -8px;
+      border: none;
+    }
+    &.success {
+      @include progress(var(--green), var(--bg));
+    }
+    &.error {
+      @include progress(var(--red), var(--bg));
+    }
+    &.info {
+      @include progress(var(--blue), var(--bg));
+    }
+    &.warning {
+      @include progress(var(--orange), var(--bg));
+    }
+  }
+}
