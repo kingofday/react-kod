@@ -87,7 +87,7 @@
     }
 
     &.pill {
-        .tab-nav-list {
+        >.tab-nav-list {
             gap: 10px;
 
             .tab-title {
@@ -114,7 +114,7 @@
     }
 
     &.bordered-pill {
-        .tab-nav-list {
+        >.tab-nav-list {
             gap: 10px;
             border-radius: 6px;
             border: solid 1px var(--border);
