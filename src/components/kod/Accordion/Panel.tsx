@@ -1,7 +1,5 @@
 import { useRef } from "react";
-// Context
 import { useAccordionContext } from "./Context";
-// Type
 import { PanelProps } from "../Shared/Models/Accordions";
 import Summary from "./Summary";
 
