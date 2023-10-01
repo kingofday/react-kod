@@ -1,3 +1,4 @@
+@use 'sass:math';
 @use "./shared";
 
 .row {
@@ -15,12 +16,12 @@
 
   @each $space in $spaces {
     &.h-spacing-#{$space} {
-      margin-left: #{-$space/2}px;
-      margin-right: #{-$space/2}px;
+      margin-left: #{-1 * math.div($space , 2)}px;
+      margin-right: #{-1 * math.div($space , 2)}px;
 
       >.col {
-        padding-left: #{$space/2}px;
-        padding-right: #{$space/2}px;
+        padding-left: #{math.div($space , 2)}px;
+        padding-right: #{math.div($space , 2)}px;
       }
     }
 
@@ -38,8 +39,8 @@
 @for $i from 1 through 24 {
   @media (max-width: shared.$xs) {
     .xs-#{$i} {
-      flex: 0 0 (100/ (24 / $i)) * 1%;
-      max-width: (100/ (24 / $i)) * 1%;
+      flex: 0 0 math.div(100, math.div(24 , $i)) * 1%;
+      max-width: math.div(100, math.div(24 , $i)) * 1%;
     }
   }
 }
@@ -47,8 +48,8 @@
 @for $i from 1 through 24 {
   @media (min-width: shared.$xs) {
     .sm-#{$i} {
-      flex: 0 0 (100%/ (24 / $i));
-      max-width: (100%/ (24 / $i));
+      flex: 0 0 math.div(100%, math.div(24 , $i));
+      max-width: math.div(100%, math.div(24 , $i));
     }
   }
 }
@@ -56,8 +57,8 @@
 @for $i from 1 through 24 {
   @media (min-width: shared.$md) {
     .md-#{$i} {
-      flex: 0 0 (100%/ (24 / $i));
-      max-width: (100%/ (24 / $i));
+      flex: 0 0 math.div(100%, math.div(24 , $i));
+      max-width: math.div(100%, math.div(24 , $i));
     }
   }
 }
@@ -65,8 +66,8 @@
 @for $i from 1 through 24 {
   @media (min-width: shared.$lg) {
     .lg-#{$i} {
-      flex: 0 0 (100/ (24 / $i)) * 1%;
-      max-width: (100/ (24 / $i)) * 1%;
+      flex: 0 0 math.div(100, math.div(24 , $i)) * 1%;
+      max-width: math.div(100, math.div(24 , $i)) * 1%;
     }
   }
 }
@@ -74,8 +75,8 @@
 @for $i from 1 through 24 {
   @media (min-width: shared.$xl) {
     .xl-#{$i} {
-      flex: 0 0 (100/ (24 / $i)) * 1%;
-      max-width: (100/ (24 / $i)) * 1%;
+      flex: 0 0 math.div(100, math.div(24 , $i)) * 1%;
+      max-width: math.div(100, math.div(24 , $i)) * 1%;
     }
   }
 }
@@ -83,8 +84,8 @@
 @for $i from 1 through 24 {
   @media (min-width: shared.$xxl) {
     .xxl-#{$i} {
-      flex: 0 0 (100/ (24 / $i)) * 1%;
-      max-width: (100/ (24 / $i)) * 1%;
+      flex: 0 0 math.div(100, math.div(24 , $i)) * 1%;
+      max-width: math.div(100, math.div(24 , $i)) * 1%;
     }
   }
 }

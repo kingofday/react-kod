@@ -5,7 +5,7 @@ export interface RadioItemProps {
     children?: ReactNode;
     title?: string;
 }
-interface RadioProps extends RadioItemProps {
+export interface RadioProps extends RadioItemProps {
     name?: string;
     checked?: boolean;
     disabled?: boolean;

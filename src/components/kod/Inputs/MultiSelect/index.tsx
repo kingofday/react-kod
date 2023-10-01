@@ -1,9 +1,9 @@
 import { ReactElement, useEffect, useState, useRef, ChangeEvent, ReactNode } from "react";
 import { default as Opt, SelectOptionItemProps } from "./Option";
-import ChevronDown from "modules/Infra/Shared/ChevronDown";
-import ChevronUp from "modules/Infra/Shared/ChevronUp";
-import Tag from "modules/Infra/Tag";
-import Badge from "modules/Infra/Badge";
+import ChevronDown from "../../Shared/ChevronDown";
+import ChevronUp from "../../Shared/ChevronUp";
+import Badge from "../../Badge";
+import Tag from "../../Tag";
 
 interface SelectProps {
     name?: string;

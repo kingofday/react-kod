@@ -1,9 +1,9 @@
-import { InputHTMLAttributes, ReactElement, useEffect, useState, useRef, cloneElement, ReactNode, ChangeEvent, useCallback } from "react";
+import { InputHTMLAttributes, ReactElement, useEffect, useState, useRef, ReactNode, ChangeEvent } from "react";
 import Opt, { SelectOptionItemProps } from "./Option";
-import ChevronDown from "modules/Infra/Shared/ChevronDown";
-import CloseIcon from "modules/Infra/Shared/ClosedIcon";
+import ChevronDown from "../../Shared/ChevronDown";
+import CloseIcon from "../../Shared/ClosedIcon";
 import { createPortal } from "react-dom";
-import useIntersectionObserver from "modules/Shared/Hooks/useIntersectionObserver";
+import useIntersectionObserver from "@/src/components/useIntersectionObserver";
 
 interface SelectProps extends Omit<InputHTMLAttributes<HTMLInputElement>, "onChange"> {
     label?: ReactNode;
@@ -89,18 +89,18 @@ const Select = ({
         }
     }, []);
 
-    const { ref:wrapperRef } = useIntersectionObserver({
-        options:{
-            root: null, 
+    const { ref: wrapperRef } = useIntersectionObserver({
+        options: {
+            root: null,
             rootMargin: "-200px 0px 0px 0px",
             threshold: 0.1,
         },
-        callback:(entry)=> {
-            if(!entry.isIntersecting) {
+        callback: (entry) => {
+            if (!entry.isIntersecting) {
                 toggle(false)
             }
         },
-      });
+    });
     return (
         <div ref={ref} className={`select-control${allowClear && selectedOption ? " clearable" : ""} ${className ?? ""}${isOpen ? " is-open" : ""}${disabled ? " disabled" : ""}`}>
             {label ? <label htmlFor={name}>{label}</label> : null}

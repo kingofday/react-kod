@@ -1,4 +1,4 @@
-import { ReactElement, useEffect, useState, ForwardRefExoticComponent, forwardRef, useImperativeHandle, useRef } from "react";
+import { ReactElement, useEffect, useState, ForwardRefExoticComponent, forwardRef, useRef } from "react";
 import { TabProps } from "./Tab";
 import TabTitle from "./TabTitle";
 interface TabsProps {

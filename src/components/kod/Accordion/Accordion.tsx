@@ -1,4 +1,4 @@
-import React, { Children, useEffect, useState } from "react";
+import { Children, useEffect, useState } from "react";
 
 import AccordionContext from "./Context/AccordionContext";
 // Type
@@ -19,9 +19,9 @@ const Accordion = ({
   const childrenLength = Children.count(children);
   const Component = element;
   const initializeModel = (panelKey: number) => {
-    return Array.apply(null, Array(childrenLength)).map((item, index) => {
+    return Array.apply(null, Array(childrenLength)).map((item:any, index:number) => {
       return {
-        panelKey: index,
+        panelKey: index??item.key,
         statusOpen: panelKey === index,
       };
     });

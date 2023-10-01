@@ -1,5 +1,5 @@
 import { InputHTMLAttributes, ChangeEvent, ReactElement, ReactNode } from "react";
-import RadioOption, { RadioItemProps } from "./Radio";
+import RadioOption, { RadioItemProps, RadioProps } from "./Radio";
 interface RadioGroupProps extends InputHTMLAttributes<HTMLInputElement> {
     name: string;
     value?: any;
@@ -47,4 +47,4 @@ const RadioGroup = ({
 };
 
 export default RadioGroup;
-export const Radio = RadioOption;
+export const Radio: (props: RadioProps) => JSX.Element = RadioOption;

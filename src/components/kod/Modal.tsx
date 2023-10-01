@@ -1,9 +1,8 @@
 import { ReactNode, useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
-import { useTranslation } from "react-i18next";
-import BreakPoints from "./BreakPoints";
 import Button from "./Button";
 import CloseIcon from "./Shared/ClosedIcon";
+import BreakPoints from "../BreakPoints";
 
 interface ModalProps {
   open: boolean,
@@ -21,6 +20,11 @@ interface ModalProps {
   fullscreen?: boolean,
   bodyClass?: string,
   className?: string,
+  strings?: {
+    close: "بستن",
+    cancel: "انصراف",
+    submit: "تایید"
+  },
   [key: string]: unknown
 }
 
@@ -39,10 +43,10 @@ const Modal = ({
   cancelText,
   onCancel,
   footer,
+  strings,
   fullscreen = false,
   ...props
 }: ModalProps) => {
-  const { t } = useTranslation();
   const modalRef = useRef<HTMLDivElement>(null);
   const [isOpen, toggle] = useState(open);
   const handleClose = () => {
@@ -78,7 +82,7 @@ const Modal = ({
       ref={modalRef}
       {...(props.id ? { id: props.id + "-body" } : {})}
     >
-      {!hideCloseButton && !title ? <Button className="btn-close" variant="square" onClick={handleClose} ariaLabel={t("close")}>
+      {!hideCloseButton && !title ? <Button className="btn-close" variant="square" onClick={handleClose} ariaLabel={strings?.close}>
         {<CloseIcon size={20} />}
       </Button> : null}
       {title ? <div className="modal-title">
@@ -86,7 +90,7 @@ const Modal = ({
           {titleIcon ? <span className="icon">{titleIcon}</span> : null}
           {title}
         </div>
-        {!hideCloseButton ? <Button className="btn-close-title" variant="square" onClick={handleClose} ariaLabel={t("close")}>
+        {!hideCloseButton ? <Button className="btn-close-title" variant="square" onClick={handleClose} ariaLabel={strings?.close}>
           {<CloseIcon size={20} />}
         </Button> : null}
       </div> : null}
@@ -98,8 +102,8 @@ const Modal = ({
       </div>
       {footer || onOk || onCancel ? <div className="footer">
         {footer ? footer : <>
-          {onCancel ? <Button onClick={onCancel} variant="secondary" ariaLabel={t("cancel")} danger>{cancelText}</Button> : null}
-          {onOk ? <Button onClick={onOk} variant="solid" ariaLabel={t("submit")} loading={onOkLoading}>{okText}</Button> : null}
+          {onCancel ? <Button onClick={onCancel} variant="secondary" ariaLabel={strings?.cancel} danger>{cancelText}</Button> : null}
+          {onOk ? <Button onClick={onOk} variant="solid" ariaLabel={strings?.submit} loading={onOkLoading}>{okText}</Button> : null}
         </>}
       </div> : null}
     </div>

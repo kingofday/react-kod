@@ -1,4 +1,4 @@
-import React, { ReactNode, useEffect, useRef, useState } from 'react';
+import { ReactNode, useEffect, useRef, useState } from 'react';
 import CloseIcon from "../Shared/ClosedIcon";
 export interface ToastProps {
     title?: ReactNode;

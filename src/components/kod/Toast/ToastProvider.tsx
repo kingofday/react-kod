@@ -1,4 +1,4 @@
-import React, { useState, useMemo, ReactNode } from 'react';
+import { useState, useMemo, ReactNode } from 'react';
 import { createPortal } from 'react-dom';
 import { ToastContext } from './ToastContext';
 import { ExtendedToastProps, Toast, ToastProps } from './Toast';

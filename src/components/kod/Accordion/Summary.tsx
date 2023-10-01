@@ -1,11 +1,8 @@
-import React, { ReactNode } from "react";
-// Context
+import { ReactNode } from "react";
 import { useAccordionContext } from "./Context";
-// Module
 import Expand from "./expand";
 import { ChildrenAccordionStatus } from "../Shared/Models/Accordions";
 
-// Type
 interface SummaryType {
   element?: keyof JSX.IntrinsicElements;
   children: ReactNode;
@@ -33,8 +30,8 @@ const Summary = ({
     ? childrenStatus[panelKey]?.statusOpen
     : false;
 
-    const handleToggle = (panelKey: number) => {
-    if (disable) return null;
+  const handleToggle = (panelKey: number) => {
+    if (disable) return;
     const finedActiveItem = childrenStatus.map(
       (item: ChildrenAccordionStatus) => {
         return {
@@ -49,9 +46,8 @@ const Summary = ({
     );
     onToggle(finedActiveItem);
   };
-  const manageClasses = `accordion_summary ${size ? size : ""} ${
-    statusOpen && shadowWhenOpen ? "visableborderWhenOpen" : ""
-  } ${reverse ? "reverse" : ""} ${disable ? "disable" : ""}`;
+  const manageClasses = `accordion_summary ${size ? size : ""} ${statusOpen && shadowWhenOpen ? "visableborderWhenOpen" : ""
+    } ${reverse ? "reverse" : ""} ${disable ? "disable" : ""}`;
 
   return (
     <Component

@@ -18,7 +18,7 @@ const Panel = ({
   innerRef,
   ...rest
 }: PanelProps) => {
-  const { separation, allOpenness, onToggle, childrenStatus } =
+  const { separation, childrenStatus } =
     useAccordionContext();
 
   const statusOpen = childrenStatus[panelKey]?.statusOpen;

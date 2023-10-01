@@ -1,5 +1,5 @@
-import Check from "modules/Infra/Shared/Check";
 import { ReactNode } from "react";
+import Check from "../../Shared/Check";
 
 export interface SelectOptionItemProps {
     text?: string;
