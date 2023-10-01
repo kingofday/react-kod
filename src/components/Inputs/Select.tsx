@@ -1,9 +1,9 @@
 import { InputHTMLAttributes, ReactElement, useEffect, useState, useRef, ReactNode, ChangeEvent } from "react";
-import Opt, { SelectOptionItemProps } from "./Option";
-import ChevronDown from "../../Shared/ChevronDown";
-import CloseIcon from "../../Shared/ClosedIcon";
+import Opt, { SelectOptionItemProps } from "@/src/components/Shared/Option";
+import ChevronDown from "@/src/components/Shared/ChevronDown";
+import CloseIcon from "@/src/components/Shared/ClosedIcon";
 import { createPortal } from "react-dom";
-import useIntersectionObserver from "@/src/components/useIntersectionObserver";
+import useIntersectionObserver from "@/src/helpers/useIntersectionObserver";
 
 interface SelectProps extends Omit<InputHTMLAttributes<HTMLInputElement>, "onChange"> {
     label?: ReactNode;

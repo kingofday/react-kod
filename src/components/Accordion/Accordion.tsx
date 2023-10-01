@@ -5,7 +5,7 @@ import AccordionContext from "./Context/AccordionContext";
 import {
   AccordionProps,
   ChildrenAccordionStatus,
-} from "../Shared/Models/Accordions";
+} from "./Models";
 
 const Accordion = ({
   element = "div",

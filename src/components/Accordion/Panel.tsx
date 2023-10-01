@@ -1,8 +1,6 @@
 import { useRef } from "react";
-// Context
 import { useAccordionContext } from "./Context";
-// Type
-import { PanelProps } from "../Shared/Models/Accordions";
+import { PanelProps } from "./Models";
 import Summary from "./Summary";
 
 const _staticSize: number = 20;

@@ -1,5 +1,5 @@
 import { ReactNode, useState } from "react";
-import Button from "../Button";
+import Button from "@/src/components/Button";
 export interface TabItem {
     key: string;
     icon?: ReactNode;

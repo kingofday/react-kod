@@ -1,7 +1,7 @@
 import { ReactNode } from "react";
 import { useAccordionContext } from "./Context";
 import Expand from "./expand";
-import { ChildrenAccordionStatus } from "../Shared/Models/Accordions";
+import { ChildrenAccordionStatus } from "./Models";
 
 interface SummaryType {
   element?: keyof JSX.IntrinsicElements;

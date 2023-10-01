@@ -1,5 +1,5 @@
 import { useRef, useEffect, useState, ChangeEvent } from "react";
-import InputProps from "../Shared/Models/Input";
+import InputProps from "./Models";
 interface SldierRangeProps extends InputProps {
     min?: number;
     max?: number;

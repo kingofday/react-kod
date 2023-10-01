@@ -1,4 +1,3 @@
-
 interface PropsType {
   iconStatus: boolean;
 }

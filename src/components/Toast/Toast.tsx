@@ -1,5 +1,5 @@
 import { ReactNode, useEffect, useRef, useState } from 'react';
-import CloseIcon from "../Shared/ClosedIcon";
+import CloseIcon from "@/src/components/Shared/ClosedIcon";
 export interface ToastProps {
     title?: ReactNode;
     message?: ReactNode;

@@ -1,5 +1,5 @@
 import { ChangeEvent, ReactNode } from "react";
-import InputProps from "../Shared/Models/Input";
+import InputProps from "./Models";
 interface CheckboxProps extends InputProps {
     checked?: boolean;
     defaultChecked?: boolean;

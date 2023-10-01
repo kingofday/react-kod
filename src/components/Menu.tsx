@@ -1,5 +1,4 @@
 import { useState, useEffect, ReactNode, ElementType } from "react";
-//import { Menu as MenuIcon, X } from "react-feather";
 type MenuItem = {
     key: string;
     label: ReactNode;
@@ -106,34 +105,8 @@ const Menu = ({ className,
             setState((s) => ({ ...s, openKeys }));
         }
     }, [selectedKeys, openKeys]);
-    // useEffect(() => {
-    //     router.events.on("routeChangeComplete", () => {
-    //         toggleMobileMenuOpen(false)
-    //     });
-    //     if (width < config.breakpoints.md)
-    //         setIsResponsive(true);
-    // }, []);
     return (
         <ul className={`menu ${variant} ${className ?? ""}`} {...rest}>
-            {/* {isResponsive && responsiveMode ? (
-                <>
-                    <div onClick={toggleMobileMenu}>
-                        <CustomIcon icon={MenuIcon} />
-                    </div>
-                    <div id="mobile-menu" className={isMobileMenuOpen ? "open" : ""}>
-                        <div className="head">
-                            <span className="close-btn">
-                                <CustomIcon size={18} onClick={() => toggleMobileMenuOpen(false)} icon={X} />
-                            </span>
-                        </div>
-                        {items?.map(x => createMenu(x, link))}
-                    </div>
-                </>
-            ) : isResponsive ? (
-                items?.map(x => createMenu(x, link))
-            ) : (
-                items?.map(x => createMenu(x, link))
-            )} */}
             {items?.map(x => createMenu(x, link))}
         </ul>
     );

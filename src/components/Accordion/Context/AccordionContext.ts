@@ -1,5 +1,5 @@
 import React from "react";
-import { ChildrenAccordionStatus } from "../../Shared/Models/Accordions";
+import { ChildrenAccordionStatus } from "../Models";
 export type AccordionTypePick = {
   onToggle: React.Dispatch<React.SetStateAction<ChildrenAccordionStatus[]>>;
   allOpenness?: boolean;

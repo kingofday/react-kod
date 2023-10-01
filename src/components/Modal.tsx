@@ -2,7 +2,7 @@ import { ReactNode, useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import Button from "./Button";
 import CloseIcon from "./Shared/ClosedIcon";
-import BreakPoints from "../BreakPoints";
+import BreakPoints from "@/src/helpers/BreakPoints";
 
 interface ModalProps {
   open: boolean,
