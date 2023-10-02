@@ -21,5 +21,5 @@ import { DesiredComp } from "react-kod"
 ### Samples
 ![Buttons](https://github.com/kingofday/react-kod/blob/master/src/assets/buttons.png)
 
-![Default Tabs](https://github.com/kingofday/react-anpicker/blob/master/src/assets/default-tab.png)
+![Default Tabs](https://github.com/kingofday/react-kod/blob/master/src/assets/default-tab.png)
 
