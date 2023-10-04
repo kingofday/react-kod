@@ -1,7 +1,7 @@
 import { useState, useMemo, ReactNode } from 'react';
 import { createPortal } from 'react-dom';
 import { ToastContext } from './ToastContext';
-import { ExtendedToastProps, Toast, ToastProps } from './Toast';
+import { ExtendedToastProps, Toast, IToastProps } from './Toast';
 
 // Create a random ID
 function generateUEID() {
@@ -11,22 +11,22 @@ function generateUEID() {
 }
 export const ToastProvider = ({ children }: { children: ReactNode }) => {
     const [toasts, setToasts] = useState<ExtendedToastProps[]>([]);
-    const success = (props: ToastProps) =>
+    const success = (props: IToastProps) =>
         setToasts((currentToasts) => [
             ...currentToasts,
             { id: generateUEID(), type: "success", ...props },
         ]);
-    const error = (props: ToastProps) =>
+    const error = (props: IToastProps) =>
         setToasts((currentToasts) => [
             ...currentToasts,
             { id: generateUEID(), type: "error", ...props },
         ]);
-    const warning = (props: ToastProps) =>
+    const warning = (props: IToastProps) =>
         setToasts((currentToasts) => [
             ...currentToasts,
             { id: generateUEID(), type: "waring", ...props },
         ]);
-    const info = (props: ToastProps) =>
+    const info = (props: IToastProps) =>
         setToasts((currentToasts) => [
             ...currentToasts,
             { id: generateUEID(), type: "info", ...props },

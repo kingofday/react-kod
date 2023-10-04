@@ -1,11 +1,11 @@
 import { ReactNode } from "react";
-interface BadgeProps {
+export interface IBadgeProps {
     children: ReactNode,
     variant?: "primary" | "danger",
     size?: "small" | "medium" | "large"
     [key: string]: any
 }
-const Badge = ({ children, size, variant = "danger", ...rest }: BadgeProps) => {
+const Badge = ({ children, size, variant = "danger", ...rest }: IBadgeProps) => {
     return <span className={`badge ${size ?? ""} ${variant}`} {...rest}>{children}</span>;
 };
 export default Badge;

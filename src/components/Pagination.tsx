@@ -1,6 +1,6 @@
 import { ReactNode } from "react";
 
-export interface Props {
+export interface IPagination {
     page: number;
     totalPages: number;
     handlePagination: (page: number) => void;
@@ -14,7 +14,7 @@ const Pagination = ({
     handlePagination,
     arrowRight,
     arrowLeft
-}: Props) => {
+}: IPagination) => {
     const getPageNumbers = () => {
         const pageNumbers = [];
         if (totalPages <= 7) {

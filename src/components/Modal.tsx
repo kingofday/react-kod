@@ -2,9 +2,9 @@ import { ReactNode, useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import Button from "./Button";
 import CloseIcon from "./Shared/ClosedIcon";
-import BreakPoints from "@/src/helpers/BreakPoints";
+import BreakPoints from "../helpers/BreakPoints";
 
-interface ModalProps {
+export interface IModalProps {
   open: boolean,
   title?: ReactNode,
   titleIcon?: ReactNode,
@@ -46,7 +46,7 @@ const Modal = ({
   strings,
   fullscreen = false,
   ...props
-}: ModalProps) => {
+}: IModalProps) => {
   const modalRef = useRef<HTMLDivElement>(null);
   const [isOpen, toggle] = useState(open);
   const handleClose = () => {

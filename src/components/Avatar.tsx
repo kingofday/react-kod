@@ -1,6 +1,6 @@
 import { ReactNode } from "react";
 
-type AvatarProps = {
+export interface IAvatarProps  {
     src?: string | ReactNode;
     alt?: string;
     children?: ReactNode;
@@ -10,7 +10,7 @@ type AvatarProps = {
     [key: string]: any;
 }
 
-const Avatar = ({ src, className, children, alt, shape = "circle", size = "medium", ...props }: AvatarProps) => {
+const Avatar = ({ src, className, children, alt, shape = "circle", size = "medium", ...props }: IAvatarProps) => {
     const imageSize = size === "small" ? 24 : size === "medium" ? 38 : size === "large" ? 52 : 38;
     return (
         <div className={`avatar ${shape} ${size} ${className ? ` ${className}` : ""}`} {...props}>

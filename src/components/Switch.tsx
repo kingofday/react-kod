@@ -1,4 +1,4 @@
-interface Props {
+export interface ISwitch {
     id?: string;
     label?: string;
     onChange: (checked: boolean) => void;
@@ -6,7 +6,7 @@ interface Props {
     description?: string;
     disabled?: boolean;
 }
-const Switch = ({ id, label, onChange, checked, disabled, description }: Props) => {
+const Switch = ({ id, label, onChange, checked, disabled, description }: ISwitch) => {
     const onSwitchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         onChange && onChange(event.target.checked);
     };

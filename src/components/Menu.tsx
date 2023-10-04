@@ -1,5 +1,5 @@
 import { useState, useEffect, ReactNode, ElementType } from "react";
-type MenuItem = {
+export type MenuItem = {
     key: string;
     label: ReactNode;
     icon?: ReactNode;
@@ -7,7 +7,7 @@ type MenuItem = {
     disabled?: boolean;
     href?: string;
 }
-interface Props {
+export interface IMenu {
     className?: string;
     items?: MenuItem[];
     variant?: "horizontal" | "vertical",
@@ -31,7 +31,7 @@ const Menu = ({ className,
     responsiveMode = false,
     hideIndicator = false,
     variant = "horizontal",
-    ...rest }: Props) => {
+    ...rest }: IMenu) => {
     const [state, setState] = useState({
         selectedKeys,
         openKeys

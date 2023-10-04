@@ -1,6 +1,6 @@
 import { ReactNode, useEffect, useRef, useState } from 'react';
-import CloseIcon from "@/src/components/Shared/ClosedIcon";
-export interface ToastProps {
+import CloseIcon from "../Shared/ClosedIcon";
+export interface IToastProps {
     title?: ReactNode;
     message?: ReactNode;
     duration?: number;
@@ -8,7 +8,7 @@ export interface ToastProps {
     fixed?: boolean;
     onClose?: (id: string) => void;
 };
-export interface ExtendedToastProps extends ToastProps {
+export interface ExtendedToastProps extends IToastProps {
     id: string;
     type: "success" | "error" | "waring" | "info";
 }

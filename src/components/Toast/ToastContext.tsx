@@ -1,10 +1,10 @@
 import { createContext } from 'react';
-import { ToastProps } from './Toast';
+import { IToastProps } from './Toast';
 export interface ToastContextProps {
-    success: (props: ToastProps) => void;
-    error: (props: ToastProps) => void;
-    warning: (props: ToastProps) => void;
-    info: (props: ToastProps) => void;
+    success: (props: IToastProps) => void;
+    error: (props: IToastProps) => void;
+    warning: (props: IToastProps) => void;
+    info: (props: IToastProps) => void;
 }
 export const ToastContext = createContext<ToastContextProps>({
     success: (props) => console.log(props),

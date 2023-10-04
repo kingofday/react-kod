@@ -2,7 +2,7 @@ import { forwardRef, MouseEventHandler, ForwardRefExoticComponent } from "react"
 import { ReactNode } from "react";
 import Spinner from "./Spinner";
 export type ButttonVariant = "solid" | "secondary" | "tab" | "link" | "square" | "circle" | "secondary-square" | "secondary-circle" | "gray" | "ghost";
-interface ButtonProps {
+export interface IButtonProps {
   children?: ReactNode;
   className?: string;
   type?: "button" | "submit" | "reset";
@@ -19,7 +19,7 @@ interface ButtonProps {
   ariaLabel?: string;
   [key: string]: any;
 }
-const Button: ForwardRefExoticComponent<ButtonProps> = forwardRef<HTMLButtonElement, ButtonProps>(({
+const Button: ForwardRefExoticComponent<IButtonProps> = forwardRef<HTMLButtonElement, IButtonProps>(({
   type,
   className,
   loading,
@@ -35,7 +35,7 @@ const Button: ForwardRefExoticComponent<ButtonProps> = forwardRef<HTMLButtonElem
   onMouseEnter,
   onMouseLeave,
   ...rest
-}: ButtonProps, ref) => {
+}: IButtonProps, ref) => {
   return (
     <button
       ref={ref}

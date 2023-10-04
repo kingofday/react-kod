@@ -3,7 +3,7 @@ enum sizes {
     medium = 12,
     large = 24
 }
-interface Props {
+interface ISpinner {
     className?: string;
     type?: "co" | "circle" | "dot";
     size?: number | "small" | "medium" | "large";
@@ -14,7 +14,7 @@ const Spinner = ({
     className,
     size = "medium",
     ...rest
-}: Props) => {
+}: ISpinner) => {
     if (type == "co") return <svg
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 30 30"

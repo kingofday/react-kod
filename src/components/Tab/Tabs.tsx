@@ -1,7 +1,7 @@
 import { ReactElement, useEffect, useState, ForwardRefExoticComponent, forwardRef, useRef } from "react";
 import { TabProps } from "./Tab";
 import TabTitle from "./TabTitle";
-interface TabsProps {
+export interface ITabsProps {
   defaultActiveTab?: string;
   activeTab?: string;
   className?: string;
@@ -18,7 +18,7 @@ interface TabsProps {
 interface RenderedTabs {
   [key: string]: boolean;
 }
-const Tabs: ForwardRefExoticComponent<TabsProps> = forwardRef<HTMLDivElement, TabsProps>(({
+const Tabs: ForwardRefExoticComponent<ITabsProps> = forwardRef<HTMLDivElement, ITabsProps>(({
   items,
   defaultActiveTab,
   children,

@@ -1,6 +1,6 @@
 import { ReactNode, useEffect, useRef } from "react";
 
-interface DrawerProps {
+export interface IDrawerProps {
     position?: "left" | "right";
     children?: ReactNode;
     className?: string;
@@ -15,7 +15,7 @@ const Drawer = ({
     onClose,
     animate = true,
     size = "medium"
-}: DrawerProps) => {
+}: IDrawerProps) => {
     const ref = useRef<HTMLDivElement>(null);
     useEffect(() => {
         const onClick = (e: MouseEvent) => {

@@ -1,7 +1,5 @@
 import { Children, useEffect, useState } from "react";
-
 import AccordionContext from "./Context/AccordionContext";
-// Type
 import {
   AccordionProps,
   ChildrenAccordionStatus,

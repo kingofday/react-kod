@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import { spacings } from "@/src/helpers/variables";
+import { spacings } from "../../helpers/variables";
 
 type gutter = typeof spacings[number];
 interface Props {

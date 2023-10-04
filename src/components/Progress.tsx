@@ -1,6 +1,6 @@
 import { CSSProperties } from "react";
 
-interface ProgressProps {
+export interface IProgressProps {
     style?: CSSProperties;
     value?: number;
     max?: number;
@@ -9,7 +9,7 @@ const Progress = ({
     value,
     max,
     style
-}: ProgressProps) => {
+}: IProgressProps) => {
     return <progress
         style={style}
         value={value}

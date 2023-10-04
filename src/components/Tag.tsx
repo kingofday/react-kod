@@ -1,5 +1,5 @@
 import { ReactNode, useState, MouseEvent } from "react";
-interface Props {
+export interface ITag {
     className?: string;
     children: ReactNode;
     icon?: ReactNode;
@@ -10,7 +10,7 @@ interface Props {
     onClose?: () => void;
     [key: string]: any;
 }
-const Tag = ({ children, className, state, onClick, active = false, icon, closable = false, hoverable = false, onClose, ...props }: Props): JSX.Element | null => {
+const Tag = ({ children, className, state, onClick, active = false, icon, closable = false, hoverable = false, onClose, ...props }: ITag): JSX.Element | null => {
     const [hidden, hide] = useState(false)
     const handleClose = (e: MouseEvent<HTMLButtonElement>) => {
         e.stopPropagation();

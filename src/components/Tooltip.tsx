@@ -1,6 +1,6 @@
 import { ReactNode, useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
-interface Props {
+export interface ITooltip {
     delay?: number;
     children?: ReactNode;
     title?: ReactNode;
@@ -9,7 +9,7 @@ interface Props {
     rtl?: boolean;
     fontSize?: number;
 }
-const Tooltip = ({ delay = 400, children, title, className, fontSize, direction = "top" }: Props) => {
+const Tooltip = ({ delay = 400, children, title, className, fontSize, direction = "top" }: ITooltip) => {
     const ref = useRef<HTMLDivElement>(null);
     const tipRef = useRef<HTMLDivElement>(null);
     const [isActive, setActive] = useState<boolean>(false);

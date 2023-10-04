@@ -1,6 +1,6 @@
 import { ReactNode, forwardRef, ForwardRefExoticComponent } from "react";
 
-type CardProps = {
+export type ICardProps = {
     title?: ReactNode;
     children: ReactNode;
     className?: string;
@@ -10,7 +10,7 @@ type CardProps = {
     [key: string]: any
 }
 
-const Card: ForwardRefExoticComponent<CardProps> = forwardRef<HTMLDivElement, CardProps>(({ title, children, className, hoverable, extra, withShadow=true, ...props }: CardProps,ref) => {
+const Card: ForwardRefExoticComponent<ICardProps> = forwardRef<HTMLDivElement, ICardProps>(({ title, children, className, hoverable, extra, withShadow=true, ...props }: ICardProps,ref) => {
     return (
         <div ref={ref} className={`card${withShadow ? " with-shadow" : ""}${hoverable ? " hoverable" : ""}${className ? ` ${className}` : ""}`} {...props}>
             {title ? <div className="title">{title} {extra ? <div className="extra">{extra}</div> : null}</div> : null}

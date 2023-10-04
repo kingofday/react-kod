@@ -2,9 +2,7 @@ import { useRef } from "react";
 import { useAccordionContext } from "./Context";
 import { PanelProps } from "./Models";
 import Summary from "./Summary";
-
 const _staticSize: number = 20;
-
 const Panel = ({
   panelKey,
   children,

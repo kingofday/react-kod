@@ -1,5 +1,5 @@
 import { ReactNode, Fragment } from "react";
-interface BreadcrumbChildrenProps {
+export interface BreadcrumbChildrenProps {
   children: ReactNode;
   [key: string]: any;
 }
@@ -7,7 +7,7 @@ export interface BreadcrumbItemProps {
   key: string;
   label: ReactNode;
 }
-interface BreadcrumbProps {
+export interface BreadcrumbProps {
   items?: BreadcrumbItemProps[];
   separator?: ReactNode;
   rtl?: boolean;

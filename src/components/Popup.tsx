@@ -6,13 +6,13 @@ type Item = {
     icon: ReactNode;
     title: string;
 }
-interface Props {
+interface IPopup {
     items: Item[];
     style?: React.CSSProperties;
     popupRef?: RefObject<HTMLDivElement>;
     open: boolean;
 }
-const Popup = ({ items, style, popupRef, open, ...rest }: Props) => {
+const Popup = ({ items, style, popupRef, open, ...rest }: IPopup) => {
     return (
         <>
             {
