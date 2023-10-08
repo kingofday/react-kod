@@ -1,5 +1,5 @@
 import React from "react";
-import Button from "../../../src/components/kod/Button";
+import Button from "../../../src/components/Button";
 import { storiesOf, type Meta, type StoryObj } from '@storybook/react';
 
 const meta: Meta<typeof Button> = {
