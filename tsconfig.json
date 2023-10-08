@@ -1,5 +1,6 @@
 {
     "compilerOptions": {
+        "baseUrl": ".",
         "types": ["node"],
         "outDir": "dist/esm",
         "module": "esnext",
@@ -15,11 +16,15 @@
         "noImplicitThis": true,
         "noImplicitAny": true,
         "strictNullChecks": true,
-        "suppressImplicitAnyIndexErrors": true,
         "allowSyntheticDefaultImports": true,
-        "allowJs": true
+        "allowJs": true,
+        "paths": {
+            "@/*": [
+                "*"
+            ]
+        }
     },
+    "include": ["src"],
     "hooks": ["copy-files"],
-    "include": ["src/**/*"],
     "exclude": ["node_modules","demo"]
 }
