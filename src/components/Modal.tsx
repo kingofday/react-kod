@@ -3,6 +3,7 @@ import { createPortal } from "react-dom";
 import Button from "./Button";
 import CloseIcon from "./Shared/ClosedIcon";
 import BreakPoints from "../helpers/BreakPoints";
+import useOnClickOutside from "../helpers/useClickOutSide";
 
 export interface IModalProps {
   open: boolean,
@@ -57,17 +58,7 @@ const Modal = ({
     if (isOpen !== open)
       toggle(open);
   }, [open])
-  useEffect(() => {
-    if (fullscreen) return;
-    const onClick = (e: MouseEvent) => {
-      if (modalRef.current && !modalRef.current.contains(e.target as Node)) {
-        toggle(false);
-        onClose?.();
-      }
-    };
-    document.addEventListener("click", onClick);
-    return () => document.removeEventListener("click", onClick);
-  }, [modalRef]);
+  useOnClickOutside(modalRef,handleClose,isOpen)
   useEffect(() => {
     if (isOpen) document.body.classList.add("modal-scroll-effect");
     else document.body.classList.remove("modal-scroll-effect");
