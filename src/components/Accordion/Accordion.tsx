@@ -12,6 +12,7 @@ const Accordion = ({
   children,
   gap,
   separation = false,
+  byShadow = false,
   ...rest
 }: AccordionProps) => {
   const childrenLength:number= Children.count(children);
@@ -37,7 +38,7 @@ const Accordion = ({
 
   const manageClasses = `accordion  ${
     separation ? "whiteout_wrapper_border" : ""
-  } ${gap ? gap : ""}`;
+  } ${byShadow ? "accordion_byShadow" : ""} ${gap ? gap : ""}`;
 
   useEffect(() => {
     const openChild = childrenStatus.filter((item) => item.statusOpen);

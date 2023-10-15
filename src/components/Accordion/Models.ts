@@ -6,6 +6,7 @@ export interface AccordionProps {
   allOpenness?: boolean;
   children: ReactNode;
   separation?: boolean;
+  byShadow?:boolean;
   gap?: "xs" | "sm" | "md" | "lg";
 }
 
