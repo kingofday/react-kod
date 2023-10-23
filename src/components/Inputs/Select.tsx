@@ -109,7 +109,7 @@ const Select = ({
                 <ChevronDown className="indicator" />
                 {allowClear && selectedOption && <CloseIcon className="clear-icon" onClick={disabled ? undefined : (e: any) => clear(e)} />}
             </div>
-            {isOpen && createPortal(<ul className={`select-options ${listClassName ?? ""}`} style={position}>
+            {isOpen && <ul className={`select-options ${listClassName ?? ""}`} style={position}>
                 {searchable ? <li className="search-wrapper">
                     <input ref={searchRef} type="text" onChange={onSearch} placeholder={searchText} />
                 </li> : null}
@@ -123,7 +123,7 @@ const Select = ({
                         >{x.children}</Opt>
                     </li>
                 ))}
-            </ul>, document.body)}
+            </ul>}
             <input type="hidden" value={value} name={name} id={id} />
         </div >
     );
