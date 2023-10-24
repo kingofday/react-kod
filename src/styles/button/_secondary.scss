@@ -2,19 +2,22 @@
   &:hover {
     background-color: $hover;
     border-color: $hover;
-    color:#fff;
+    color: #fff;
   }
+
   &:focus {
     background-color: $active;
     border-color: $active;
-    color:#fff;
+    color: #fff;
   }
+
   &:disabled {
     background-color: var(--border);
     color: var(--disabledText);
     border-width: 0;
   }
 }
+
 &.secondary {
   border-width: 1px;
   border-style: solid;
@@ -22,9 +25,25 @@
   border-color: var(--blue);
   color: var(--blue);
   @include sedo(var(--blueHover), var(--blueActive));
+
   &.danger {
-    color:var(--red);
+    color: var(--red);
     border-color: var(--red);
     @include sedo(var(--redHover), var(--redActive));
+
+    svg {
+      color: var(--red);
+    }
+
+    &:hover {
+      svg {
+        color: var(--bg);
+      }
+    }
+    &:focus {
+      svg {
+        color: var(--bg);
+      }
+    }
   }
 }
