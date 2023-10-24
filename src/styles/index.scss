@@ -71,8 +71,6 @@ body {
 
 .horizontal-scroll-bar {
   overflow-x: auto;
-  height: 100%;
-
   &::-webkit-scrollbar {
     height: 6px;
     margin-bottom: .3125rem;
