@@ -1,11 +1,11 @@
-@use './shared' as v;
+@use './shared';
 
 .modal {
   position: fixed;
   top: 0;
   left: 0;
   width: 100vw;
-  height: 100vh;
+  height: 100dvh;
   background-color: #00000073;
   display: flex;
   justify-content: center;
@@ -56,7 +56,7 @@
     }
 
     >.modal-content {
-      max-height: calc(100vh - 65px - 2.5rem);
+      max-height: calc(100dvh - 2.5rem);
       overflow: auto;
       padding: 1.25rem;
     }
@@ -70,15 +70,6 @@
     }
   }
 
-  @media (max-width: 576px) {
-    align-items: flex-end;
-    padding-bottom: 30px;
-
-    .modal-body {
-      border-radius: 0;
-      min-width: 90%;
-    }
-  }
 
   &.fullscreen {
     padding-bottom: 0px;
@@ -88,7 +79,8 @@
       max-width: 100%;
       height: 100%;
       border-radius: 0;
-      .modal-content{
+
+      .modal-content {
         height: 100%;
       }
     }
@@ -114,6 +106,21 @@ html[dir='ltr'] {
     .btn-close {
       right: 1.875rem;
       left: auto;
+    }
+  }
+}
+
+@media (max-width: shared.$xl) {
+  .modal{
+    align-items: flex-end;
+  
+    .modal-body {
+      border-radius: 0;
+      min-width: 90%;
+      .btn-close {
+        margin: 0;
+        left: 1.25rem;
+      }
     }
   }
 }
