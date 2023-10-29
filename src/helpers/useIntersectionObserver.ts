@@ -6,10 +6,6 @@ interface IntersectionObserverOptions {
   threshold?: number | number[];
 }
 
-interface IntersectionObserverEntry {
-  isIntersecting: boolean;
-  target: Element;
-}
 
 type IntersectionObserverCallback = (
   entry: IntersectionObserverEntry,
