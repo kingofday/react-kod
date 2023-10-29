@@ -32,9 +32,12 @@ const Tooltip = ({ delay = 400, children, title, className, fontSize, direction 
     });
     let timeout: number;
     const showTip = (): void => {
-        timeout = window.setTimeout(() => {
+        if (!delay)
             setActive(true);
-        }, delay);
+        else
+            timeout = window.setTimeout(() => {
+                setActive(true);
+            }, delay);
     };
     const hideTip = (): void => {
         clearInterval(timeout);
