@@ -9,7 +9,7 @@ export interface ITooltip {
     rtl?: boolean;
     fontSize?: number;
 }
-const Tooltip = ({ delay = 400, children, title, className, fontSize, direction = "top" }: ITooltip) => {
+const Tooltip = ({ delay, children, title, className, fontSize, direction = "top" }: ITooltip) => {
     const ref = useRef<HTMLDivElement>(null);
     const tipRef = useRef<HTMLDivElement>(null);
     const [isActive, setActive] = useState<boolean>(false);
