@@ -3,7 +3,7 @@ import { createPortal } from "react-dom";
 import Button from "./Button";
 import CloseIcon from "./Shared/ClosedIcon";
 import BreakPoints from "../helpers/BreakPoints";
-import useOnClickOutside from "../helpers/useClickOutSide";
+import useOnClickOutside from "../helpers/useOnClickOutside";
 
 export interface IModalProps {
   open: boolean,

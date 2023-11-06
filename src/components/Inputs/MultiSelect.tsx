@@ -4,6 +4,8 @@ import ChevronDown from "../Shared/ChevronDown";
 import ChevronUp from "../Shared/ChevronUp";
 import Badge from "../Badge";
 import Tag from "../Tag";
+import useIntersectionObserver from "@/src/helpers/useIntersectionObserver";
+import useOnClickOutside from "@/src/helpers/useOnClickOutside";
 
 interface SelectProps {
     name?: string;
@@ -43,6 +45,11 @@ const MultiSelect = ({
     const searchRef = useRef<HTMLInputElement>(null);
     const options = useRef<SelectOptionItemProps[]>(children ? (Array.isArray(children) ? children?.map(x => x.props) : [children.props]) : []);
     const [searchedOptions, setSearchedOptions] = useState<SelectOptionItemProps[]>([]);
+    const [positionOptions, setPositionOptions] = useState(true)
+
+    const handleClose = () => {
+        toggle(false);
+    }
     const onSelect = (v: string) => {
         if (values?.includes(v)) {
             onChange?.(values?.filter(x => x !== v));
@@ -66,24 +73,31 @@ const MultiSelect = ({
         onChange?.(values?.filter(x => x !== v) ?? []);
     }
     const selectedOptions = searchedOptions.filter(x => typeof values !== 'undefined' ? values.includes(x.value.toString()) : defaultValues?.includes(x.value));
+   
+   
+   
+    useOnClickOutside(ref, handleClose, isOpen);
+    const { ref: wrapperOptionsRef } = useIntersectionObserver({
+      options: {
+        root: null,
+        rootMargin: "0px",
+        threshold: .1,
+      },
+      callback(entry) {
+          if(!isOpen) return; 
+          if(entry.intersectionRatio === 0) {
+            toggle(false)
+          }
+        if (!entry.isIntersecting) {
+          setPositionOptions((prev) => !prev);
+        }
+      },
+    });
+   
     useEffect(() => {
         options.current = children ? (Array.isArray(children) ? children?.map(x => x.props) : [children.props]) : [];
         setSearchedOptions(options.current);
     }, [children])
-    useEffect(() => {
-        if (isOpen && searchable) {
-            searchRef.current?.focus();
-        }
-    }, [isOpen]);
-    useEffect(() => {
-        const onOutsideClick = function (e: MouseEvent) {
-            if (ref.current && !ref.current.contains(e.target as Node)) {
-                toggle(false);
-            }
-        };
-        document.addEventListener("click", onOutsideClick);
-        return () => document.removeEventListener("click", onOutsideClick);
-    }, [ref]);
     return (
         <div className={`multiselect-control ${className ? ` ${className}` : ""}${isOpen ? " is-open" : ""}${disabled ? " disabled" : ""}`}>
             <div className="input-control">
@@ -91,7 +105,7 @@ const MultiSelect = ({
                 <div ref={ref} className={`input-wrapper`} onClick={disabled ? undefined : () => toggle(s => !s)}>
                     {placeholder}
                     {isOpen ? <ChevronUp /> : <ChevronDown />}
-                    <ul className={`options`}>
+                    <ul ref={wrapperOptionsRef} className={`options  ${positionOptions? "openDown": "openUp"}`}>
                         {searchable ? <li className="search-wrapper">
                             <input ref={searchRef} type="text" onChange={onSearch} placeholder={searchText} />
                         </li> : null}
