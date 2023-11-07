@@ -30,6 +30,7 @@ const Tabs: ForwardRefExoticComponent<ITabsProps> = forwardRef<HTMLDivElement, I
   afterChange,
   activeTab,
   onChange,
+  asElement="span",
   ...rest
 },
   forwardedRef,
@@ -85,6 +86,7 @@ const Tabs: ForwardRefExoticComponent<ITabsProps> = forwardRef<HTMLDivElement, I
             setSelectedTab={handleSelect}
             icon={item.icon}
             disabled={item.disabled}
+            asElement={asElement}
           />
         ))}
       </ul>
