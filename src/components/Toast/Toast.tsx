@@ -1,6 +1,7 @@
 import { ReactNode, useEffect, useRef, useState } from 'react';
 import CloseIcon from "../Shared/ClosedIcon";
 import Button from '../Button';
+import { DurationProgress } from './DurationProgress';
 export interface IToastProps {
     title?: ReactNode;
     message?: ReactNode;
@@ -55,8 +56,8 @@ export const Toast = ({ id, title, message, type, fixed = false, showIcon = true
             return;
         }
         t.current = setTimeout(() => {
-            setHideProgress(x => x - 250);
-        }, 250)
+            setHideProgress(x => x - 100);
+        }, 100)
     }, [hideProgress])
     return <div className={`toast ${type}`}>
         {showIcon && <span className='icon'>
@@ -69,6 +70,6 @@ export const Toast = ({ id, title, message, type, fixed = false, showIcon = true
             </div>
             <div className="message">{message ?? <span></span>}</div>
         </div>
-        <progress value={100 * hideProgress / duration} max="100" />
+        <DurationProgress id={id} duration={duration} onClose={onClose} fixed={fixed}/>
     </div>
 };
