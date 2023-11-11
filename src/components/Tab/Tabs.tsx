@@ -11,7 +11,6 @@ export interface ITabsProps {
   alignTitles?: "start" | "end" | "center",
   visibility?:boolean;
   hideScrollBar?:boolean;
-  asElement?: keyof JSX.IntrinsicElements
   onChange?: (key: string) => void,
   afterChange?: (key: string) => void,
   [key: string]: any
@@ -31,7 +30,6 @@ const Tabs: ForwardRefExoticComponent<ITabsProps> = forwardRef<HTMLDivElement, I
   afterChange,
   activeTab,
   onChange,
-  asElement="span",
   ...rest
 },
   forwardedRef,
@@ -87,7 +85,6 @@ const Tabs: ForwardRefExoticComponent<ITabsProps> = forwardRef<HTMLDivElement, I
             setSelectedTab={handleSelect}
             icon={item.icon}
             disabled={item.disabled}
-            asElement={asElement}
           />
         ))}
       </ul>
