@@ -1,5 +1,6 @@
 import { ReactNode, useEffect, useRef, useState } from 'react';
 import CloseIcon from "../Shared/ClosedIcon";
+import Button from '../Button';
 export interface IToastProps {
     title?: ReactNode;
     message?: ReactNode;
@@ -64,7 +65,7 @@ export const Toast = ({ id, title, message, type, fixed = false, showIcon = true
         <div className='toast-content'>
             <div className="title">
                 {title ?? <span></span>}
-                <a className="btn-close" role="button" onClick={handleClose}><CloseIcon /></a>
+                <Button variant='square' size='small' className="btn-close" role="button" onClick={handleClose}><CloseIcon /></Button>
             </div>
             <div className="message">{message ?? <span></span>}</div>
         </div>
