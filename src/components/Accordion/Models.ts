@@ -7,6 +7,7 @@ export interface AccordionProps {
   children: ReactNode;
   separation?: boolean;
   byShadow?:boolean;
+  afterClick?:(key:number)=>void,
   gap?: "xs" | "sm" | "md" | "lg";
 }
 
