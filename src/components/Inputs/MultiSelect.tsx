@@ -4,8 +4,8 @@ import ChevronDown from "../Shared/ChevronDown";
 import ChevronUp from "../Shared/ChevronUp";
 import Badge from "../Badge";
 import Tag from "../Tag";
-import useIntersectionObserver from "@/src/helpers/useIntersectionObserver";
-import useOnClickOutside from "@/src/helpers/useOnClickOutside";
+import useIntersectionObserver from "../../helpers/useIntersectionObserver";
+import useOnClickOutside from "../../helpers/useOnClickOutside";
 interface SelectProps {
     name?: string;
     id?: string;

@@ -2,9 +2,8 @@ import { InputHTMLAttributes, ReactElement, useEffect, useState, useRef, ReactNo
 import Opt, { SelectOptionItemProps } from "../Shared/Option";
 import ChevronDown from "../Shared/ChevronDown";
 import CloseIcon from "../Shared/ClosedIcon";
-import { createPortal } from "react-dom";
 import useIntersectionObserver from "../../helpers/useIntersectionObserver";
-import useOnClickOutside from "@/src/helpers/useOnClickOutside";
+import useOnClickOutside from "../../helpers/useOnClickOutside";
 
 interface SelectProps extends Omit<InputHTMLAttributes<HTMLInputElement>, "onChange"> {
   label?: ReactNode;
@@ -120,6 +119,5 @@ const Select = ({
     </div>
   );
 };
-
+Select.Option = Opt;
 export default Select;
-export const Option = Opt;

@@ -1,6 +1,5 @@
 import React from "react";
-import { action } from "@storybook/addon-actions";
-import { Tabs, Tab } from "../../src/components/kod/Tab";
+import { Tabs, Tab } from "../../src/components/Tab";
 import type { Meta, StoryObj } from '@storybook/react';
 
 const meta: Meta<typeof Tabs> = {
