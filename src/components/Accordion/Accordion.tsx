@@ -11,16 +11,17 @@ const Accordion = ({
   allOpenness,
   children,
   gap,
+  afterClick,
   separation = false,
   byShadow = false,
   ...rest
 }: AccordionProps) => {
-  const childrenLength:number= Children.count(children);
+  const childrenLength = Children.count(children);
   const Component = element;
   const initializeModel = (panelKey: number) => {
     return Array.apply(null, Array(childrenLength)).map((_:any, index: number) => {
       return {
-        panelKey: index??item.key,
+        panelKey: index,
         statusOpen: panelKey === index,
       };
     });
@@ -34,6 +35,7 @@ const Accordion = ({
     onToggle,
     allOpenness,
     separation,
+    afterClick,
   };
 
   const manageClasses = `accordion  ${
