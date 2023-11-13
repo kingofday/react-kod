@@ -6,7 +6,6 @@ import Badge from "../Badge";
 import Tag from "../Tag";
 import useIntersectionObserver from "@/src/helpers/useIntersectionObserver";
 import useOnClickOutside from "@/src/helpers/useOnClickOutside";
-
 interface SelectProps {
     name?: string;
     id?: string;

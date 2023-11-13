@@ -8,6 +8,10 @@
   @include v.inputWrapper;
 
   .input-wrapper {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+
     .indicator {
       transition-duration: 0.5s;
       ;
@@ -61,10 +65,19 @@
 
 .select-options {
   @include v.menuCard;
-  position: fixed;
+  position: absolute;
+  height: 12.5rem;
   max-height: 12.5rem;
   overflow: auto;
   z-index: 9999;
+
+  &.openUp {
+    bottom: 2.1875rem;
+  }
+
+  &.openDown {
+    top: 2.1875rem;
+  }
 
   li {
     gap: 0.25rem;

@@ -30,11 +30,18 @@
     .options {
         @include v.menuCard;
         display: none;
-        top: calc(100% + 1px);
+        // top: calc(100% + 1px);
         right: 0;
         left: 0;
+        height: 12.5rem;
         max-height: 12.5rem;
         overflow: auto;
+        &.openUp {
+            bottom: 2.1875rem;
+           }
+           &.openDown {
+             top: 2.1875rem;
+          }
         li {
             gap: 4px;
             .option-content {
