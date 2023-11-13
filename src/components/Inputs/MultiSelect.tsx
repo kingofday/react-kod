@@ -131,5 +131,5 @@ const MultiSelect = ({
     );
 };
 
+MultiSelect.Option = Opt;
 export default MultiSelect;
-export const Option = Opt;

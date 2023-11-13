@@ -8,7 +8,7 @@ const meta: Meta<typeof Select> = {
 };
 export default meta;
 type Story = StoryObj<typeof Select>;
-export const BorderedPillTab: Story = {
+export const Simple: Story = {
     render: () => {
         const [value, setValue] = useState("");
         return <Select
