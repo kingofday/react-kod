@@ -8,9 +8,9 @@ const meta: Meta<typeof Accordion> = {
 export default meta;
 type Story = StoryObj<typeof Accordion>;
 export const Simple: Story = {
-  render: () => {
+  render: ({...args}) => {
     return (
-      <Accordion defaultOpen={0} separation gap="lg" byShadow>
+      <Accordion defaultOpen={0} {...args}>
         <Panel key={0} panelKey={0} header={<div>label</div>}>
           <div>content</div>
         </Panel>
