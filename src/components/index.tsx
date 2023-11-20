@@ -5,6 +5,7 @@ export * from './Tab';
 export * from './Toast';
 export * from './Avatar';
 export * from './Badge';
+export { default as Badge } from './Badge';
 export { default as Breadcrumb } from './Breadcrumb';
 export * from './Breadcrumb';
 export * from './Tag';

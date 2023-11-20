@@ -23,6 +23,7 @@ interface SelectProps {
     suffix?: ReactNode;
     children?: ReactElement<SelectOptionItemProps> | ReactElement<SelectOptionItemProps>[];
     onChange?: (values: string[]) => void;
+    showOptionOrder?: boolean;
 }
 const MultiSelect = ({
     id,
@@ -37,6 +38,7 @@ const MultiSelect = ({
     searchText,
     suffix,
     onChange,
+    showOptionOrder = true,
     disabled = false
 }: SelectProps) => {
     const [isOpen, toggle] = useState(false);
@@ -72,31 +74,42 @@ const MultiSelect = ({
         onChange?.(values?.filter(x => x !== v) ?? []);
     }
     const selectedOptions = searchedOptions.filter(x => typeof values !== 'undefined' ? values.includes(x.value.toString()) : defaultValues?.includes(x.value));
-   
-   
-   
+
+
+
     useOnClickOutside(ref, handleClose, isOpen);
     const { ref: wrapperOptionsRef } = useIntersectionObserver({
-      options: {
-        root: null,
-        rootMargin: "0px",
-        threshold: .1,
-      },
-      callback(entry) {
-          if(!isOpen) return; 
-          if(entry.intersectionRatio === 0) {
-            toggle(false)
-          }
-        if (!entry.isIntersecting) {
-          setPositionOptions((prev) => !prev);
-        }
-      },
+        options: {
+            root: null,
+            rootMargin: "0px",
+            threshold: .1,
+        },
+        callback(entry) {
+            if (!isOpen) return;
+            if (entry.intersectionRatio === 0) {
+                toggle(false)
+            }
+            if (!entry.isIntersecting) {
+                setPositionOptions((prev) => !prev);
+            }
+        },
     });
-   
+
     useEffect(() => {
         options.current = children ? (Array.isArray(children) ? children?.map(x => x.props) : [children.props]) : [];
         setSearchedOptions(options.current);
     }, [children])
+
+    //    useEffect(() => {   
+    //     const windowHeight = window.innerHeight;
+    //     const optionsHeight = 220;
+    //     const  waitForCalculateSpace = 500
+    //     setTimeout(() => {
+    //         if (ref.current && windowHeight - ref.current.getBoundingClientRect().bottom >= optionsHeight) {
+    //             setPositionOptions(true);
+    //         } else setPositionOptions(false);
+    //     }, waitForCalculateSpace);
+    // }, [isIntersecting,isOpen]);
     return (
         <div className={`multiselect-control ${className ? ` ${className}` : ""}${isOpen ? " is-open" : ""}${disabled ? " disabled" : ""}`}>
             <div className="input-control">
@@ -104,7 +117,7 @@ const MultiSelect = ({
                 <div ref={ref} className={`input-wrapper`} onClick={disabled ? undefined : () => toggle(s => !s)}>
                     {placeholder}
                     {isOpen ? <ChevronUp /> : <ChevronDown />}
-                    <ul ref={wrapperOptionsRef} className={`options  ${positionOptions? "openDown": "openUp"}`}>
+                    <ul ref={wrapperOptionsRef} className={`options  ${positionOptions ? "openDown" : "openUp"}`}>
                         {searchable ? <li className="search-wrapper">
                             <input ref={searchRef} type="text" onChange={onSearch} placeholder={searchText} />
                         </li> : null}
@@ -123,7 +136,7 @@ const MultiSelect = ({
             </div>
             <div className="tags">
                 {selectedOptions.map((opt, idx) => <Tag key={opt.value !== null ? opt.value : idx} closable onClose={() => removeOption(opt.value)}>
-                    <Badge size="small" variant="primary">{idx + 1}</Badge>{opt.text ?? opt.children}
+                    {showOptionOrder && <><Badge size="small" variant="primary">{idx + 1}</Badge>{" "}</>}{opt.text ?? opt.children}
                 </Tag>)}
             </div>
             <input type="hidden" value={values?.join(',')} name={name} id={id} />
