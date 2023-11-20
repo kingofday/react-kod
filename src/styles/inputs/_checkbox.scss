@@ -10,9 +10,11 @@
     z-index: -1;
     opacity: 0;
   }
+
   &.disabled {
     color: var(--disabledText);
   }
+
   .indicator {
     position: absolute;
     top: 50%;
@@ -24,22 +26,27 @@
     border: solid 1px var(--border);
     border-radius: 3px;
   }
-  // &:hover input ~ .indicator,
-  // & input:focus ~ .indicator {
-  //     background: #ccc;
-  // }
-  & input:checked ~ .indicator {
+
+  &:hover input~.indicator,
+  & input:focus~.indicator {
+    border-color: var(--gray);
+  }
+
+  & input:checked~.indicator {
     background: var(--blue);
   }
-  &:hover input:not([disabled]):checked ~ .indicator,
-  & input:checked:focus ~ .indicator {
+
+  &:hover input:not([disabled]):checked~.indicator,
+  & input:checked:focus~.indicator {
     background: var(--blue);
   }
-  & input:disabled ~ .indicator {
+
+  & input:disabled~.indicator {
     background: var(--disabledBg);
     opacity: 0.6;
     pointer-events: none;
   }
+
   .indicator:after {
     content: '';
     position: absolute;
@@ -52,12 +59,14 @@
     border-width: 0 2px 2px 0;
     transform: translate(-50%, calc(-50% - 1px)) rotate(45deg);
   }
-  & input:checked ~ .indicator:after {
+
+  & input:checked~.indicator:after {
     display: block;
   }
-  & input:disabled ~ .indicator:after {
+
+  & input:disabled~.indicator:after {
     border-color: var(--text);
   }
 }
-[dir='ltr'] {
-}
+
+[dir='ltr'] {}

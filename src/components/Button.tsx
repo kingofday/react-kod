@@ -40,7 +40,7 @@ const Button: ForwardRefExoticComponent<IButtonProps> = forwardRef<HTMLButtonEle
     <button
       ref={ref}
       type={type || "button"}
-      className={`btn ${size ?? ""} ${variant ?? "solid"} ${danger ? "danger" : ""} ${className ?? ""}`}
+      className={`btn${size ? ` ${size}` : ""}${variant ? ` ${variant}` : " solid"}${danger ? " danger" : ""}${className ? ` ${className}` : ""}`}
       disabled={disabled}
       onClick={onClick}
       onMouseEnter={onMouseEnter}

@@ -1,6 +1,6 @@
 import React from "react";
-import Button from "../../../src/components/kod/Button";
-import { storiesOf, type Meta, type StoryObj } from '@storybook/react';
+import Button from "../../../src/components/Button";
+import { type Meta, type StoryObj } from '@storybook/react';
 
 const meta: Meta<typeof Button> = {
   title: "/Form/Button/Variant",

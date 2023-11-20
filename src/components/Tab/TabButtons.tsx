@@ -36,7 +36,7 @@ const TabButtons = ({
         afterChange?.(key)
     };
     return <div id={id} className={`tab-buttons horizontal-scroll-bar ${variant}${className ? " " + className : ""}${hideScrollBar ? " hide-scroll-bar" : ""}`}>
-        {tabs.map((t) => <Button key={t.key} icon={t.icon} className={`${t.className ? " " + t.className : ""}${(onChange ? activeKey : innerActiveKey) === t.key ? " " + "active" : ""} ${t.disabled ? " disabled" : ""}`} variant="tab" onClick={() => t.disabled ? undefined : (onChange ? onChange(t.key, t) : handleClick(t.key))}>{t.text}</Button>)}
+        {tabs.map((t) => <Button {...t} key={t.key} icon={t.icon} className={`${t.className ?? ""}${(onChange ? activeKey : innerActiveKey) === t.key ? " active" : ""}${t.disabled ? " disabled" : ""}`} variant="tab" onClick={() => t.disabled ? undefined : (onChange ? onChange(t.key, t) : handleClick(t.key))}>{t.text}</Button>)}
     </div>;
 };
 export default TabButtons;

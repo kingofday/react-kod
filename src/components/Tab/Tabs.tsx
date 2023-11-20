@@ -1,7 +1,7 @@
 import { ReactElement, useEffect, useState, ForwardRefExoticComponent, forwardRef, useRef } from "react";
 import { TabProps } from "./Tab";
 import TabTitle from "./TabTitle";
-export interface ITabsProps {
+type TabsProps = {
   defaultActiveTab?: string;
   activeTab?: string;
   className?: string;
@@ -9,8 +9,8 @@ export interface ITabsProps {
   items?: TabProps[];
   variant?: "pill" | "normal" | "bordered-pill" | "bordered" | "secondary";
   alignTitles?: "start" | "end" | "center",
-  visibility?:boolean;
-  hideScrollBar?:boolean;
+  visibility?: boolean;
+  hideScrollBar?: boolean;
   onChange?: (key: string) => void,
   afterChange?: (key: string) => void,
   [key: string]: any
@@ -18,14 +18,14 @@ export interface ITabsProps {
 interface RenderedTabs {
   [key: string]: boolean;
 }
-const Tabs: ForwardRefExoticComponent<ITabsProps> = forwardRef<HTMLDivElement, ITabsProps>(({
+const Tabs: ForwardRefExoticComponent<TabsProps> = forwardRef<HTMLDivElement, TabsProps>(({
   items,
   defaultActiveTab,
   children,
   className = "",
   variant = "normal",
   alignTitles = "start",
-  visibility ,
+  visibility,
   hideScrollBar,
   afterChange,
   activeTab,
@@ -74,7 +74,7 @@ const Tabs: ForwardRefExoticComponent<ITabsProps> = forwardRef<HTMLDivElement, I
       renderedTabs.current[activeTab] = true;
   }, [activeTab]);
   return (
-    <div className={`tabs ${variant} ${alignTitles}${className?` ${className}`:""}${visibility ? " visibility" :""}${hideScrollBar?" hide-scroll-bar":""}`} ref={forwardedRef} {...rest}>
+    <div className={`tabs ${variant} ${alignTitles}${className ? ` ${className}` : ""}${visibility ? " visibility" : ""}${hideScrollBar ? " hide-scroll-bar" : ""}`} ref={forwardedRef} {...rest}>
       <ul className="tab-nav-list horizontal-scroll-bar" role="tablist">
         {tabProps.map((item) => (
           <TabTitle
@@ -98,5 +98,4 @@ const Tabs: ForwardRefExoticComponent<ITabsProps> = forwardRef<HTMLDivElement, I
     </div>
   );
 });
-
-export default Tabs;
+export { Tabs, TabsProps };
