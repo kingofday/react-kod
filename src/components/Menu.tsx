@@ -6,6 +6,7 @@ export type MenuItem = {
     children?: MenuItem[];
     disabled?: boolean;
     href?: string;
+    afterClick?: () => void;
 }
 export interface IMenu {
     className?: string;
@@ -57,7 +58,10 @@ const Menu = ({ className,
                             </span>
                         ) : null}
                         {item.label}
-                    </Link> : <div className="menu-content" onClick={() => handleSelect(item.key)}>
+                    </Link> : <div className="menu-content" onClick={() => {                        
+                        handleSelect(item.key)
+                        item?.afterClick && item?.afterClick();
+                    }}>
                         {item.icon ? (
                             <span className="menu-icon">
                                 {item.icon}
