@@ -77,12 +77,12 @@ const Menu = ({
             state.openKeys?.some((x) => x === item.key) ? "collapsed" : ""
           }`}
           onClick={openOnClick ? () => handleCollapse(item.key) : undefined}
-          onMouseLeave={variant === "horizontal" ? () => handleCollapse(item.key, false) : undefined}
+          onMouseLeave={openOnClick ? undefined : variant === "horizontal" ? () => handleCollapse(item.key, false) : undefined}
         >
           <div
             className="menu-content"
             onClick={variant === "horizontal" ? undefined : () => handleCollapse(item.key)}
-            onMouseEnter={variant === "horizontal" ? () => handleCollapse(item.key) : undefined}
+            onMouseEnter={openOnClick ? undefined : variant === "horizontal" ? () => handleCollapse(item.key) : undefined}
           >
             <span>
               {item.icon ? <span className="menu-icon">{item.icon}</span> : null}
