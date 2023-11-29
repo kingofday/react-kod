@@ -1,11 +1,12 @@
-import { ReactElement, useEffect, useState, useRef, ChangeEvent, ReactNode } from "react";
+import { ReactElement, useEffect, useState, useRef, ChangeEvent, ReactNode, CSSProperties } from "react";
 import Opt, { SelectOptionItemProps } from "../Shared/Option";
 import ChevronDown from "../Shared/ChevronDown";
 import ChevronUp from "../Shared/ChevronUp";
 import Badge from "../Badge";
 import Tag from "../Tag";
-import useIntersectionObserver from "../../helpers/useIntersectionObserver";
 import useOnClickOutside from "../../helpers/useOnClickOutside";
+import { createPortal } from "react-dom";
+type Pos = "auto" | number;
 interface SelectProps {
     name?: string;
     id?: string;
@@ -21,6 +22,7 @@ interface SelectProps {
     allowClear?: boolean;
     searchText?: string;
     suffix?: ReactNode;
+    popupTargetId?: string;
     children?: ReactElement<SelectOptionItemProps> | ReactElement<SelectOptionItemProps>[];
     onChange?: (values: string[]) => void;
     showOptionOrder?: boolean;
@@ -39,15 +41,39 @@ const MultiSelect = ({
     suffix,
     onChange,
     showOptionOrder = true,
+    popupTargetId,
     disabled = false
 }: SelectProps) => {
     const [isOpen, toggle] = useState(false);
     const ref = useRef<HTMLDivElement>(null);
+    const popupRef = useRef<HTMLUListElement | null>(null);
+    const popupTarget = useRef<HTMLElement | null>(null);
     const searchRef = useRef<HTMLInputElement>(null);
     const options = useRef<SelectOptionItemProps[]>(children ? (Array.isArray(children) ? children?.map(x => x.props) : [children.props]) : []);
+    const [popupStyle, setPopupStyle] = useState<CSSProperties | undefined>(undefined);
     const [searchedOptions, setSearchedOptions] = useState<SelectOptionItemProps[]>([]);
-    const [positionOptions, setPositionOptions] = useState(true)
-
+    const adjustPosition = () => {
+        const inputRect = ref.current?.getBoundingClientRect();
+        const popupRect = popupRef.current?.getBoundingClientRect();
+        const parentRect = popupTarget.current?.getBoundingClientRect();
+        if (!popupRect || !inputRect) return;
+        const h = window.innerHeight;
+        let left: Pos = "auto";
+        let top: Pos = "auto";
+        const scrollTop = window.scrollY || document.documentElement.scrollTop;
+        const scrollLeft = window.scrollX || document.documentElement.scrollLeft;
+        const inputOffsetTop = ref.current?.offsetTop ?? 0;
+        const inputOffsetLeft = ref.current?.offsetLeft ?? 0;
+        if (inputRect.top + popupRect.height > h) {
+            top = ((popupTargetId && parentRect) ? inputOffsetTop : (inputRect.top + scrollTop)) - popupRect.height;
+        }
+        else {
+            top = (popupTargetId && parentRect ? inputOffsetTop : (inputRect.top + scrollTop)) + inputRect.height;
+        }
+        console.log("left", inputRect.left, scrollLeft)
+        left = (popupTargetId && parentRect ? inputOffsetLeft : (inputRect.left + scrollLeft));
+        setPopupStyle(({ top, left,right:"auto", width: inputRect.width }));
+    }
     const handleClose = () => {
         toggle(false);
     }
@@ -74,42 +100,16 @@ const MultiSelect = ({
         onChange?.(values?.filter(x => x !== v) ?? []);
     }
     const selectedOptions = searchedOptions.filter(x => typeof values !== 'undefined' ? values.includes(x.value.toString()) : defaultValues?.includes(x.value));
-
-
-
-    useOnClickOutside(ref, handleClose, isOpen);
-    const { ref: wrapperOptionsRef } = useIntersectionObserver({
-        options: {
-            root: null,
-            rootMargin: "0px",
-            threshold: .1,
-        },
-        callback(entry) {
-            if (!isOpen) return;
-            if (entry.intersectionRatio === 0) {
-                toggle(false)
-            }
-            if (!entry.isIntersecting) {
-                setPositionOptions((prev) => !prev);
-            }
-        },
-    });
-
+    useOnClickOutside([ref, popupRef], handleClose, isOpen);
     useEffect(() => {
-        options.current = children ? (Array.isArray(children) ? children?.map(x => x.props) : [children.props]) : [];
-        setSearchedOptions(options.current);
-    }, [children])
-
-    //    useEffect(() => {   
-    //     const windowHeight = window.innerHeight;
-    //     const optionsHeight = 220;
-    //     const  waitForCalculateSpace = 500
-    //     setTimeout(() => {
-    //         if (ref.current && windowHeight - ref.current.getBoundingClientRect().bottom >= optionsHeight) {
-    //             setPositionOptions(true);
-    //         } else setPositionOptions(false);
-    //     }, waitForCalculateSpace);
-    // }, [isIntersecting,isOpen]);
+        popupTarget.current = popupTargetId ? document.getElementById(popupTargetId) : document.body;
+      }, [popupTargetId])
+      useEffect(() => { setSearchedOptions(options.current) }, [children])
+    useEffect(() => {
+        if (isOpen) {
+            adjustPosition();
+        }
+    }, [isOpen])
     return (
         <div className={`multiselect-control ${className ? ` ${className}` : ""}${isOpen ? " is-open" : ""}${disabled ? " disabled" : ""}`}>
             <div className="input-control">
@@ -117,7 +117,7 @@ const MultiSelect = ({
                 <div ref={ref} className={`input-wrapper`} onClick={disabled ? undefined : () => toggle(s => !s)}>
                     {placeholder}
                     {isOpen ? <ChevronUp /> : <ChevronDown />}
-                    <ul ref={wrapperOptionsRef} className={`options  ${positionOptions ? "openDown" : "openUp"}`}>
+                    {isOpen && createPortal(<ul ref={popupRef} className="multiselect-options" style={popupStyle}>
                         {searchable ? <li className="search-wrapper">
                             <input ref={searchRef} type="text" onChange={onSearch} placeholder={searchText} />
                         </li> : null}
@@ -130,7 +130,7 @@ const MultiSelect = ({
                                 >{x.children}</Opt>
                             </li>
                         ))}
-                    </ul>
+                    </ul>, popupTarget.current ?? document.body)}
                 </div>
                 {suffix}
             </div>

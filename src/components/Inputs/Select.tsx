@@ -1,10 +1,11 @@
-import { InputHTMLAttributes, ReactElement, useEffect, useState, useRef, ReactNode, ChangeEvent } from "react";
+import { InputHTMLAttributes, ReactElement, useEffect, useState, useRef, ReactNode, ChangeEvent, CSSProperties } from "react";
 import Opt, { SelectOptionItemProps } from "../Shared/Option";
 import ChevronDown from "../Shared/ChevronDown";
 import CloseIcon from "../Shared/ClosedIcon";
-import useIntersectionObserver from "../../helpers/useIntersectionObserver";
 import useOnClickOutside from "../../helpers/useOnClickOutside";
-
+import { createPortal } from "react-dom";
+//import isMobileDevice from "../../helpers/isMobileDevice";
+type Pos = "auto" | number;
 interface SelectProps extends Omit<InputHTMLAttributes<HTMLInputElement>, "onChange"> {
   label?: ReactNode;
   defaultValue?: any;
@@ -14,6 +15,7 @@ interface SelectProps extends Omit<InputHTMLAttributes<HTMLInputElement>, "onCha
   searchable?: boolean;
   allowClear?: boolean;
   searchText?: string;
+  popupTargetId?: string;
   children?: ReactElement<SelectOptionItemProps> | ReactElement<SelectOptionItemProps>[];
   onChange?: (value: string) => void;
 }
@@ -31,13 +33,15 @@ const Select = ({
   allowClear = false,
   searchable = false,
   searchText,
+  popupTargetId,
   disabled = false,
 }: SelectProps) => {
   const [isOpen, toggle] = useState(false);
-  const [positionOptions, setPositionOptions] = useState(true);
+  const popupRef = useRef<HTMLUListElement | null>(null);
+  const popupTarget = useRef<HTMLElement | null>(null);
   const ref = useRef<HTMLDivElement>(null);
   const searchRef = useRef<HTMLInputElement>(null);
-
+  const [popupStyle, setPopupStyle] = useState<CSSProperties | undefined>(undefined);
   const options = children ? (Array.isArray(children) ? children?.map((x) => x.props) : [children.props]) : [];
   const selectedOption = options.find((x) => (typeof value !== "undefined" ? x.value === value : x.value === defaultValue));
   const [searchedOptions, setSearchedOptions] = useState<SelectOptionItemProps[]>(options);
@@ -47,6 +51,28 @@ const Select = ({
     onChange?.("");
     setSearchedOptions([]);
   };
+  const adjustPosition = () => {
+    const inputRect = ref.current?.getBoundingClientRect();
+    const popupRect = popupRef.current?.getBoundingClientRect();
+    const parentRect = popupTarget.current?.getBoundingClientRect();
+    if (!popupRect || !inputRect) return;
+    const h = window.innerHeight;
+    let left: Pos = "auto";
+    let top: Pos = "auto";
+    //TODO:Add rtl provider
+    const scrollTop = window.scrollY || document.documentElement.scrollTop;
+    const scrollLeft = window.scrollX || document.documentElement.scrollLeft;
+    const inputOffsetTop = ref.current?.offsetTop ?? 0;
+    const inputOffsetLeft = ref.current?.offsetLeft ?? 0;
+    if (inputRect.top + popupRect.height > h) {
+      top = ((popupTargetId && parentRect) ? inputOffsetTop : (inputRect.top + scrollTop)) - popupRect.height;
+    }
+    else {
+      top = (popupTargetId && parentRect ? inputOffsetTop : (inputRect.top + scrollTop)) + inputRect.height;
+    }
+    left = (popupTargetId && parentRect ? inputOffsetLeft : (inputRect.left + scrollLeft));
+    setPopupStyle(({ top, left, right: "auto", width: inputRect.width }));
+  }
   const handleClose = () => {
     toggle(false);
   };
@@ -60,34 +86,23 @@ const Select = ({
     else setSearchedOptions(options);
   };
 
-  useOnClickOutside(ref, handleClose, isOpen);
-  const { ref: wrapperOptionsRef } = useIntersectionObserver({
-    options: {
-      root: null,
-      rootMargin: "0px",
-      threshold: 0.1,
-    },
-    callback(entry) {
-      if(!isOpen) return; 
-      if (entry.intersectionRatio === 0) {
-        toggle(false);
-      }
-      if (!entry.isIntersecting) {
-        setPositionOptions((prev) => !prev);
-      }
-    },
-  });
+  useOnClickOutside([ref, popupRef], handleClose, isOpen);
 
+  useEffect(() => {
+    popupTarget.current = popupTargetId ? document.getElementById(popupTargetId) : document.body;
+  }, [popupTargetId])
   useEffect(() => {
     setSearchedOptions(children ? (Array.isArray(children) ? children?.map((x) => x.props) : [children.props]) : []);
   }, [children]);
-
+  useEffect(() => {
+    if (isOpen) {
+      adjustPosition();
+    }
+  }, [isOpen])
   return (
     <div
       ref={ref}
-      className={`select-control${allowClear && selectedOption ? " clearable" : ""} ${className ?? ""}${isOpen ? " is-open" : ""}${
-        disabled ? " disabled" : ""
-      }`}
+      className={`select-control${allowClear && selectedOption ? " clearable" : ""}${className ? ` ${className}` : ""}${isOpen ? " is-open" : ""}${disabled ? " disabled" : ""}`}
     >
       {label ? <label htmlFor={name}>{label}</label> : null}
       <div className={`input-wrapper `} onClick={disabled ? undefined : () => toggle((s) => !s)}>
@@ -95,8 +110,8 @@ const Select = ({
         <ChevronDown className="indicator" />
         {allowClear && selectedOption && <CloseIcon className="clear-icon" onClick={disabled ? undefined : (e: any) => clear(e)} />}
       </div>
-      {isOpen && (
-        <ul ref={wrapperOptionsRef} className={`select-options ${positionOptions ? "openDown" : "openUp"} ${listClassName ?? ""}`}>
+      {isOpen && (createPortal(
+        <ul ref={popupRef} className={`select-options${listClassName ? ` ${listClassName}` : ""}`} style={popupStyle}>
           {searchable ? (
             <li className="search-wrapper">
               <input ref={searchRef} type="text" onChange={onSearch} placeholder={searchText} />
@@ -113,7 +128,7 @@ const Select = ({
               </Opt>
             </li>
           ))}
-        </ul>
+        </ul>, popupTarget.current ?? document.body)
       )}
       <input type="hidden" value={value} name={name} id={id} />
     </div>

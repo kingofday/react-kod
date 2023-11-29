@@ -6,6 +6,7 @@
   flex-direction: column;
   gap: 0.625rem;
   @include v.inputWrapper;
+  min-width: 80px;
 
   .input-wrapper {
     white-space: nowrap;
@@ -14,7 +15,6 @@
 
     .indicator {
       transition-duration: 0.5s;
-      ;
     }
 
     &:not(.disabled) {
@@ -65,19 +65,13 @@
 
 .select-options {
   @include v.menuCard;
+  width: auto;
   position: absolute;
-  height: 12.5rem;
+  height: fit-content;
   max-height: 12.5rem;
   overflow: auto;
   z-index: 9999;
-
-  &.openUp {
-    bottom: 2.1875rem;
-  }
-
-  &.openDown {
-    top: 2.1875rem;
-  }
+  left: 0;
 
   li {
     gap: 0.25rem;
@@ -86,6 +80,7 @@
       display: inline-flex;
       justify-content: space-between;
       align-items: center;
+      gap: 0.25rem;
       width: 100%;
       padding: 0.625rem;
 
@@ -131,5 +126,12 @@
       padding: 0.625rem;
       font-family: inherit;
     }
+  }
+}
+
+html[dir="ltr"] {
+  .select-options {
+    right: 0;
+    left: "auto";
   }
 }
