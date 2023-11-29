@@ -17,6 +17,7 @@ const TabTitle = ({ title, icon = null, setSelectedTab, selectedTab, tabKey, dis
       onClick={disabled ? undefined : () => setSelectedTab(tabKey)}
     >
       {icon ? <span className="icon">{icon}</span> : null}
+      {title}
     </li>
   );
 };
