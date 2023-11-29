@@ -1,6 +1,7 @@
 @use "../shared" as v;
 
 .multiselect-control {
+    width: fit-content;
     position: relative;
     display: flex;
     flex-direction: column;

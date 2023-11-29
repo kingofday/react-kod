@@ -13,8 +13,9 @@ npm i react-kod
 ```
 add css to your project
 ```
-import "react-kod/dist/index.css";
+import "react-kod/dist/styles.css";
 ```
+(if you like to include styles in your global styles can import it in sass file with thi path: "react-kod/dist/styles.scss")
 ### Usage
 import { DesiredComp } from "react-kod"
 

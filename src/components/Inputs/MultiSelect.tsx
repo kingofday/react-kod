@@ -45,6 +45,7 @@ const MultiSelect = ({
     disabled = false
 }: SelectProps) => {
     const [isOpen, toggle] = useState(false);
+    const wrapperRef = useRef<HTMLDivElement>(null);
     const ref = useRef<HTMLDivElement>(null);
     const popupRef = useRef<HTMLUListElement | null>(null);
     const popupTarget = useRef<HTMLElement | null>(null);
@@ -62,17 +63,19 @@ const MultiSelect = ({
         let top: Pos = "auto";
         const scrollTop = window.scrollY || document.documentElement.scrollTop;
         const scrollLeft = window.scrollX || document.documentElement.scrollLeft;
-        const inputOffsetTop = ref.current?.offsetTop ?? 0;
-        const inputOffsetLeft = ref.current?.offsetLeft ?? 0;
+        const inputOffsetTop = wrapperRef.current?.offsetTop ?? 0;
+        const inputOffsetLeft = wrapperRef.current?.offsetLeft ?? 0;
+        const offsetHeight = popupTargetId && popupTarget.current ?popupTarget.current.offsetHeight-popupTarget.current.clientHeight:0
+        const offsetWidth = popupTargetId && popupTarget.current ?popupTarget.current.offsetWidth-popupTarget.current.clientWidth:0
+
         if (inputRect.top + popupRect.height > h) {
-            top = ((popupTargetId && parentRect) ? inputOffsetTop : (inputRect.top + scrollTop)) - popupRect.height;
+            top = ((popupTargetId && parentRect) ? inputOffsetTop : (inputRect.top + scrollTop)) - popupRect.height - offsetHeight;
         }
         else {
-            top = (popupTargetId && parentRect ? inputOffsetTop : (inputRect.top + scrollTop)) + inputRect.height;
+            top = (popupTargetId && parentRect ? inputOffsetTop : (inputRect.top + scrollTop)) + inputRect.height - offsetHeight;
         }
-        console.log("left", inputRect.left, scrollLeft)
-        left = (popupTargetId && parentRect ? inputOffsetLeft : (inputRect.left + scrollLeft));
-        setPopupStyle(({ top, left,right:"auto", width: inputRect.width }));
+        left = (popupTargetId && parentRect ? inputOffsetLeft : (inputRect.left + scrollLeft)) - offsetWidth;
+        setPopupStyle(({ top, left, right: "auto", width: inputRect.width }));
     }
     const handleClose = () => {
         toggle(false);
@@ -103,15 +106,15 @@ const MultiSelect = ({
     useOnClickOutside([ref, popupRef], handleClose, isOpen);
     useEffect(() => {
         popupTarget.current = popupTargetId ? document.getElementById(popupTargetId) : document.body;
-      }, [popupTargetId])
-      useEffect(() => { setSearchedOptions(options.current) }, [children])
+    }, [popupTargetId])
+    useEffect(() => { setSearchedOptions(options.current) }, [children])
     useEffect(() => {
         if (isOpen) {
             adjustPosition();
         }
     }, [isOpen])
     return (
-        <div className={`multiselect-control ${className ? ` ${className}` : ""}${isOpen ? " is-open" : ""}${disabled ? " disabled" : ""}`}>
+        <div ref={wrapperRef} className={`multiselect-control ${className ? ` ${className}` : ""}${isOpen ? " is-open" : ""}${disabled ? " disabled" : ""}`}>
             <div className="input-control">
                 {label ? <label htmlFor={name}>{label}</label> : null}
                 <div ref={ref} className={`input-wrapper`} onClick={disabled ? undefined : () => toggle(s => !s)}>

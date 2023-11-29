@@ -64,13 +64,16 @@ const Select = ({
     const scrollLeft = window.scrollX || document.documentElement.scrollLeft;
     const inputOffsetTop = ref.current?.offsetTop ?? 0;
     const inputOffsetLeft = ref.current?.offsetLeft ?? 0;
+    const offsetHeight = popupTargetId && popupTarget.current ?popupTarget.current.offsetHeight-popupTarget.current.clientHeight:0
+    const offsetWidth = popupTargetId && popupTarget.current ?popupTarget.current.offsetWidth-popupTarget.current.clientWidth:0
+
     if (inputRect.top + popupRect.height > h) {
-      top = ((popupTargetId && parentRect) ? inputOffsetTop : (inputRect.top + scrollTop)) - popupRect.height;
+      top = ((popupTargetId && parentRect) ? inputOffsetTop : (inputRect.top + scrollTop)) - popupRect.height - offsetHeight;
     }
     else {
-      top = (popupTargetId && parentRect ? inputOffsetTop : (inputRect.top + scrollTop)) + inputRect.height;
+      top = (popupTargetId && parentRect ? inputOffsetTop : (inputRect.top + scrollTop)) + inputRect.height - offsetHeight;
     }
-    left = (popupTargetId && parentRect ? inputOffsetLeft : (inputRect.left + scrollLeft));
+    left = (popupTargetId && parentRect ? inputOffsetLeft : (inputRect.left + scrollLeft)) - offsetWidth;
     setPopupStyle(({ top, left, right: "auto", width: inputRect.width }));
   }
   const handleClose = () => {
