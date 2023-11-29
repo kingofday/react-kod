@@ -6,24 +6,17 @@ interface Props {
   icon?: ReactNode;
   setSelectedTab: (key: string) => void;
   disabled?: boolean;
+  asElement?: keyof JSX.IntrinsicElements;
 }
 
-const TabTitle = ({
-  title,
-  icon = null,
-  setSelectedTab,
-  selectedTab,
-  tabKey,
-  disabled
-
-}: Props) => {
+const TabTitle = ({ title, icon = null, setSelectedTab, selectedTab, tabKey, disabled }: Props) => {
   return (
     <li
       role="tab"
-      className={`tab-title ${tabKey === selectedTab ? "active" : ""} ${disabled ? 'disabled' : ''}`}
+      className={`tab-title ${tabKey === selectedTab ? "active" : ""} ${disabled ? "disabled" : ""}`}
       onClick={disabled ? undefined : () => setSelectedTab(tabKey)}
     >
-      {icon ? <span className="icon">{icon}</span> : null}{title}
+      {icon ? <span className="icon">{icon}</span> : null}
     </li>
   );
 };

@@ -1,10 +1,9 @@
-@use './shared' as v;
+@use "./shared" as v;
 
 @mixin active {
-
   // border-bottom: solid 2px var(--blue);
   &:after {
-    content: '';
+    content: "";
     background-color: var(--blue);
     transition: all 0.1s linear;
     height: 3px;
@@ -46,27 +45,25 @@
 
   .item {
     .disabled {
-      >.menu-content {
+      > .menu-content {
         cursor: not-allowed;
       }
     }
   }
 
-  >.item>.menu-content {
+  > .item > .menu-content {
     &:hover {
       @include hover;
     }
   }
 
-
   &.vertical {
     display: inline-flex;
     flex-direction: column;
 
-    .item.selected:not(:has(.sub-menu))>.menu-content {
+    .item.selected:not(:has(.sub-menu)) > .menu-content {
       color: var(--blue);
     }
-
 
     .item {
       position: relative;
@@ -97,14 +94,13 @@
           width: 100%;
         }
 
-        >svg path {
+        > svg path {
           stroke: var(--text);
         }
       }
 
       &:hover {
-
-        >.menu-content {
+        > .menu-content {
           color: var(--blue);
 
           svg path {
@@ -155,10 +151,10 @@
     height: 60px;
     gap: v.$spacing2;
 
-    >.item.selected>.menu-content {
+    > .item.selected > .menu-content {
       @include active;
 
-      >.indicator {
+      > .indicator {
         path {
           stroke: var(--blue);
         }
@@ -192,30 +188,25 @@
           width: 100%;
         }
 
-        >svg path {
+        > svg path {
           stroke: var(--text);
         }
-      }
-
-      &:hover {
-
-        .menu-content {
+        &:hover {
           color: var(--blue);
-
+          & * {
+            color: var(--blue);
+          }
           svg path {
             stroke: var(--blue);
           }
         }
       }
-
-      .menu-icon {
-        svg {
-          path {
-            stroke: inherit !important;
-          }
+      &:is(.disabled) .menu-content *{
+        color: inherit;
+        svg path {
+          stroke: inherit;
         }
       }
-
       &.disabled {
         opacity: 0.5;
         cursor: not-allowed;
@@ -267,7 +258,7 @@
   }
 }
 
-[dir='ltr'] .menu {
+[dir="ltr"] .menu {
   &.horizontal {
     flex-direction: row;
   }
