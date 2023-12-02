@@ -98,6 +98,6 @@ const Modal = ({
         </>}
       </div> : null}
     </div>
-  </div >, document.body) : null;
+  </div >, document.body) : <></>;
 };
 export default Modal;

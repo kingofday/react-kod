@@ -22,7 +22,7 @@ const useOnClickOutside = (
       }
       else {
         const r = (ref as RefObject<any>);
-        if (toggle && r.current && r.current.contains(e.target as Node)) {
+        if (toggle && r.current && !r.current.contains(e.target as Node)) {
           handleToggle();
         }
       };
