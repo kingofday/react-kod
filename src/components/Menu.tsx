@@ -19,7 +19,6 @@ export interface IMenu {
   link?: ElementType;
   onClick?: ((key: string) => void) | undefined;
   [key: string]: any;
-  responsiveMode?: boolean;
 }
 const Menu = ({
   className,
@@ -30,7 +29,6 @@ const Menu = ({
   onClick,
   link,
   openOnClick = false,
-  responsiveMode = false,
   hideIndicator = false,
   variant = "horizontal",
   ...rest

@@ -12,6 +12,7 @@ export * from './Tag';
 export { default as Tag } from './Tag';
 export * from './Button';
 export { default as Button } from './Button';
+export * from './Card';
 export { default as Card } from './Card';
 export * from './Drawer';
 export { default as Drawer } from './Drawer';

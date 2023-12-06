@@ -63,8 +63,8 @@ const MultiSelect = ({
         let top: Pos = "auto";
         const scrollTop = window.scrollY || document.documentElement.scrollTop;
         const scrollLeft = window.scrollX || document.documentElement.scrollLeft;
-        const inputOffsetTop = wrapperRef.current?.offsetTop ?? 0;
-        const inputOffsetLeft = wrapperRef.current?.offsetLeft ?? 0;
+        const inputOffsetTop = (wrapperRef.current?.offsetTop ?? 0)+(ref.current?.offsetTop ?? 0);
+        const inputOffsetLeft = (wrapperRef.current?.offsetLeft ?? 0)+(ref.current?.offsetLeft ?? 0);
         const offsetHeight = popupTargetId && popupTarget.current ?popupTarget.current.offsetHeight-popupTarget.current.clientHeight:0
         const offsetWidth = popupTargetId && popupTarget.current ?popupTarget.current.offsetWidth-popupTarget.current.clientWidth:0
 
