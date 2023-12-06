@@ -13,6 +13,7 @@ type TabsProps = {
   hideScrollBar?: boolean;
   onChange?: (key: string) => void,
   afterChange?: (key: string) => void,
+  swipable?: boolean;
   [key: string]: any
 }
 interface RenderedTabs {
@@ -28,12 +29,14 @@ const Tabs: ForwardRefExoticComponent<TabsProps> = forwardRef<HTMLDivElement, Ta
   visibility,
   hideScrollBar,
   afterChange,
+  swipable,
   activeTab,
   onChange,
   ...rest
 },
   forwardedRef,
 ) => {
+  const clientTouchX = useRef<number | null>(null);
   const tabProps: TabProps[] = children
     ? children.filter((x): x is ReactElement<TabProps> => x !== null).map((x) => ({
       key: x.key as string,
@@ -59,6 +62,29 @@ const Tabs: ForwardRefExoticComponent<TabsProps> = forwardRef<HTMLDivElement, Ta
       onChange(key);
     else
       setActiveKey(key);
+  };
+  const handleTouchStart = (e: React.TouchEvent) => {
+    clientTouchX.current = e.touches[0].clientX;
+  };
+  const handleTouchMove = (e: React.TouchEvent) => {
+    if (clientTouchX.current === null) return;
+
+    const currentX = e.touches[0].clientX;
+    const deltaX = currentX - clientTouchX.current;
+    if (deltaX < -100) {
+      const swipedTab = activeKey === tabProps[tabProps.length - 1].key ? tabProps[0].key : tabProps[tabProps.findIndex(c => c.key === activeKey) + 1].key
+      renderedTabs.current[swipedTab] = true;
+      setActiveKey(swipedTab)
+      clientTouchX.current = null;
+    } else if (deltaX > 100) {
+      const swipedTab = activeKey === tabProps[0].key ? tabProps[tabProps.length - 1].key : tabProps[tabProps.findIndex(c => c.key === activeKey) - 1].key
+      renderedTabs.current[swipedTab] = true;
+      setActiveKey(swipedTab)
+      clientTouchX.current = null;
+    }
+  };
+  const handleTouchEnd = () => {
+    clientTouchX.current = null;
   };
   // useImperativeHandle(forwardedRef, () => ({
   //   changeTab(key: string) {
@@ -88,7 +114,12 @@ const Tabs: ForwardRefExoticComponent<TabsProps> = forwardRef<HTMLDivElement, Ta
           />
         ))}
       </ul>
-      <ul className="tab-content-list">
+      <ul
+        className="tab-content-list"
+        onTouchStart={swipable ? handleTouchStart : undefined}
+        onTouchMove={swipable ? handleTouchMove : undefined}
+        onTouchEnd={swipable ? handleTouchEnd : undefined}
+      >
         {tabProps.map((x) => (
           <li className={`tab-content ${(activeTab ?? activeKey) !== x.key ? "d-none" : ""}`} key={x.key}>
             {(renderedTabs.current[x.key] as boolean) || ((activeTab ?? activeKey) === x.key) ? x.children : null}

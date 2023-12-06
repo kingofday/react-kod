@@ -62,4 +62,20 @@ export const BorderedPillTab: Story = {
             تب سوم
         </Tab>
     </Tabs>,
+};
+export const SwipableTab: Story = {
+    render: () => <Tabs
+        defaultActiveTab="t1"
+        swipable
+    >
+        <Tab key="t1" title="تب 1">
+            تب اول
+        </Tab>
+        <Tab key="t2" title="تب 2">
+            تب دوم
+        </Tab>
+        <Tab key="t3" title="تب 3">
+            تب سوم
+        </Tab>
+    </Tabs>,
 };      
