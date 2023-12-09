@@ -1,6 +1,6 @@
 import { forwardRef, MouseEventHandler, ForwardRefExoticComponent } from "react";
 import { ReactNode } from "react";
-import Spinner from "./Spinner";
+import Spinner,{SpinnerType} from "./Spinner";
 export type ButttonVariant = "solid" | "secondary" | "tab" | "link" | "square" | "circle" | "secondary-square" | "secondary-circle" | "gray" | "ghost";
 export interface IButtonProps {
   children?: ReactNode;
@@ -10,7 +10,7 @@ export interface IButtonProps {
   icon?: ReactNode;
   disabled?: boolean;
   danger?: boolean;
-  spinnerType?: "co" | "circle" | "dot";
+  spinnerType?: SpinnerType;
   size?: "small" | "medium" | "large";
   variant?: ButttonVariant;
   onClick?: MouseEventHandler<HTMLButtonElement> | undefined;
