@@ -11,6 +11,7 @@ const SelectExample = ()=>{
           value={value}
           placeholder={"please select"}
           onChange={setValue}
+          searchable
           disabled={false}>
           <Option key="opt1" value={"1"}>
             Opt 1

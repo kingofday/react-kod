@@ -63,10 +63,10 @@ const MultiSelect = ({
         let top: Pos = "auto";
         const scrollTop = window.scrollY || document.documentElement.scrollTop;
         const scrollLeft = window.scrollX || document.documentElement.scrollLeft;
-        const inputOffsetTop = (wrapperRef.current?.offsetTop ?? 0)+(ref.current?.offsetTop ?? 0);
-        const inputOffsetLeft = (wrapperRef.current?.offsetLeft ?? 0)+(ref.current?.offsetLeft ?? 0);
-        const offsetHeight = popupTargetId && popupTarget.current ?popupTarget.current.offsetHeight-popupTarget.current.clientHeight:0
-        const offsetWidth = popupTargetId && popupTarget.current ?popupTarget.current.offsetWidth-popupTarget.current.clientWidth:0
+        const inputOffsetTop = (wrapperRef.current?.offsetTop ?? 0) + (ref.current?.offsetTop ?? 0);
+        const inputOffsetLeft = (wrapperRef.current?.offsetLeft ?? 0) + (ref.current?.offsetLeft ?? 0);
+        const offsetHeight = popupTargetId && popupTarget.current ? popupTarget.current.offsetHeight - popupTarget.current.clientHeight : 0
+        const offsetWidth = popupTargetId && popupTarget.current ? popupTarget.current.offsetWidth - popupTarget.current.clientWidth : 0
 
         if (inputRect.top + popupRect.height > h) {
             top = ((popupTargetId && parentRect) ? inputOffsetTop : (inputRect.top + scrollTop)) - popupRect.height - offsetHeight;
@@ -103,7 +103,7 @@ const MultiSelect = ({
         onChange?.(values?.filter(x => x !== v) ?? []);
     }
     const selectedOptions = searchedOptions.filter(x => typeof values !== 'undefined' ? values.includes(x.value.toString()) : defaultValues?.includes(x.value));
-    useOnClickOutside([ref, popupRef], handleClose, isOpen);
+    useOnClickOutside([ref, popupRef], handleClose);
     useEffect(() => {
         popupTarget.current = popupTargetId ? document.getElementById(popupTargetId) : document.body;
     }, [popupTargetId])
@@ -117,7 +117,7 @@ const MultiSelect = ({
         <div ref={wrapperRef} className={`multiselect-control ${className ? ` ${className}` : ""}${isOpen ? " is-open" : ""}${disabled ? " disabled" : ""}`}>
             <div className="input-control">
                 {label ? <label htmlFor={name}>{label}</label> : null}
-                <div ref={ref} className={`input-wrapper`} onClick={disabled ? undefined : () => toggle(s => !s)}>
+                <div ref={ref} className={`input-wrapper`} onClick={disabled ? undefined : () => toggle(true)}>
                     {placeholder}
                     {isOpen ? <ChevronUp /> : <ChevronDown />}
                     {isOpen && createPortal(<ul ref={popupRef} className="multiselect-options" style={popupStyle}>

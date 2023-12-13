@@ -89,7 +89,7 @@ const Select = ({
     else setSearchedOptions(options);
   };
 
-  useOnClickOutside([ref, popupRef], handleClose, isOpen);
+  useOnClickOutside([ref, popupRef], handleClose);
 
   useEffect(() => {
     popupTarget.current = popupTargetId ? document.getElementById(popupTargetId) : document.body;

@@ -14,10 +14,10 @@ function App() {
 
   return (
     <div className="App" dir='rtl' style={{ height: 1000, paddingTop: 250, paddingBottom: 30 }}>
-      {/* <MultiSelectExample /> */}
+      <MultiSelectExample />
       {/* <SelectExample /> */}
-      {/* <ModalExample/> */}
-      <SpinnerSample/>
+       {/*<ModalExample/> 
+      <SpinnerSample/>*/}
     </div>
   );
 }

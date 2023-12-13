@@ -58,7 +58,7 @@ const Modal = ({
     if (isOpen !== open)
       toggle(open);
   }, [open])
-  useOnClickOutside(modalRef,handleClose,isOpen)
+  useOnClickOutside(modalRef,handleClose)
   useEffect(() => {
     if (isOpen) document.body.classList.add("modal-scroll-effect");
     else document.body.classList.remove("modal-scroll-effect");
