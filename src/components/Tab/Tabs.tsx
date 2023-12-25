@@ -1,4 +1,4 @@
-import { ReactElement, useEffect, useState, ForwardRefExoticComponent, forwardRef, useRef } from "react";
+import { ForwardRefExoticComponent, ReactElement, forwardRef, useEffect, useRef, useState } from "react";
 import { TabProps } from "./Tab";
 import TabTitle from "./TabTitle";
 type TabsProps = {
@@ -60,6 +60,11 @@ const Tabs: ForwardRefExoticComponent<TabsProps> = forwardRef<HTMLDivElement, Ta
   ))
   const [activeKey, setActiveKey] = useState<string>(activeTab ?? defaultActiveTab ?? tabProps[0].key);
   const handleSelect = (key: string) => {
+    const parentTabElement = wrapperList?.current as HTMLUListElement | undefined
+    const activeElement = parentTabElement?.querySelector(`[data-key="${key}"]`)as HTMLUListElement | undefined
+    if (parentTabElement && activeElement) {
+      parentTabElement.scrollLeft = activeElement.offsetLeft - (parentTabElement.offsetWidth - activeElement.offsetWidth) / 2;
+    }
     renderedTabs.current[key] = true;
     if (onChange)
       onChange(key);
@@ -97,12 +102,6 @@ const Tabs: ForwardRefExoticComponent<TabsProps> = forwardRef<HTMLDivElement, Ta
   useEffect(() => {
     if (!onChange)
     afterChange?.(activeKey);
-    const parentTabElement = wrapperList?.current as HTMLUListElement | undefined
-    const activeElement = parentTabElement?.querySelector(`#${activeKey}`)as HTMLUListElement | undefined
-    if (parentTabElement && activeElement) {
-      parentTabElement.scrollLeft = activeElement.offsetLeft - (parentTabElement.offsetWidth - activeElement.offsetWidth) / 2;
-    }
-    
   }, [activeKey]);
   useEffect(() => {
     if (activeTab && !renderedTabs.current[activeTab])
@@ -139,3 +138,4 @@ const Tabs: ForwardRefExoticComponent<TabsProps> = forwardRef<HTMLDivElement, Ta
   );
 });
 export { Tabs, TabsProps };
+
