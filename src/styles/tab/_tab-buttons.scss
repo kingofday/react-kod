@@ -1,6 +1,7 @@
 .tab-buttons {
     display: flex;
     gap: 0.625rem;
+    padding: 0 2px;
 
     &.ink-bar {
         gap: 0;
