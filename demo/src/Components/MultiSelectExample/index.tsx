@@ -7,7 +7,7 @@ const MultiSelectExample = () => {
     const [t, setT] = useState("");
     const [filters, setFilters] = useState<string[]>([]);
     useEffect(() => {
-        setTimeout(() => { setT("t") }, 50000)
+        setTimeout(() => { setT("t") }, 9000)
     }, [])
     return <div>
         <span>t: {t}</span>
