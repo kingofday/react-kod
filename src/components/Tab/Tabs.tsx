@@ -37,6 +37,9 @@ const Tabs: ForwardRefExoticComponent<TabsProps> = forwardRef<HTMLDivElement, Ta
   forwardedRef,
 ) => {
   const clientTouchX = useRef<number | null>(null);
+  const wrapperList = useRef<HTMLUListElement | null>(null);
+
+
   const tabProps: TabProps[] = children
     ? children.filter((x): x is ReactElement<TabProps> => x !== null).map((x) => ({
       key: x.key as string,
@@ -93,15 +96,21 @@ const Tabs: ForwardRefExoticComponent<TabsProps> = forwardRef<HTMLDivElement, Ta
   // }));
   useEffect(() => {
     if (!onChange)
-      afterChange?.(activeKey);
+    afterChange?.(activeKey);
+    const parentTabElement = wrapperList?.current as HTMLUListElement | undefined
+    const activeElement = parentTabElement?.querySelector(`#${activeKey}`)as HTMLUListElement | undefined
+    if (parentTabElement && activeElement) {
+      parentTabElement.scrollLeft = activeElement.offsetLeft - (parentTabElement.offsetWidth - activeElement.offsetWidth) / 2;
+    }
+    
   }, [activeKey]);
   useEffect(() => {
     if (activeTab && !renderedTabs.current[activeTab])
       renderedTabs.current[activeTab] = true;
   }, [activeTab]);
   return (
-    <div className={`tabs ${variant} ${alignTitles}${className ? ` ${className}` : ""}${visibility ? " visibility" : ""}${hideScrollBar ? " hide-scroll-bar" : ""}`} ref={forwardedRef} {...rest}>
-      <ul className="tab-nav-list horizontal-scroll-bar" role="tablist">
+    <div className={`tabs ${variant} ${alignTitles}${className ? ` ${className}` : ""}${visibility ? " visibility" : ""}`} ref={forwardedRef} {...rest}>
+      <ul ref={wrapperList} className={`tab-nav-list horizontal-scroll-bar ${hideScrollBar ? " hide-scroll-bar" : ""}`} role="tablist">
         {tabProps.map((item) => (
           <TabTitle
             key={item.key}
@@ -111,7 +120,7 @@ const Tabs: ForwardRefExoticComponent<TabsProps> = forwardRef<HTMLDivElement, Ta
             setSelectedTab={handleSelect}
             icon={item.icon}
             disabled={item.disabled}
-          />
+            />
         ))}
       </ul>
       <ul

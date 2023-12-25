@@ -9,10 +9,11 @@ interface Props {
   asElement?: keyof JSX.IntrinsicElements;
 }
 
-const TabTitle = ({ title, icon = null, setSelectedTab, selectedTab, tabKey, disabled }: Props) => {
+const TabTitle = ({ title, icon = null, setSelectedTab, selectedTab, tabKey, disabled}: Props) => {
   return (
     <li
       role="tab"
+      id={tabKey}
       className={`tab-title ${tabKey === selectedTab ? "active" : ""} ${disabled ? "disabled" : ""}`}
       onClick={disabled ? undefined : () => setSelectedTab(tabKey)}
     >

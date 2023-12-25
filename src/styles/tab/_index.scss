@@ -57,6 +57,7 @@
         overflow-x: auto;
         overflow-y: hidden;
         max-width: 100%;
+        padding: 0 2px;
 
         .tab-title {
             color: var(--text);
@@ -171,7 +172,7 @@
             }
         }
     }
-    &.hide-scroll-bar{
+    .hide-scroll-bar{
         @include shared.hideScrollBar;
     }
 }

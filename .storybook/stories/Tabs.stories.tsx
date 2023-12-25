@@ -16,19 +16,31 @@ export const DefaultTab: Story = {
         <Tab key="t2" title="تب 2 با آیکون" icon="#">
             تب دوم با آیکون
         </Tab>
-        <Tab key="t4" title="تب 3">
+        <Tab key="t3" title="تب 3">
             تب سوم
         </Tab>
-        <Tab key="t5" title="تب 4">
+        <Tab key="t4" title="تب 4">
             تب چهارم{" "}
         </Tab>
-        <Tab key="t6" title="تب 5">
+        <Tab key="t5" title="تب 5">
             تب پنجم
+        </Tab>
+        <Tab key="t6" title="تب 6">
+            تب ششم
+        </Tab>
+        <Tab key="t7" title="تب 7">
+            تب هفتم
+        </Tab>
+        <Tab key="t8" title="تب 8">
+            تب هشتم
+        </Tab>
+        <Tab key="t9" title="تب 9">
+            تب نهم 
         </Tab>
     </Tabs>,
 };
 export const PillTab: Story = {
-    render: () => <Tabs variant="pill" defaultActiveTab="t1">
+    render: () => <Tabs variant="pill" defaultActiveTab="t1" hideScrollBar>
         <Tab key="t1" title="تب 1">
             تب اول
         </Tab>
@@ -43,6 +55,15 @@ export const PillTab: Story = {
         </Tab>
         <Tab key="t6" title="تب 5">
             تب پنجم
+        </Tab>
+        <Tab key="t7" title="تب 7">
+            تب هفتم
+        </Tab>
+        <Tab key="t8" title="تب 8">
+            تب هشتم
+        </Tab>
+        <Tab key="t9" title="تب 9">
+            تب نهم 
         </Tab>
     </Tabs>,
 };
