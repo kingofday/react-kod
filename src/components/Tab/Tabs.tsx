@@ -19,6 +19,7 @@ type TabsProps = {
 interface RenderedTabs {
   [key: string]: boolean;
 }
+const THRESHOLD_SCROLL_MOVEMENT = 50
 const Tabs: ForwardRefExoticComponent<TabsProps> = forwardRef<HTMLDivElement, TabsProps>(({
   items,
   defaultActiveTab,
@@ -63,7 +64,7 @@ const Tabs: ForwardRefExoticComponent<TabsProps> = forwardRef<HTMLDivElement, Ta
     const parentTabElement = wrapperList?.current as HTMLUListElement | undefined
     const activeElement = parentTabElement?.querySelector(`[data-key="${key}"]`)as HTMLUListElement | undefined
     if (parentTabElement && activeElement) {
-      parentTabElement.scrollLeft = activeElement.offsetLeft - (parentTabElement.offsetWidth - activeElement.offsetWidth) / 2;
+      parentTabElement.scrollLeft = activeElement.offsetLeft - (parentTabElement.offsetWidth - activeElement.offsetWidth) / 2 - THRESHOLD_SCROLL_MOVEMENT;
     }
     renderedTabs.current[key] = true;
     if (onChange)

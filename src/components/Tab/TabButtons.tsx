@@ -19,6 +19,7 @@ interface TabButtonsProps {
   onChange?: (key: string, tab?: TabItem) => void;
   afterChange?: (key: string) => void;
 }
+const THRESHOLD_SCROLL_MOVEMENT = 50
 const TabButtons = ({ id, initialActiveKey, activeKey, className, onChange, afterChange, variant = "pill", hideScrollBar, tabs }: TabButtonsProps) => {
   const [innerActiveKey, chnageActiveKey] = useState(initialActiveKey ?? tabs.length ? tabs[0].key : "");
   const wrapperList = useRef<HTMLDivElement | null>(null);
@@ -27,7 +28,7 @@ const TabButtons = ({ id, initialActiveKey, activeKey, className, onChange, afte
     const parentTabElement = wrapperList?.current as HTMLDivElement | undefined;
     const activeElement = parentTabElement?.querySelector(`[data-key="${key}"]`) as HTMLUListElement | undefined;
     if (parentTabElement && activeElement) {
-      parentTabElement.scrollLeft = activeElement.offsetLeft - (parentTabElement.offsetWidth - activeElement.offsetWidth) / 2;
+      parentTabElement.scrollLeft = activeElement.offsetLeft - (parentTabElement.offsetWidth - activeElement.offsetWidth) / 2 - THRESHOLD_SCROLL_MOVEMENT;
     }
   }
   
