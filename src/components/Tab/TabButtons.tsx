@@ -22,16 +22,26 @@ interface TabButtonsProps {
 const TabButtons = ({ id, initialActiveKey, activeKey, className, onChange, afterChange, variant = "pill", hideScrollBar, tabs }: TabButtonsProps) => {
   const [innerActiveKey, chnageActiveKey] = useState(initialActiveKey ?? tabs.length ? tabs[0].key : "");
   const wrapperList = useRef<HTMLDivElement | null>(null);
-
-  const handleClick = (key: string) => {
-    chnageActiveKey(key);
-    afterChange?.(key);
+  
+  const centralizeTab = (key:string) => {
     const parentTabElement = wrapperList?.current as HTMLDivElement | undefined;
     const activeElement = parentTabElement?.querySelector(`[data-key="${key}"]`) as HTMLUListElement | undefined;
     if (parentTabElement && activeElement) {
       parentTabElement.scrollLeft = activeElement.offsetLeft - (parentTabElement.offsetWidth - activeElement.offsetWidth) / 2;
     }
+  }
+  
+  const handleClick = (key: string) => {
+    chnageActiveKey(key);
+    afterChange?.(key);
+    centralizeTab(key);
+
   };
+  const outSideHandleClick =  (key:string, item:TabItem) => {
+    onChange?.(key,item)
+    centralizeTab(key);
+
+  }
   return (
     <div ref={wrapperList} id={id} className={`tab-buttons horizontal-scroll-bar ${variant}${className ? " " + className : ""}${hideScrollBar ? " hide-scroll-bar" : ""}`}>
       {tabs.map((t) => (
@@ -42,7 +52,7 @@ const TabButtons = ({ id, initialActiveKey, activeKey, className, onChange, afte
           icon={t.icon}
           className={`${t.className ?? ""}${(onChange ? activeKey : innerActiveKey) === t.key ? " active" : ""}${t.disabled ? " disabled" : ""}`}
           variant="tab"
-          onClick={() => (t.disabled ? undefined : onChange ? onChange(t.key, t) : handleClick(t.key))}
+          onClick={() => (t.disabled ? undefined : onChange ? outSideHandleClick(t.key, t) : handleClick(t.key))}
         >
           {t.text}
         </Button>
