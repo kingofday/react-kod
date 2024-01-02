@@ -6,7 +6,6 @@ export type MenuItem = {
   children?: MenuItem[];
   disabled?: boolean;
   href?: string;
-  afterClick?: () => void;
 };
 export interface IMenu {
   className?: string;
@@ -20,19 +19,7 @@ export interface IMenu {
   onClick?: ((key: string) => void) | undefined;
   [key: string]: any;
 }
-const Menu = ({
-  className,
-  children,
-  items,
-  selectedKeys,
-  openKeys,
-  onClick,
-  link,
-  openOnClick = false,
-  hideIndicator = false,
-  variant = "horizontal",
-  ...rest
-}: IMenu) => {
+const Menu = ({ className, children, items, selectedKeys, openKeys, onClick, link, openOnClick = false, hideIndicator = false, variant = "horizontal", ...rest }: IMenu) => {
   const [state, setState] = useState({
     selectedKeys,
     openKeys,
@@ -57,10 +44,12 @@ const Menu = ({
               {item.label}
             </Link>
           ) : (
-            <div className="menu-content" onClick={() => {
+            <div
+              className="menu-content"
+              onClick={() => {
                 handleSelect(item.key);
-                item?.afterClick && item?.afterClick();
-            }}>
+              }}
+            >
               {item.icon ? <span className="menu-icon">{item.icon}</span> : null}
               {item.label}
             </div>
