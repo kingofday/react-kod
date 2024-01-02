@@ -5,8 +5,9 @@ export interface ISwitch {
     checked: boolean;
     description?: string;
     disabled?: boolean;
+  [key: string]: any;
 }
-const Switch = ({ id, label, onChange, checked, disabled, description }: ISwitch) => {
+const Switch = ({ id, label, onChange, checked, disabled, description,...rest }: ISwitch) => {
     const onSwitchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         onChange && onChange(event.target.checked);
     };
@@ -25,6 +26,7 @@ const Switch = ({ id, label, onChange, checked, disabled, description }: ISwitch
                 aria-checked={checked}
                 aria-labelledby={labelBy}
                 disabled={disabled}
+                {...rest}
             />
             <div className="switch-labels">
                 <span id={id ? labelId : " "}>{label}</span>
