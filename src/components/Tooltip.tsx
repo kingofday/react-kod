@@ -32,6 +32,7 @@ const Tooltip = ({ delay, children, title, className, fontSize, direction = "top
     });
     let timeout: number;
     const showTip = (): void => {
+        if (!children || !title) return;
         if (!delay)
             setActive(true);
         else
