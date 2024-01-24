@@ -27,6 +27,7 @@
     max-height: calc(100dvh - 20px);
     display: flex;
     flex-direction: column;
+
     >.modal-title {
       padding: 1rem 1.25rem;
       border-bottom: 1px solid var(--border);
@@ -53,7 +54,7 @@
       }
     }
 
-    > .btn-close {
+    >.btn-close {
       position: absolute;
       left: 1.875rem;
       top: 0.875rem;
@@ -126,9 +127,17 @@ html[dir='ltr'] {
       width: 100%;
       border-radius: 0;
       max-height: none;
+
       .btn-close {
         margin: 0;
         left: 1.25rem;
+      }
+    }
+
+    &:not(.fullscreen) {
+      .modal-body {
+        border-top-left-radius: 0.375rem;
+        border-top-right-radius: 0.375rem;
       }
     }
   }

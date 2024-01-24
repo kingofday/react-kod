@@ -4,7 +4,6 @@ import ChevronDown from "../Shared/ChevronDown";
 import CloseIcon from "../Shared/ClosedIcon";
 import useOnClickOutside from "../../helpers/useOnClickOutside";
 import { createPortal } from "react-dom";
-//import isMobileDevice from "../../helpers/isMobileDevice";
 type Pos = "auto" | number;
 interface SelectProps extends Omit<InputHTMLAttributes<HTMLInputElement>, "onChange"> {
   label?: ReactNode;
@@ -100,6 +99,7 @@ const Select = ({
   useEffect(() => {
     if (isOpen) {
       adjustPosition();
+      searchRef.current?.focus({preventScroll:true});
     }
   }, [isOpen])
   return (
