@@ -13,8 +13,7 @@ const TabTitle = ({ title, icon = null, setSelectedTab, selectedTab, tabKey, dis
   return (
     <li
       role="tab"
-      data-key={tabKey}
-      className={`tab-title ${tabKey === selectedTab ? "active" : ""} ${disabled ? "disabled" : ""}`}
+      className={`${`tab-${tabKey} `}tab-title ${tabKey === selectedTab ? "active" : ""} ${disabled ? "disabled" : ""}`}
       onClick={disabled ? undefined : () => setSelectedTab(tabKey)}
     >
       {icon ? <span className="icon">{icon}</span> : null}

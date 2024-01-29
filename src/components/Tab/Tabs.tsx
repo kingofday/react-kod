@@ -14,12 +14,12 @@ type TabsProps = {
   onChange?: (key: string) => void,
   afterChange?: (key: string) => void,
   swipable?: boolean;
+  threshold?: number;
   [key: string]: any
 }
 interface RenderedTabs {
   [key: string]: boolean;
 }
-const THRESHOLD_SCROLL_MOVEMENT = 50
 const Tabs: ForwardRefExoticComponent<TabsProps> = forwardRef<HTMLDivElement, TabsProps>(({
   items,
   defaultActiveTab,
@@ -32,6 +32,7 @@ const Tabs: ForwardRefExoticComponent<TabsProps> = forwardRef<HTMLDivElement, Ta
   afterChange,
   swipable,
   activeTab,
+  threshold = 0,
   onChange,
   ...rest
 },
@@ -62,9 +63,9 @@ const Tabs: ForwardRefExoticComponent<TabsProps> = forwardRef<HTMLDivElement, Ta
   const [activeKey, setActiveKey] = useState<string>(activeTab ?? defaultActiveTab ?? tabProps[0].key);
   const handleSelect = (key: string) => {
     const parentTabElement = wrapperList?.current as HTMLUListElement | undefined
-    const activeElement = parentTabElement?.querySelector(`[data-key="${key}"]`)as HTMLUListElement | undefined
+    const activeElement = parentTabElement?.querySelector(`.tab-${key} `) as HTMLUListElement | undefined;
     if (parentTabElement && activeElement) {
-      parentTabElement.scrollLeft = activeElement.offsetLeft - (parentTabElement.offsetWidth - activeElement.offsetWidth) / 2 - THRESHOLD_SCROLL_MOVEMENT;
+      parentTabElement.scrollLeft = activeElement.offsetLeft - (parentTabElement.offsetWidth - activeElement.offsetWidth) / 2 - threshold;
     }
     renderedTabs.current[key] = true;
     if (onChange)
@@ -102,7 +103,7 @@ const Tabs: ForwardRefExoticComponent<TabsProps> = forwardRef<HTMLDivElement, Ta
   // }));
   useEffect(() => {
     if (!onChange)
-    afterChange?.(activeKey);
+      afterChange?.(activeKey);
   }, [activeKey]);
   useEffect(() => {
     if (activeTab && !renderedTabs.current[activeTab])
@@ -120,7 +121,7 @@ const Tabs: ForwardRefExoticComponent<TabsProps> = forwardRef<HTMLDivElement, Ta
             setSelectedTab={handleSelect}
             icon={item.icon}
             disabled={item.disabled}
-            />
+          />
         ))}
       </ul>
       <ul

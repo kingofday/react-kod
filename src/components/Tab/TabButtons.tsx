@@ -18,28 +18,28 @@ interface TabButtonsProps {
   hideScrollBar?: boolean;
   onChange?: (key: string, tab?: TabItem) => void;
   afterChange?: (key: string) => void;
+  threshold?: number;
 }
-const THRESHOLD_SCROLL_MOVEMENT = 50
-const TabButtons = ({ id, initialActiveKey, activeKey, className, onChange, afterChange, variant = "pill", hideScrollBar, tabs }: TabButtonsProps) => {
+const TabButtons = ({ id, initialActiveKey, activeKey, className, onChange, afterChange, variant = "pill", hideScrollBar, tabs, threshold = 0 }: TabButtonsProps) => {
   const [innerActiveKey, chnageActiveKey] = useState(initialActiveKey ?? tabs.length ? tabs[0].key : "");
   const wrapperList = useRef<HTMLDivElement | null>(null);
-  
-  const centralizeTab = (key:string) => {
+
+  const centralizeTab = (key: string) => {
     const parentTabElement = wrapperList?.current as HTMLDivElement | undefined;
-    const activeElement = parentTabElement?.querySelector(`[data-key="${key}"]`) as HTMLUListElement | undefined;
+    const activeElement = parentTabElement?.querySelector(`.tab-btn-${key} `) as HTMLUListElement | undefined;
     if (parentTabElement && activeElement) {
-      parentTabElement.scrollLeft = activeElement.offsetLeft - (parentTabElement.offsetWidth - activeElement.offsetWidth) / 2 - THRESHOLD_SCROLL_MOVEMENT;
+      parentTabElement.scrollLeft = activeElement.offsetLeft - (parentTabElement.offsetWidth - activeElement.offsetWidth) / 2 - threshold;
     }
   }
-  
+
   const handleClick = (key: string) => {
     chnageActiveKey(key);
     afterChange?.(key);
     centralizeTab(key);
 
   };
-  const outSideHandleClick =  (key:string, item:TabItem) => {
-    onChange?.(key,item)
+  const outSideHandleClick = (key: string, item: TabItem) => {
+    onChange?.(key, item)
     centralizeTab(key);
 
   }
@@ -49,9 +49,8 @@ const TabButtons = ({ id, initialActiveKey, activeKey, className, onChange, afte
         <Button
           {...t}
           key={t.key}
-          data-key={t.key}
           icon={t.icon}
-          className={`${t.className ?? ""}${(onChange ? activeKey : innerActiveKey) === t.key ? " active" : ""}${t.disabled ? " disabled" : ""}`}
+          className={`${`tab-btn-${t.key} `}${t.className ?? ""}${(onChange ? activeKey : innerActiveKey) === t.key ? " active" : ""}${t.disabled ? " disabled" : ""}`}
           variant="tab"
           onClick={() => (t.disabled ? undefined : onChange ? outSideHandleClick(t.key, t) : handleClick(t.key))}
         >
