@@ -111,6 +111,7 @@ const MultiSelect = ({
     useEffect(() => {
         if (isOpen) {
             adjustPosition();
+            searchRef.current?.focus({preventScroll:true});
         }
     }, [isOpen])
     return (
