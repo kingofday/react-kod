@@ -28,12 +28,14 @@
         .input-suffix-container {
             display: flex;
             gap: .3125rem;
-            color: #323e544d;
+            color: var(--text);
+            opacity: .3;
         }
 
         .suffix,
         .prefix {
-            color: #323e544d;
+            color: var(--text);
+            opacity: .3;
             display: inline-flex;
             align-items: center;
             justify-content: center;
