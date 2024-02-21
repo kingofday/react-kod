@@ -46,11 +46,14 @@ body {
   border-radius: 0.375rem;
 }
 
+// vertical scroll
+.vertical-scroll-bar {
+  overflow-y: auto;
+}
 .vertical-scroll-bar {
   overflow-y: auto;
 
-  &::-webkit-scrollbar,
-  &::-moz-scrollbar {
+  &::-webkit-scrollbar {
     width: 0.375rem;
   }
 
@@ -59,7 +62,24 @@ body {
   }
 
   /* Handle */
-  &::-webkit-scrollbar-thumb,
+  &::-webkit-scrollbar-thumb {
+    background: var(--disabledBorder);
+    border-radius: 0.1875rem;
+    width: 0.375rem;
+  }
+
+  /* Handle on hover */
+  &::-webkit-scrollbar-thumb:hover {
+    background: var(--gray);
+  }
+}
+.vertical-scroll-bar {
+
+  &::-moz-scrollbar {
+    width: 0.375rem;
+  }
+
+  /* Handle */
   &::-moz-scrollbar-thumb {
     background: var(--disabledBorder);
     border-radius: 0.1875rem;
@@ -67,18 +87,20 @@ body {
   }
 
   /* Handle on hover */
-  &::-webkit-scrollbar-thumb:hover,
   &::-moz-scrollbar-thumb:hover {
     background: var(--gray);
   }
 }
 
 
+
+// horizontal scroll
 .horizontal-scroll-bar {
   overflow-x: auto;
+}
+.horizontal-scroll-bar {
 
-  &::-webkit-scrollbar,
-  &::-moz-scrollbar {
+  &::-webkit-scrollbar {
     height: 0.375rem;
     margin-bottom: 0.3125rem;
   }
@@ -88,14 +110,31 @@ body {
     margin-bottom: 0.3125rem;
   }
 
-  &::-webkit-scrollbar-thumb,
+  &::-webkit-scrollbar-thumb {
+    background: var(--disabledBorder);
+    border-radius: 0.1875rem;
+    height: 0.375rem;
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    background: var(--gray);
+  }
+}
+
+.horizontal-scroll-bar {
+
+  &::-moz-scrollbar {
+    height: 0.375rem;
+    margin-bottom: 0.3125rem;
+    
+  }
+
   &::-moz-scrollbar-thumb {
     background: var(--disabledBorder);
     border-radius: 0.1875rem;
     height: 0.375rem;
   }
 
-  &::-webkit-scrollbar-thumb:hover,
   &::-moz-scrollbar-thumb:hover {
     background: var(--gray);
   }
@@ -104,6 +143,7 @@ body {
 @-moz-document url-prefix() {
   .vertical-scroll-bar,
   .horizontal-scroll-bar {
+    scrollbar-color: var(--disabledBorder) transparent;
     scrollbar-width: thin; /* For Firefox */
   }
 }
