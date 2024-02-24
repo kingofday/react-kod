@@ -24,7 +24,14 @@ const Popup = ({ id, className, ariaLabel, items, style, popupRef, open, ...rest
                     <div id={id} className={`pop-up ${className}`} style={style} {...rest} ref={popupRef} aria-label={ariaLabel}>
                         <Card withShadow>
                             {items.map((item, idx) => (
-                                <Button onClick={item.onClick} key={idx} variant="link" icon={item.icon}>{item.title}</Button>
+                                <Button
+                                    onClick={item.onClick}
+                                    key={idx}
+                                    variant="link"
+                                    icon={item.icon}
+                                    id={item.id}
+                                    className={item.className}
+                                >{item.title}</Button>
                             ))}
                         </Card>
                     </div >
