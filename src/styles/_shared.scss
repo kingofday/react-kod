@@ -15,7 +15,8 @@
   --textBtn:#fff
   --cardShadow:rgba(0, 0, 0, 0.2);
   //=== co colors
-  --blue: #2962FF;
+  --blueRgb:41, 98, 255;
+  --blue: rgb(var(--blueRgb));
   --blueHover: #2456E0;
   --blueActive: #1F49BF;
   --red: #F23645;
