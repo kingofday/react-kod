@@ -1,32 +1,31 @@
 import { MouseEvent, ReactNode, RefObject } from "react";
 import Button from "./Button";
 import Card from "./Card";
+import { BasicElementProps } from "../helpers/Models";
 type Item = {
-    onClick: (e: MouseEvent<HTMLLIElement>) => void;
+    onClick: (e: MouseEvent) => void;
     icon: ReactNode;
     title: string;
+    id?: string;
+    className?: string
 }
-interface IPopup {
+interface IPopup extends BasicElementProps {
     items: Item[];
     style?: React.CSSProperties;
     popupRef?: RefObject<HTMLDivElement>;
     open: boolean;
+
 }
-const Popup = ({ items, style, popupRef, open, ...rest }: IPopup) => {
+const Popup = ({ id, className, ariaLabel, items, style, popupRef, open, ...rest }: IPopup) => {
     return (
         <>
             {
                 open ? (
-                    <div id="pop-up" style={style} {...rest} ref={popupRef} >
+                    <div id={id} className={`pop-up ${className}`} style={style} {...rest} ref={popupRef} aria-label={ariaLabel}>
                         <Card withShadow>
-                            <ul>
-                                {items.map((item, idx) => (
-                                    <li onClick={item.onClick} key={idx}>
-                                        {item.icon}
-                                        <Button variant="link">{item.title}</Button>
-                                    </li>
-                                ))}
-                            </ul>
+                            {items.map((item, idx) => (
+                                <Button onClick={item.onClick} key={idx} variant="link" icon={item.icon}>{item.title}</Button>
+                            ))}
                         </Card>
                     </div >
                 ) : null}
