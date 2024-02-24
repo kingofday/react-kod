@@ -1,15 +1,16 @@
-#pop-up {
+.pop-up {
     position: absolute;
+    z-index: 999;
 
     .card {
         padding: .625rem;
 
-        ul {
+        .content {
             display: flex;
             flex-flow: column;
             gap: .625rem;
 
-            li {
+            button {
                 display: flex;
                 align-items: center;
                 gap: .625rem;
