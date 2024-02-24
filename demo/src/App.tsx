@@ -6,6 +6,7 @@ import MultiSelectExample from './Components/MultiSelectExample';
 import SelectExample from './Components/SelectExample';
 import ModalExample from './Components/ModalExample';
 import SpinnerSample from './Components/SpinnerSample';
+import PopupExample from './Components/PopupSample';
 import SliderRangeExample from './Components/SliderRangeExample';
 const Option = Select.Option;
 const CustomInput = (props: React.InputHTMLAttributes<HTMLInputElement>) => {
@@ -16,9 +17,9 @@ function App() {
   return (
     <div className="App" dir='rtl' style={{ height: 1000, paddingTop: 250, paddingBottom: 30 }}>
       {/* <MultiSelectExample /> 
-      <SelectExample /> */}
-      <SliderRangeExample/>
-       {/*<ModalExample/> 
+      <SelectExample />*/}
+      <PopupExample />
+      {/*<ModalExample/> 
       <SpinnerSample/>*/}
     </div>
   );
