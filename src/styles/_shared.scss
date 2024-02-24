@@ -1,69 +1,118 @@
 :root {
-  --bg: #fff;
-  --text: #323e54;
-  --hover: #f3f5f9;
-  --border: #e0e3eb;
-  --icon: #787b86;
-  --selected: #d5f1ff;
-  --tooltip: #2a2e39;
-  --gray: #a3a6af;
-  --modalBg: #fefefe;
-  --disabledText: #b2b5be;
-  --disabledBorder: #d1d4dc;
-  --disabledBg: #f0f3fa;
-  --pics: #143366;
-  --textBtn:#fff
-  --cardShadow:rgba(0, 0, 0, 0.2);
+  --bgRgb: 255, 255, 255;
+  --bg: rgb(var(--bgRgb));
+  --textRgb: 50, 62, 84;
+  --text: rgb(var(--textRgb));
+  --hoverRgb: 243, 245, 249;
+  --hover: rgb(var(--hoverRgb));
+  --borderRgb: 224, 227, 235;
+  --border: rgb(var(--borderRgb));
+  --iconRgb: 120, 123, 134;
+  --icon: rgb(var(--iconRgb));
+  --selectedRgb: 213, 241, 255;
+  --selected: rgb(var(--selectedRgb));
+  --tooltipRgb: 42, 46, 57;
+  --tooltip: rgb(var(--tooltipRgb));
+  --grayRgb: 163, 166, 175;
+  --gray: rgb(var(--grayRgb));
+  --modalBgRgb: 254, 254, 254;
+  --modalBg: rgb(var(--modalBgRgb));
+  --disabledTextRgb: 178, 181, 190;
+  --disabledText: rgb(var(--disabledTextRgb));
+  --disabledBorderRgb: 209, 212, 220;
+  --disabledBorder: rgb(var(--disabledBorderRgb));
+  --disabledBgRgb: 240, 243, 250;
+  --disabledBg: rgb(var(--disabledBgRgb));
+  --picsRgb: 20, 51, 102;
+  --pics: rgb(var(--picsRgb));
+  --textBtn: #fff --cardShadow:rgba(0, 0, 0, 0.2);
   //=== co colors
-  --blue: #2962FF;
-  --blueHover: #2456E0;
-  --blueActive: #1F49BF;
-  --red: #F23645;
-  --redHover: #CE2E3B;
-  --redActive: #A92630;
-  --red2:#F63538;
-  --red2Hover:#D12D30;
-  --red3:#8B444E;
-  --red3Hover:#763A42;
-  --redTooltip: #f7525fcc;
-  --green: #089981;
-  --greenHover: #07826E;
-  --greenActive: #066B5A;
-  --green2: #30CC5A;
-  --green2Hover: #29AE4D;
-  --green3: #35764E;
-  --green3Hover: #2D6442;
-  --greenTooltip: #00a97fcc;
-  --orange: #ff9800;
-  --turquise: #26c6da;
-  --purple: #9575cd;
-  --pink:#FF4081;
-  --yellow:#E0BC00;
+  --blueRgb: 41, 98, 255;
+  --blue: rgb(var(--blueRgb), 1);
+  --blueHoverRgb: 36, 86, 224;
+  --blueHover: rgb(var(--blueHoverRgb));
+  --blueActiveRgb: 31, 73, 191;
+  --blueActive: rgb(var(--blueActiveRgb));
+  --redRgb: 242, 54, 69;
+  --red: rgb(var(--redRgb));
+  --redHoverRgb: 206, 46, 59;
+  --redHover: rgb(var(--redHoverRgb));
+  --redActiveRgb: 169, 38, 48;
+  --redActive: rgb(var(--redActiveRgb));
+  --red2Rgb: 246, 53, 56;
+  --red2: rgb(var(--red2Rgb));
+  --red2HoverRgb: 209, 45, 48;
+  --red2Hover: rgb(var(--red2HoverRgb));
+  --red3Rgb: 139, 68, 78;
+  --red3: rgb(var(--red3Rgb));
+  --red3HoverRgb: 118, 58, 66;
+  --red3Hover: rgb(var(--red3HoverRgb));
+  --redTooltipRgb: 247, 82, 95, 0.8;
+  --redTooltip: rgb(var(--redTooltipRgb));
+  --greenRgb: 8, 153, 129;
+  --green: rgb(var(--greenRgb));
+  --greenHoverRgb: 7, 130, 110;
+  --greenHover: rgb(var(--greenHoverRgb));
+  --greenActiveRgb: 6, 107, 90;
+  --greenActive: rgb(var(--greenActiveRgb));
+  --green2Rgb: 48, 204, 90;
+  --green2: rgb(var(--green2Rgb));
+  --green2HoverRgb: 41, 174, 77;
+  --green2Hover: rgb(var(--green2HoverRgb));
+  --green3Rgb: 53, 118, 78;
+  --green3: rgb(var(--green3Rgb));
+  --green3HoverRgb: 45, 100, 66;
+  --green3Hover: rgb(var(--green3HoverRgb));
+  --greenTooltipRgb: 0, 169, 127, 0.8;
+  --greenTooltip: rgb(var(--greenTooltipRgb));
+  --orangeRgb: 255, 152, 0;
+  --orange: rgb(var(--orangeRgb));
+  --turquiseRgb: 38, 198, 218;
+  --turquise: rgb(var(--turquiseRgb));
+  --purpleRgb: 149, 117, 205;
+  --purple: rgb(var(--purpleRgb));
+  --pinkRgb: 255, 64, 129;
+  --pink: rgb(var(--pinkRgb));
+  --yellowRgb: 224, 188, 0;
+  --yellow: rgb(var(--yellowRgb));
 }
 
 .dark {
-  --bg: #131722;
-  --text: #d1d4dc;
-  --hover: #2f3241;
-  --border: #434651;
-  --icon: #787b86;
-  --selected: #21384d;
-  --tooltip: #363a45;
-  --gray: #4f525d;
-  --modalBg: #1e222d;
-  --disabledText: #50535e;
-  --disabledBorder: #50535e;
-  --disabledBg: #2a2e39;
-  --pics: #7f9ef3;
-  --cardShadow:rgba(f, f, f, 0.2);
+  --bgRgb: 19, 23, 34;
+  --bg: rgb(var(--bgRgb));
+  --textRgb: 209, 212, 220;
+  --text: rgb(var(--textRgb));
+  --hoverRgb: 47, 50, 65;
+  --hover: rgb(var(--hoverRgb));
+  --borderRgb: 67, 70, 81;
+  --border: rgb(var(--borderRgb));
+  --iconRgb: 120, 123, 134;
+  --icon: rgb(var(--iconRgb));
+  --selectedRgb: 33, 56, 77;
+  --selected: rgb(var(--selectedRgb));
+  --tooltipRgb: 54, 58, 69;
+  --tooltip: rgb(var(--tooltipRgb));
+  --grayRgb: 79, 82, 93;
+  --gray: rgb(var(--grayRgb));
+  --modalBgRgb: 30, 34, 45;
+  --modalBg: rgb(var(--modalBgRgb));
+  --disabledTextRgb: 80, 83, 94;
+  --disabledText: rgb(var(--disabledTextRgb));
+  --disabledBorderRgb: 80, 83, 94;
+  --disabledBorder: rgb(var(--disabledBorderRgb));
+  --disabledBgRgb: 42, 46, 57;
+  --disabledBg: rgb(var(--disabledBgRgb));
+  --picsRgb: 127, 158, 243;
+  --pics: rgb(var(--picsRgb));
+  --cardShadow: rgba(f, f, f, 0.2);
 }
 
 //=== Spacing
 $spacing1: 0.25rem;
 $spacing2: 0.625rem;
-$spacing3: 1rem;//16px
-$spacing4: 1.25rem;//20px
-$spacing5: 1.875rem;//30px
+$spacing3: 1rem; //16px
+$spacing4: 1.25rem; //20px
+$spacing5: 1.875rem; //30px
 $spacing6: 2.5rem;
 $spacing7: 4rem;
 
@@ -72,14 +121,17 @@ $md: 48rem;
 $lg: 62rem;
 $xl: 75rem;
 $xxl: 100rem;
+
 .chevron {
   path {
     stroke: var(--text);
   }
 }
-.cursor-p{
+
+.cursor-p {
   cursor: pointer;
 }
+
 @mixin hideScrollBar {
   -ms-overflow-style: none;
   /* IE and Edge */
@@ -90,6 +142,7 @@ $xxl: 100rem;
     display: none;
   }
 }
+
 @mixin menuCard {
   display: flex;
   flex-direction: column;
@@ -100,13 +153,15 @@ $xxl: 100rem;
   z-index: 999;
   box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.2);
   border-radius: 6px;
+
   // transition: height 0.5s linear;
   // -webkit-transition: height, 0.5s linear;
-  > li {
+  >li {
     margin-left: 0;
     margin-right: 0;
   }
 }
+
 @mixin inputWrapper {
   .input-wrapper {
     border-radius: 6px;
@@ -119,15 +174,18 @@ $xxl: 100rem;
     width: 100%;
     height: 2.125rem;
   }
+
   &:not(.disabled) {
     .input-wrapper:hover {
       border-color: var(--gray);
     }
+
     .input-wrapper.focused {
       border-color: var(--blue);
     }
   }
 }
+
 @keyframes fadeIn {
   0% {
     opacity: 0;
@@ -151,35 +209,37 @@ $xxl: 100rem;
     transform: translateY(endYposition);
   }
 }
+
 @mixin inputPlaceholder($color, $opacity) {
   &::placeholder {
-      color: $color;
-      opacity: $opacity;
-      font-family: inherit;
-      font-size: 0.75rem;
+    color: $color;
+    opacity: $opacity;
+    font-family: inherit;
+    font-size: 0.75rem;
   }
 
   &::-webkit-input-placeholder {
-      color: $color;
-      opacity: $opacity;
-      font-family: inherit;
-      font-size: 0.75rem;
+    color: $color;
+    opacity: $opacity;
+    font-family: inherit;
+    font-size: 0.75rem;
   }
 
   &:-ms-input-placeholder {
-      color: $color;
-      opacity: $opacity;
-      font-family: inherit;
-      font-size: 0.75rem;
+    color: $color;
+    opacity: $opacity;
+    font-family: inherit;
+    font-size: 0.75rem;
   }
 }
-@mixin disabledInput{
+
+@mixin disabledInput {
   &.disabled {
     color: var(--disabledText);
-  
+
     .input-wrapper {
       background-color: var(--disabledBg);
-  
+
       input {
         color: var(--disabledText);
         @include inputPlaceholder(var(--disabledText), 1);
