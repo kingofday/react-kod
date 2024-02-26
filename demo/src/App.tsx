@@ -16,9 +16,10 @@ function App() {
 
   return (
     <div className="App" dir='rtl' style={{ height: 1000, paddingTop: 250, paddingBottom: 30 }}>
+      <SliderRangeExample/>
       {/* <MultiSelectExample /> 
-      <SelectExample />*/}
-      <PopupExample />
+      <SelectExample />
+      <PopupExample />*/}
       {/*<ModalExample/> 
       <SpinnerSample/>*/}
     </div>

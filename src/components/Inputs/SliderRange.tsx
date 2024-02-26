@@ -48,14 +48,14 @@ const SliderRange = ({
     }, [value])
     const width = Math.abs(value1 - value2) * 100 / Math.abs(max - min);
     const minMargin = Math.abs((value1 < value2 ? value1 : value2)-min) * 100 / Math.abs(max - min);
-    const maxMargin = Math.abs((value1 < value2 ? value2 : value1)-min) * 100 / Math.abs(max - min);
+    //const maxMargin = Math.abs((value1 < value2 ? value2 : value1)-min) * 100 / Math.abs(max - min);
     return <div id={id} className={`range-group${disabled ? " disabled" : ""}${className ? ` ${className}` : ""}`}>
         <div className="multi-range">
-            <span style={{width:`calc(100% - ${minMargin}% - 1.25rem)`}} className="track before-track"></span>
+            <span style={{width:`calc(100% - ${width}%)`}} className="track before-track"></span>
             <input disabled={disabled} className="range-input" onChange={(e) => handleChange(e, true)} value={value1} min={min} max={max} step="1" type="range" />
             <span style={{ [rtl ? "marginRight" : "marginLeft"]: `calc(${width>=100?0:minMargin}%)`, width: `calc(${width>100?100:width}%)` }} className="range-color"></span>
             <input disabled={disabled} className="range-input" onChange={(e) => handleChange(e, false)} value={value2} min={min} max={max} step="1" type="range" />
-            <span style={{width:`calc(100% - ${maxMargin}%)`}} className="track after-track"></span>
+            <span style={{width:`calc(100% - ${width}%)`}} className="track after-track"></span>
         </div>
     </div>
 }
