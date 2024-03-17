@@ -4,6 +4,7 @@ import ChevronDown from "../Shared/ChevronDown";
 import CloseIcon from "../Shared/ClosedIcon";
 import useOnClickOutside from "../../helpers/useOnClickOutside";
 import { createPortal } from "react-dom";
+import Empty from "../Shared/Empty";
 type Pos = "auto" | number;
 interface SelectProps extends Omit<InputHTMLAttributes<HTMLInputElement>, "onChange"> {
   label?: ReactNode;
@@ -11,6 +12,8 @@ interface SelectProps extends Omit<InputHTMLAttributes<HTMLInputElement>, "onCha
   className?: string;
   listClassName?: string;
   placeholder?: string;
+  emptyLabel?:string;
+  emptyComponent?:ReactNode;
   searchable?: boolean;
   allowClear?: boolean;
   searchText?: string;
@@ -33,6 +36,8 @@ const Select = ({
   searchable = false,
   searchText,
   popupTargetId,
+  emptyLabel,
+  emptyComponent,
   disabled = false,
 }: SelectProps) => {
   const [isOpen, toggle] = useState(false);
@@ -120,7 +125,8 @@ const Select = ({
               <input ref={searchRef} type="text" onChange={onSearch} placeholder={searchText} />
             </li>
           ) : null}
-          {searchedOptions?.map((x, idx) => (
+          {searchedOptions.length > 0 ?
+          searchedOptions?.map((x, idx) => (
             <li
               key={x.value}
               className={`${x.disabled ? "disabled" : ""}${x.value === value ? " selected" : ""}`}
@@ -130,7 +136,9 @@ const Select = ({
                 {x.children}
               </Opt>
             </li>
-          ))}
+          )):
+          emptyComponent ? emptyComponent :<Empty label={emptyLabel}/>
+          }
         </ul>, popupTarget.current ?? document.body)
       )}
       <input type="hidden" value={value} name={name} id={id} />
