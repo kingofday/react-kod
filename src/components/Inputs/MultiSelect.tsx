@@ -102,7 +102,7 @@ const MultiSelect = ({
     const removeOption = (v: string) => {
         onChange?.(values?.filter(x => x !== v) ?? []);
     }
-    const selectedOptions = searchedOptions.filter(x => typeof values !== 'undefined' ? values.includes(x.value.toString()) : defaultValues?.includes(x.value));
+    const selectedOptions = ((typeof values !== 'undefined' ? values : defaultValues) ?? []).map(v => options.current.find(x => x.value === v)).filter(x => !!x) as SelectOptionItemProps[];// searchedOptions.filter(x => typeof values !== 'undefined' ? values.includes(x.value.toString()) : defaultValues?.includes(x.value));
     useOnClickOutside([ref, popupRef], handleClose);
     useEffect(() => {
         popupTarget.current = popupTargetId ? document.getElementById(popupTargetId) : document.body;
@@ -111,7 +111,10 @@ const MultiSelect = ({
     useEffect(() => {
         if (isOpen) {
             adjustPosition();
-            searchRef.current?.focus({preventScroll:true});
+            searchRef.current?.focus({ preventScroll: true });
+        }
+        else {
+            setSearchedOptions(options.current);
         }
     }, [isOpen])
     return (
