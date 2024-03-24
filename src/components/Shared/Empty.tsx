@@ -1,6 +1,6 @@
 import { Col, Row } from "../Griding";
 
-const Empty = ({ label="! موردی وجود ندارد" }: { label?: string }) => {
+const Empty = ({ label="موردی وجود ندارد" }: { label?: string }) => {
   return (
     <Row gutter={[0, 10]} className="empty">
       <Col xs={24}>
