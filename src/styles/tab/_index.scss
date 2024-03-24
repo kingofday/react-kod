@@ -41,7 +41,6 @@
 .tabs {
     display: flex;
     flex-direction: column;
-
     &.center {
         align-items: center;
 
@@ -175,6 +174,19 @@
     .hide-scroll-bar{
         @include shared.hideScrollBar;
     }
+    .mobile_mode {
+        display: none;
+    }
+    @media (max-width: shared.$xl) {
+        .mobile_mode {
+            display: inline-block;
+        }
+        .desktop_mode {
+            display: none;
+        }
+    }
+        
+  
 }
 
 @import "./tab-buttons"
