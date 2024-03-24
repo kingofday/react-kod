@@ -114,7 +114,7 @@ const Tabs: ForwardRefExoticComponent<TabsProps> = forwardRef<HTMLDivElement, Ta
   }, [activeTab]);
   return (
     <div className={`tabs ${variant} ${alignTitles}${className ? ` ${className}` : ""}${visibility ? " visibility" : ""}`} ref={forwardedRef} {...rest}>
-      <ul ref={wrapperList} className={`desktop_mode tab-nav-list horizontal-scroll-bar ${hideScrollBar ? " hide-scroll-bar" : ""}`} role="tablist">
+      <ul ref={wrapperList} className={`${changeToInputSelectInMobile ?"desktop_mode":""} tab-nav-list horizontal-scroll-bar ${hideScrollBar ? " hide-scroll-bar" : ""}`} role="tablist">
         {tabProps.map((item) => (
           <TabTitle
             key={item.key}
