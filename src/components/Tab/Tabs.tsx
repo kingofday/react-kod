@@ -1,6 +1,7 @@
 import { ForwardRefExoticComponent, ReactElement, forwardRef, useEffect, useRef, useState } from "react";
 import { TabProps } from "./Tab";
 import TabTitle from "./TabTitle";
+import { Select } from "../Inputs";
 type TabsProps = {
   defaultActiveTab?: string;
   activeTab?: string;
@@ -14,6 +15,7 @@ type TabsProps = {
   onChange?: (key: string) => void,
   afterChange?: (key: string) => void,
   swipable?: boolean;
+  changeToInputSelectInMobile?:boolean;
   threshold?: number;
   [key: string]: any
 }
@@ -34,6 +36,7 @@ const Tabs: ForwardRefExoticComponent<TabsProps> = forwardRef<HTMLDivElement, Ta
   activeTab,
   threshold = 0,
   onChange,
+  changeToInputSelectInMobile,
   ...rest
 },
   forwardedRef,
@@ -111,7 +114,7 @@ const Tabs: ForwardRefExoticComponent<TabsProps> = forwardRef<HTMLDivElement, Ta
   }, [activeTab]);
   return (
     <div className={`tabs ${variant} ${alignTitles}${className ? ` ${className}` : ""}${visibility ? " visibility" : ""}`} ref={forwardedRef} {...rest}>
-      <ul ref={wrapperList} className={`tab-nav-list horizontal-scroll-bar ${hideScrollBar ? " hide-scroll-bar" : ""}`} role="tablist">
+      <ul ref={wrapperList} className={`${changeToInputSelectInMobile ?"desktop_mode":""} tab-nav-list horizontal-scroll-bar ${hideScrollBar ? " hide-scroll-bar" : ""}`} role="tablist">
         {tabProps.map((item) => (
           <TabTitle
             key={item.key}
@@ -124,8 +127,17 @@ const Tabs: ForwardRefExoticComponent<TabsProps> = forwardRef<HTMLDivElement, Ta
           />
         ))}
       </ul>
+      {changeToInputSelectInMobile &&
+      <Select value={activeTab ?? activeKey} onChange={handleSelect} className="mobile_mode">
+            {tabProps.map((item) => (
+              <Select.Option key={item.key} value={item.key}>
+                {item.title}
+              </Select.Option>
+            ))}
+          </Select>
+    }
       <ul
-        className="tab-content-list"
+      className="tab-content-list"
         onTouchStart={swipable ? handleTouchStart : undefined}
         onTouchMove={swipable ? handleTouchMove : undefined}
         onTouchEnd={swipable ? handleTouchEnd : undefined}

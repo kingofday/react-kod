@@ -14,12 +14,11 @@ export interface IMenu {
   selectedKeys?: string[];
   hideIndicator?: boolean;
   openKeys?: string[];
-  openOnClick?: boolean;
   link?: ElementType;
   onClick?: ((key: string) => void) | undefined;
   [key: string]: any;
 }
-const Menu = ({ className, children, items, selectedKeys, openKeys, onClick, link, openOnClick = false, hideIndicator = false, variant = "horizontal", ...rest }: IMenu) => {
+const Menu = ({ className, children, items, selectedKeys, openKeys, onClick, link , hideIndicator = false, variant = "horizontal", ...rest }: IMenu) => {
   const [state, setState] = useState({
     selectedKeys,
     openKeys,
@@ -63,13 +62,12 @@ const Menu = ({ className, children, items, selectedKeys, openKeys, onClick, lin
           className={`item ${item.disabled ? "disabled" : ""} ${state.selectedKeys?.some((k) => item.children?.some((c) => c.key === k)) ? "selected" : ""} ${
             state.openKeys?.some((x) => x === item.key) ? "collapsed" : ""
           }`}
-          onClick={openOnClick ? () => handleCollapse(item.key) : undefined}
-          onMouseLeave={openOnClick ? undefined : variant === "horizontal" ? () => handleCollapse(item.key, false) : undefined}
+          onMouseLeave={variant === "horizontal" ? () => handleCollapse(item.key, false) : undefined}
         >
           <div
             className="menu-content"
             onClick={variant === "horizontal" ? undefined : () => handleCollapse(item.key)}
-            onMouseEnter={openOnClick ? undefined : variant === "horizontal" ? () => handleCollapse(item.key) : undefined}
+            onMouseEnter={variant === "horizontal" ? () => handleCollapse(item.key) : undefined}
           >
             <span>
               {item.icon ? <span className="menu-icon">{item.icon}</span> : null}
