@@ -175,14 +175,14 @@
         @include shared.hideScrollBar;
     }
     .mobile_mode {
-        display: none;
+        display: none !important;
     }
     @media (max-width: shared.$xl) {
         .mobile_mode {
-            display: inline-block;
+            display: inline-block !important;
         }
         .desktop_mode {
-            display: none;
+            display: none!important;
         }
     }
         
