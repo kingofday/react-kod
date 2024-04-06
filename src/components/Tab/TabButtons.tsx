@@ -1,4 +1,4 @@
-import { ReactNode, useRef, useState } from "react";
+import { ReactNode, useRef, useState, useTransition } from "react";
 import Button from "../Button";
 export interface TabItem {
   key: string;
@@ -21,9 +21,9 @@ interface TabButtonsProps {
   threshold?: number;
 }
 const TabButtons = ({ id, initialActiveKey, activeKey, className, onChange, afterChange, variant = "pill", hideScrollBar, tabs, threshold = 0 }: TabButtonsProps) => {
-  const [innerActiveKey, chnageActiveKey] = useState(initialActiveKey ?? tabs.length ? tabs[0].key : "");
+  const [innerActiveKey, chnageActiveKey] = useState(initialActiveKey ?? (tabs.length ? tabs[0].key : ""));
   const wrapperList = useRef<HTMLDivElement | null>(null);
-
+  const [, startTransition] = useTransition();
   const centralizeTab = (key: string) => {
     const parentTabElement = wrapperList?.current as HTMLDivElement | undefined;
     const activeElement = parentTabElement?.querySelector(`.tab-btn-${key} `) as HTMLUListElement | undefined;
@@ -34,14 +34,15 @@ const TabButtons = ({ id, initialActiveKey, activeKey, className, onChange, afte
 
   const handleClick = (key: string) => {
     chnageActiveKey(key);
-    afterChange?.(key);
-    centralizeTab(key);
+    startTransition(() => {
+      afterChange?.(key);
+      centralizeTab(key);
+    })
 
   };
   const outSideHandleClick = (key: string, item: TabItem) => {
     onChange?.(key, item)
     centralizeTab(key);
-
   }
   return (
     <div ref={wrapperList} id={id} className={`tab-buttons horizontal-scroll-bar ${variant}${className ? " " + className : ""}${hideScrollBar ? " hide-scroll-bar" : ""}`}>
@@ -52,7 +53,7 @@ const TabButtons = ({ id, initialActiveKey, activeKey, className, onChange, afte
           icon={t.icon}
           className={`${`tab-btn-${t.key} `}${t.className ?? ""}${(onChange ? activeKey : innerActiveKey) === t.key ? " active" : ""}${t.disabled ? " disabled" : ""}`}
           variant="tab"
-          onClick={() => (t.disabled ? undefined : onChange ? outSideHandleClick(t.key, t) : handleClick(t.key))}
+          onClick={() => (t.disabled ? undefined : (onChange ? outSideHandleClick(t.key, t) : handleClick(t.key)))}
         >
           {t.text}
         </Button>
