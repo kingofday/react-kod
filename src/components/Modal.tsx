@@ -49,7 +49,7 @@ const Modal = ({
   footer,
   strings,
   fullscreen = false,
-  fullScreenIcon = true,
+  fullScreenIcon = false,
   ...props
 }: IModalProps) => {
   const modalRef = useRef<HTMLDivElement>(null);
@@ -83,9 +83,6 @@ const Modal = ({
         >
           {!hideCloseButton && !title ? (
             <Button  variant="square" onClick={handleClose} ariaLabel={strings?.close}>
-              {fullScreenIcon ? (
-                <div>{isFullScreen ? <MaximizeIcon onClick={() => toggleFullScreen(false)} /> : <MinimizeIcon onClick={() => toggleFullScreen(true)} />}</div>
-              ) : null}
               {<CloseIcon size={20} />}
             </Button>
           ) : null}
