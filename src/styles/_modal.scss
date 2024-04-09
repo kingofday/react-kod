@@ -1,4 +1,4 @@
-@use './shared';
+@use "./shared";
 
 .modal {
   position: fixed;
@@ -28,7 +28,7 @@
     display: flex;
     flex-direction: column;
 
-    >.modal-title {
+    > .modal-title {
       padding: 1rem 1.25rem;
       border-bottom: 1px solid var(--border);
       display: flex;
@@ -53,29 +53,41 @@
         }
       }
     }
+    > .modal-operation {
+      display: flex;
+      align-items: baseline;
+      button:last-child {
+        display: none;
+      }
+    }
+    .btn-fullScreen-title:focus {
+      background-color: transparent;
+    }
+    .btn-fullScreen-title:hover {
+      background-color: var(--hover);
+    }
 
-    >.btn-close {
+    > .btn-close {
       position: absolute;
       left: 1.875rem;
       top: 0.875rem;
       margin: 1.25rem;
     }
 
-    >.modal-content {
+    > .modal-content {
       max-height: calc(100dvh - 2.5rem);
       overflow: auto;
       padding: 1.25rem;
     }
 
     &:not(.with-title) {
-      >.modal-content {
+      > .modal-content {
         padding-top: 0px;
         margin-top: 30px;
         max-height: calc(100% - 30px);
       }
     }
   }
-
 
   &.fullscreen {
     padding: 0px;
@@ -108,7 +120,7 @@
   overflow: hidden !important;
 }
 
-html[dir='ltr'] {
+html[dir="ltr"] {
   .modal {
     .btn-close {
       right: 1.875rem;

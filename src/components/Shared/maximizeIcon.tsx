@@ -1,7 +1,7 @@
 import IconProps from "./Models";
-const MaximizeIcon = ({ className, ...rest }: IconProps) => {
+const MaximizeIcon = ({size=20, className, ...rest }: IconProps) => {
   return (
-    <svg xmlns="http://www.w3.org/2000/svg" width={20} height={20} fill="none" {...rest}>
+    <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} fill="none" {...rest}>
       <path
         stroke="#323E54"
         strokeLinecap="round"

@@ -82,7 +82,7 @@ const Modal = ({
           {...(props.id ? { id: props.id + "-body" } : {})}
         >
           {!hideCloseButton && !title ? (
-            <Button className="btn-close" variant="square" onClick={handleClose} ariaLabel={strings?.close}>
+            <Button  variant="square" onClick={handleClose} ariaLabel={strings?.close}>
               {fullScreenIcon ? (
                 <div>{isFullScreen ? <MaximizeIcon onClick={() => toggleFullScreen(false)} /> : <MinimizeIcon onClick={() => toggleFullScreen(true)} />}</div>
               ) : null}
@@ -96,11 +96,9 @@ const Modal = ({
                 {title}
               </div>
               {!hideCloseButton ? (
-                <div>
-                  <Button className="btn-close-title" variant="square" onClick={() => toggleFullScreen(!isFullScreen)}>
-                    <div>
-                      {isFullScreen ? <MinimizeIcon  /> : <MaximizeIcon  />}
-                    </div>
+                <div className="modal-operation">
+                  <Button className="btn-fullScreen-title" variant="square" onClick={() => toggleFullScreen(!isFullScreen)}>
+                      {isFullScreen ? <MinimizeIcon /> : <MaximizeIcon />}
                   </Button>
                   <Button className="btn-close-title" variant="square" onClick={handleClose} ariaLabel={strings?.close}>
                     {<CloseIcon size={20} />}
