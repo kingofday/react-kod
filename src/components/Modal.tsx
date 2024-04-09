@@ -4,7 +4,6 @@ import Button from "./Button";
 import CloseIcon from "./Shared/ClosedIcon";
 import BreakPoints from "../helpers/BreakPoints";
 import useOnClickOutside from "../helpers/useOnClickOutside";
-import ScreenIcon from "./Shared/maximizeIcon";
 import MaximizeIcon from "./Shared/maximizeIcon";
 import MinimizeIcon from "./Shared/minimizeIcon";
 
