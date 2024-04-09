@@ -4,7 +4,6 @@ import Button from "./Button";
 import CloseIcon from "./Shared/ClosedIcon";
 import BreakPoints from "../helpers/BreakPoints";
 import useOnClickOutside from "../helpers/useOnClickOutside";
-import ScreenIcon from "./Shared/maximizeIcon";
 import MaximizeIcon from "./Shared/maximizeIcon";
 import MinimizeIcon from "./Shared/minimizeIcon";
 
@@ -22,6 +21,7 @@ export interface IModalProps {
   onCancel?: () => void;
   hideCloseButton?: boolean;
   fullscreen?: boolean;
+  fullScreenIcon?: boolean;
   bodyClass?: string;
   className?: string;
   strings?: {
@@ -83,14 +83,14 @@ const Modal = ({
         >
           {!hideCloseButton && !title ? (
             <div className="modal-operation">
+              <Button className="btn-close" variant="square" onClick={handleClose} ariaLabel={strings?.close}>
+                {<CloseIcon size={20} />}
+              </Button>
               {fullScreenIcon ? (
                 <Button className="btn-fullScreen-title" variant="square" onClick={() => toggleFullScreen(!isFullScreen)}>
                   {isFullScreen ? <MinimizeIcon /> : <MaximizeIcon />}
                 </Button>
               ) : null}
-              <Button className="btn-close" variant="square" onClick={handleClose} ariaLabel={strings?.close}>
-                {<CloseIcon size={20} />}
-              </Button>
             </div>
           ) : null}
           {title ? (
@@ -100,7 +100,7 @@ const Modal = ({
                 {title}
               </div>
               {!hideCloseButton ? (
-                <div className="modal-operation">
+                <div className="modal-operation-title">
                   {fullScreenIcon ? (
                     <Button className="btn-fullScreen-title" variant="square" onClick={() => toggleFullScreen(!isFullScreen)}>
                       {isFullScreen ? <MinimizeIcon /> : <MaximizeIcon />}

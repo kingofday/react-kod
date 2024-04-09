@@ -18,7 +18,7 @@ export const DefaultModal: Story = {
         }
         return <>
         <Button onClick={handleOpen}>Show</Button>
-        <Modal open={isOpen} title={"some title"} titleIcon={"$"} onClose={()=>toggleModal(false)}>
+        <Modal open={isOpen} title={"some title"} fullScreenIcon  titleIcon={"$"} onClose={()=>toggleModal(false)}>
             Some content
         </Modal>
         </>

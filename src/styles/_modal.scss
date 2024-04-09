@@ -54,11 +54,16 @@
       }
     }
     > .modal-operation {
+      position: absolute;
+      left: 1.875rem;
+      top: 0.875rem;
+      margin: 1.25rem;
       display: flex;
       align-items: baseline;
-      button:last-child {
-        display: none;
-      }
+    }
+    > .modal-operation-title {
+      display: flex;
+      align-items: baseline;
     }
     .btn-fullScreen-title:focus {
       background-color: transparent;
@@ -67,12 +72,6 @@
       background-color: var(--hover);
     }
 
-    > .btn-close {
-      position: absolute;
-      left: 1.875rem;
-      top: 0.875rem;
-      margin: 1.25rem;
-    }
 
     > .modal-content {
       max-height: calc(100dvh - 2.5rem);
