@@ -97,9 +97,9 @@ const Modal = ({
               </div>
               {!hideCloseButton ? (
                 <div>
-                  <Button className="btn-close-title" variant="square">
+                  <Button className="btn-close-title" variant="square" onClick={() => toggleFullScreen(!isFullScreen)}>
                     <div>
-                      {isFullScreen ? <MinimizeIcon onClick={() => toggleFullScreen(false)} /> : <MaximizeIcon onClick={() => toggleFullScreen(true)} />}
+                      {isFullScreen ? <MinimizeIcon  /> : <MaximizeIcon  />}
                     </div>
                   </Button>
                   <Button className="btn-close-title" variant="square" onClick={handleClose} ariaLabel={strings?.close}>
