@@ -30,6 +30,9 @@ export const Gray: Story = {
 export const Link: Story = {
   render: () => <Button variant="link" >Button</Button>,
 };
+export const LinkGray: Story = {
+  render: () => <Button variant="link-gray" >Button</Button>,
+};
 export const Ghost: Story = {
   render: () => <Button variant="ghost" >Button</Button>,
 };

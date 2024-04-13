@@ -1,7 +1,7 @@
 import { forwardRef, MouseEventHandler, ForwardRefExoticComponent } from "react";
 import { ReactNode } from "react";
 import Spinner,{SpinnerType} from "./Spinner";
-export type ButttonVariant = "solid" | "secondary" | "tab" | "link" | "square" | "circle" | "secondary-square" | "secondary-circle" | "gray" | "ghost";
+export type ButttonVariant = "solid" | "secondary" | "tab" | "link" | "square" | "circle" | "secondary-square" | "secondary-circle" | "gray" | "ghost" | "link-gray";
 export interface IButtonProps {
   children?: ReactNode;
   className?: string;
