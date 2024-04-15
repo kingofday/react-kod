@@ -7,9 +7,11 @@ const meta: Meta = {
 export default meta;
 export const Normal: StoryObj = {
     render: () => {
-        return <Tooltip title="title">
+        return <div style={{direction:"rtl",margin:"10px",marginRight:"1580px"}}>
+            <Tooltip title="titletitle title title title title title ">
             Show Tooltip
         </Tooltip>
+        </div>
     },
 };
 export const WithoutTitle: StoryObj = {
