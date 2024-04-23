@@ -1,58 +1,61 @@
 .tab-buttons {
-    display: flex;
-    gap: 0.625rem;
-    padding: 0 2px;
+  display: flex;
+  gap: 0.625rem;
+  padding: 0 2px;
 
-    &.ink-bar {
-        gap: 0;
+  &.ink-bar {
+    gap: 0;
 
-        .btn.tab {
-            white-space: nowrap;
-            color: var(--text);
-            white-space: nowrap;
+    .btn.tab {
+      white-space: nowrap;
+      color: var(--text);
+      white-space: nowrap;
 
-            svg {
-                color: inherit;
-            }
+      svg {
+        color: inherit;
+      }
 
-            >* {
-                font-size: inherit;
-            }
+      > * {
+        font-size: inherit;
+      }
 
-            &:after {
-                transition: width 0.2s linear;
-                bottom: 0;
-                position: absolute;
-                height: 3px;
-                background-color: var(--blue);
-            }
+      &:after {
+        transition: width 0.2s linear;
+        bottom: 0;
+        position: absolute;
+        height: 3px;
+        background-color: var(--blue);
+      }
 
-            @include tabTitle;
-        }
+      @include tabTitle;
+    }
+  }
+
+  &.bordered {
+    @media (max-width: shared.$xs) {
+      .btn.tab:not(.active) {
+        border: none !important;
+        background-color: var(--hover);
+        color: var(--text);
+      }
     }
 
-    &.bordered {
-        @media(max-width: shared.$xs) {
-            .btn.tab:not(.active) {
-                border: none !important;
-                background-color: var(--hover);
-                color: var(--text);
-            }
-        }
-
-        .btn.tab:not(.active) {
-            border: solid 1px var(--border)
-        }
+    .btn.tab:not(.active) {
+      border: solid 1px var(--border);
     }
+  }
 
-    .btn {
-        height: 26.8px;
-        &.disabled {
-            opacity: 0.5;
-        }
+  .btn {
+    height: 26.8px;
+    &.disabled {
+      opacity: 0.5;
     }
+    &.pending {
+      opacity: 0.7;
+    }
+  }
 
-    &.hide-scroll-bar {
-        @include shared.hideScrollBar;
-    }
+  &.hide-scroll-bar {
+    @include shared.hideScrollBar;
+  }
 }

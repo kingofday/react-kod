@@ -1,15 +1,9 @@
-import { ReactNode } from "react";
+import { ITabProps } from "./Model";
 
-export interface TabProps {
-  key: string;
-  title: ReactNode;
-  children?: ReactNode;
-  icon?: ReactNode;
-  disabled?:boolean;
-}
-
-const Tab = ({ key, children }: TabProps): JSX.Element => {
-  return <div key={key} className="tab-content">{children}</div>;
+const Tab = ({
+  children,
+}: ITabProps): JSX.Element => {
+  return <div className="tab-content">{children}</div>;
 };
 
 export default Tab;
