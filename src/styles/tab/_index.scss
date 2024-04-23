@@ -1,190 +1,193 @@
 @use "../shared";
 
 @mixin tabTitle {
-    display: inline-flex;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-    padding: 10px 15px;
-    cursor: pointer;
-    position: relative;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 15px;
+  cursor: pointer;
+  position: relative;
 
-    &.active {
-        color: var(--blue);
-        background-color: transparent;
+  &.active {
+    color: var(--blue);
+    background-color: transparent;
 
-        &:after {
-            content: "";
-            width: calc(100% - 30px);
-        }
-
-        &:hover {
-            color: var(--blueHover);
-
-            &:after {
-                background-color: var(--blueHover);
-                width: 100%;
-            }
-        }
+    &:after {
+      content: "";
+      width: calc(100% - 30px);
     }
 
     &:hover {
-        color: var(--blue);
-    }
+      color: var(--blueHover);
 
-    &.disabled {
-        opacity: 0.5;
-        cursor: not-allowed;
+      &:after {
+        background-color: var(--blueHover);
+        width: 100%;
+      }
     }
+  }
+
+  &:hover {
+    color: var(--blue);
+  }
+
+  &.disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
 }
 
 .tabs {
-    display: flex;
-    flex-direction: column;
-    &.center {
-        align-items: center;
-
-        &.bordered-pill {
-            .tab-nav-list {
-                display: inline-flex;
-            }
-        }
-    }
-
-    >.tab-nav-list {
-        display: flex;
-        overflow-x: auto;
-        overflow-y: hidden;
-        max-width: 100%;
-        padding: 0 2px;
-
-        >button {
-            color: var(--text);
-            white-space: nowrap;
-
-            >* {
-                font-size: inherit;
-            }
-
-            &:after {
-                transition: all 0.1s linear;
-                bottom: 0;
-                position: absolute;
-                height: 3px;
-                background-color: var(--blue);
-            }
-        }
-    }
-
-    &.normal {
-        >.tab-nav-list {
-            border-bottom: 1px solid var(--border);
-
-            > button {
-                @include tabTitle;
-            }
-        }
-    }
-
-    &.pill {
-        >.tab-nav-list {
-            gap: 10px;
-
-            > button {
-                display: inline-flex;
-                justify-content: center;
-                align-items: center;
-                gap: 10px;
-                padding: 5px 10px;
-                cursor: pointer;
-                color: var(--text);
-                border-radius: 6px;
-
-                // position: relative;
-                &.active {
-                    background-color: var(--blue);
-                    color: var(--bg);
-                }
-
-                &:not(.active):hover {
-                    background-color: var(--hover);
-                }
-            }
-        }
-    }
+  display: flex;
+  flex-direction: column;
+  &.center {
+    align-items: center;
 
     &.bordered-pill {
-        >.tab-nav-list {
-            gap: 10px;
-            border-radius: 6px;
-            border: solid 1px var(--border);
-            padding: 5px;
-            display: inline-flex;
-
-            > button {
-                display: inline-flex;
-                justify-content: center;
-                align-items: center;
-                gap: 10px;
-                padding: 5px 10px;
-                cursor: pointer;
-                color: var(--text);
-                border-radius: 6px;
-
-                // position: relative;
-                &.active {
-                    background-color: var(--blue);
-                    color: var(--bg);
-                }
-
-                &:not(.active):hover {
-                    background-color: var(--hover);
-                }
-            }
-        }
+      .tab-nav-list {
+        display: inline-flex;
+      }
     }
+  }
 
+  > .tab-nav-list {
+    display: flex;
+    overflow-x: auto;
+    overflow-y: hidden;
+    max-width: 100%;
+    padding: 0 2px;
+
+    > button {
+      color: var(--text);
+      white-space: nowrap;
+
+      > * {
+        font-size: inherit;
+      }
+
+      &:after {
+        transition: all 0.1s linear;
+        bottom: 0;
+        position: absolute;
+        height: 3px;
+        background-color: var(--blue);
+      }
+      &.pending {
+        opacity: 0.7;
+      }
+    }
+  }
+
+  &.normal {
+    > .tab-nav-list {
+      border-bottom: 1px solid var(--border);
+
+      > button {
+        @include tabTitle;
+      }
+    }
+  }
+
+  &.pill {
+    > .tab-nav-list {
+      gap: 10px;
+
+      > button {
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+        padding: 5px 10px;
+        cursor: pointer;
+        color: var(--text);
+        border-radius: 6px;
+
+        // position: relative;
+        &.active {
+          background-color: var(--blue);
+          color: var(--bg);
+        }
+
+        &:not(.active):hover {
+          background-color: var(--hover);
+        }
+      }
+    }
+  }
+
+  &.bordered-pill {
+    > .tab-nav-list {
+      gap: 10px;
+      border-radius: 6px;
+      border: solid 1px var(--border);
+      padding: 5px;
+      display: inline-flex;
+
+      > button {
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+        padding: 5px 10px;
+        cursor: pointer;
+        color: var(--text);
+        border-radius: 6px;
+
+        // position: relative;
+        &.active {
+          background-color: var(--blue);
+          color: var(--bg);
+        }
+
+        &:not(.active):hover {
+          background-color: var(--hover);
+        }
+      }
+    }
+  }
+
+  .tab-content-list {
+    display: flex;
+    padding-top: 20px;
+    width: 100%;
+
+    .tab-content {
+      width: 100%;
+
+      &.d-none {
+        display: none;
+      }
+    }
+  }
+
+  &.visibility {
     .tab-content-list {
-        display: flex;
-        padding-top: 20px;
-        width: 100%;
-
-        .tab-content {
-            width: 100%;
-
-            &.d-none {
-                display: none;
-            }
+      .tab-content {
+        &.d-none {
+          display: inherit;
+          position: absolute;
+          visibility: hidden;
+          bottom: -100%;
+          left: 0;
         }
+      }
     }
-
-    &.visibility {
-        .tab-content-list {
-            .tab-content {
-                &.d-none {
-                    display: inherit;
-                    position: absolute;
-                    visibility: hidden;
-                    bottom: -100%;
-                    left: 0;
-                }
-            }
-        }
-    }
-    .hide-scroll-bar{
-        @include shared.hideScrollBar;
-    }
+  }
+  .hide-scroll-bar {
+    @include shared.hideScrollBar;
+  }
+  .mobile_mode {
+    display: none !important;
+  }
+  @media (max-width: shared.$xl) {
     .mobile_mode {
-        display: none !important;
+      display: inline-block !important;
     }
-    @media (max-width: shared.$xl) {
-        .mobile_mode {
-            display: inline-block !important;
-        }
-        .desktop_mode {
-            display: none!important;
-        }
+    .desktop_mode {
+      display: none !important;
     }
+  }
 }
 
-@import "./tab-buttons"
+@import "./tab-buttons";
