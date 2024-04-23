@@ -58,7 +58,7 @@
         max-width: 100%;
         padding: 0 2px;
 
-        .tab-title {
+        >button {
             color: var(--text);
             white-space: nowrap;
 
@@ -80,7 +80,7 @@
         >.tab-nav-list {
             border-bottom: 1px solid var(--border);
 
-            .tab-title {
+            > button {
                 @include tabTitle;
             }
         }
@@ -90,7 +90,7 @@
         >.tab-nav-list {
             gap: 10px;
 
-            .tab-title {
+            > button {
                 display: inline-flex;
                 justify-content: center;
                 align-items: center;
@@ -121,7 +121,7 @@
             padding: 5px;
             display: inline-flex;
 
-            .tab-title {
+            > button {
                 display: inline-flex;
                 justify-content: center;
                 align-items: center;
@@ -185,8 +185,6 @@
             display: none!important;
         }
     }
-        
-  
 }
 
 @import "./tab-buttons"
