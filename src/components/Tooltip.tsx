@@ -76,7 +76,7 @@ const Tooltip = ({ delay, children, title, className, fontSize, direction = "top
       if (rect.left <= 50) {
         setPosition((prev) => ({ ...prev, left: Number(rect?.x) }));
       } else if (rect?.x + tipRect?.width > window.innerWidth) {
-        setPosition((prev) => ({ ...prev, left: rect?.x - rect.width / 2 -(tipRect.width/2)}));
+        setPosition((prev) => ({ ...prev, left: rect?.x - rect.width / 2 - tipRect.width / 2 }));
       }
     }
   }, [position]);
