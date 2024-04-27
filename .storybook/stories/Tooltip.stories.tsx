@@ -1,23 +1,23 @@
 import React from "react";
-import type { Meta, StoryObj } from '@storybook/react';
-import Tooltip from "../../src/components/Tooltip"
+import type { Meta, StoryObj } from "@storybook/react";
+import Tooltip from "../../src/components/Tooltip";
 const meta: Meta = {
-    title: "/Tooltip"
+  title: "/Tooltip",
 };
 export default meta;
 export const Normal: StoryObj = {
-    render: () => {
-        return <div style={{direction:"rtl",margin:"10px",marginRight:"1580px"}}>
-            <Tooltip title="titletitle title title title title title ">
-            Show Tooltip
+  render: () => {
+    return (
+      <div style={{ direction: "rtl", margin: "10px", marginRight: "10px" }}>
+        <Tooltip title="titletitle title title const titletitle title title const titletitle title title const titletitle title title const titletitle title title const titletitle title title const titletitle title title const">
+          Show Tooltip
         </Tooltip>
-        </div>
-    },
+      </div>
+    );
+  },
 };
 export const WithoutTitle: StoryObj = {
-    render: () => {
-        return <Tooltip title="">
-            Without Title
-        </Tooltip>
-    },
+  render: () => {
+    return <Tooltip title="">Without Title</Tooltip>;
+  },
 };

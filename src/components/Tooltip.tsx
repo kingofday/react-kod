@@ -53,13 +53,7 @@ const Tooltip = ({ delay, children, title, className, fontSize, direction = "top
     if (ref.current && tipRef.current) {
       let rect = ref.current?.getBoundingClientRect();
       let tipRect = tipRef.current?.getBoundingClientRect();
-      const centerDevice = window.innerWidth / 2;
-      const isLeftPosition = rect.x < centerDevice / 10;
-      const isRightPosition = rect.x > centerDevice *1.85 && rect.x < window.innerWidth;
-      const center = rect.x + rect.width / 2 - tipRect.width / 2;
-      const start = rect.x;
-      const end = window.innerWidth - tipRect.width*1.1;
-      let left: number | string = isLeftPosition ? start : isRightPosition ? end : center;
+      let left: number | string = rect.x + rect.width / 2 - tipRect.width / 2;
       let right: number | string = "auto";
       let top: string | number = direction === "top" ? rect.top - tipRect.height - 10 : rect.top + rect.height + 10;
       setPosition({
@@ -73,6 +67,20 @@ const Tooltip = ({ delay, children, title, className, fontSize, direction = "top
       });
     }
   }, [loaded, isActive]);
+
+  useEffect(() => {
+    if (ref.current && tipRef.current) {
+      const rect = ref.current?.getBoundingClientRect();
+      const tipRect = tipRef.current?.getBoundingClientRect();
+
+      if (rect.left <= 50) {
+        setPosition((prev) => ({ ...prev, left: Number(rect?.x) }));
+      } else if (rect?.x + tipRect?.width > window.innerWidth) {
+        setPosition((prev) => ({ ...prev, left: rect?.x - rect.width / 2 -(tipRect.width/2)}));
+      }
+    }
+  }, [position]);
+
   return (
     <div ref={ref} className={`tooltip-wrapper ${className ?? ""}`} onMouseEnter={showTip} onMouseLeave={hideTip}>
       {children}
