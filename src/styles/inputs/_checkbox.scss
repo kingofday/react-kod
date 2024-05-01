@@ -27,7 +27,7 @@
     border-radius: 3px;
   }
 
-  &:hover input~.indicator,
+  &:not(.disabled):hover input~.indicator,
   & input:focus~.indicator {
     border-color: var(--gray);
   }
