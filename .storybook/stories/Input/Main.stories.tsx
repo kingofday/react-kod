@@ -22,10 +22,10 @@ Simple.args = {
   label:"input",
   defaultValue:"",
   placeholder:"type",
+  disabled:true,
   type:"text",
   hasError:false,
   errorMessage:"",
-  disabled:false,
   suffix:<div>&</div>,
   preFix:<div>$</div>,
 };
