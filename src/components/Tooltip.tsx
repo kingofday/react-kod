@@ -6,11 +6,20 @@ export interface ITooltip {
   title?: ReactNode;
   direction?: "top" | "bottom";
   className?: string;
+  wrapperClassName?: string;
   rtl?: boolean;
   fontSize?: number;
 }
 
-const Tooltip = ({ delay, children, title, className, fontSize, direction = "top" }: ITooltip) => {
+const Tooltip = ({
+  delay,
+  children,
+  title,
+  wrapperClassName,
+  className,
+  fontSize,
+  direction = "top",
+}: ITooltip) => {
   const ref = useRef<HTMLDivElement>(null);
   const tipRef = useRef<HTMLDivElement>(null);
   const [isActive, setActive] = useState<boolean>(false);
@@ -55,7 +64,10 @@ const Tooltip = ({ delay, children, title, className, fontSize, direction = "top
       let tipRect = tipRef.current?.getBoundingClientRect();
       let left: number | string = rect.x + rect.width / 2 - tipRect.width / 2;
       let right: number | string = "auto";
-      let top: string | number = direction === "top" ? rect.top - tipRect.height - 10 : rect.top + rect.height + 10;
+      let top: string | number =
+        direction === "top"
+          ? rect.top - tipRect.height - 10
+          : rect.top + rect.height + 10;
       setPosition({
         left: left,
         right: right,
@@ -76,13 +88,21 @@ const Tooltip = ({ delay, children, title, className, fontSize, direction = "top
       if (rect.left <= 50) {
         setPosition((prev) => ({ ...prev, left: Number(rect?.x) }));
       } else if (rect?.x + tipRect?.width > window.innerWidth) {
-        setPosition((prev) => ({ ...prev, left: rect?.x - rect.width / 2 - tipRect.width / 2 }));
+        setPosition((prev) => ({
+          ...prev,
+          left: rect?.x - rect.width / 2 - tipRect.width / 2,
+        }));
       }
     }
   }, [position]);
 
   return (
-    <div ref={ref} className={`tooltip-wrapper ${className ?? ""}`} onMouseEnter={showTip} onMouseLeave={hideTip}>
+    <div
+      ref={ref}
+      className={`tooltip-wrapper ${wrapperClassName ?? ""}`}
+      onMouseEnter={showTip}
+      onMouseLeave={hideTip}
+    >
       {children}
       {isActive &&
         loaded &&
@@ -95,10 +115,13 @@ const Tooltip = ({ delay, children, title, className, fontSize, direction = "top
               right: position.right,
               fontSize: `${fontSize}px`,
             }}
-            className="tooltip-tip"
+            className={`tooltip-tip${className ? ` ${className}` : ""}`}
           >
             {title}
-            <span style={trianglePosition} className={`triangle ${direction}`}></span>
+            <span
+              style={trianglePosition}
+              className={`triangle ${direction}`}
+            ></span>
           </div>,
           document.body
         )}
