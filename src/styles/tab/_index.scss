@@ -76,6 +76,9 @@
       &.pending {
         opacity: 0.7;
       }
+      &:hover:not(.active){
+        background-color: inherit;
+      }
     }
   }
 
