@@ -1,4 +1,4 @@
-@use "./shared" as v;
+@use "./variables" as v;
 
 @mixin active {
   // border-bottom: solid 2px var(--blue);
@@ -87,7 +87,7 @@
         a {
           display: flex;
           align-items: center;
-          gap: v.$spacing1;
+          gap: 0.25rem;
           text-decoration: none;
           color: inherit;
           height: 100%;
@@ -149,7 +149,7 @@
   &.horizontal {
     flex-direction: row;
     height: 60px;
-    gap: v.$spacing2;
+    gap: 0.625rem;
 
     > .item.selected > .menu-content {
       @include active;
@@ -174,14 +174,14 @@
         height: 100%;
         display: flex;
         align-items: center;
-        padding: v.$spacing2;
+        padding: 0.625rem;
         gap: 0.625rem;
         color: var(--text);
 
         a {
           display: flex;
           align-items: center;
-          gap: v.$spacing1;
+          gap: 0.25rem;
           text-decoration: none;
           color: inherit;
           height: 100%;

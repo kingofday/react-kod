@@ -1,5 +1,5 @@
 @use 'sass:math';
-@use "./shared";
+@use "./variables";
 
 .row {
   display: flex;
@@ -37,7 +37,7 @@
 }
 
 @for $i from 1 through 24 {
-  @media (max-width: shared.$xs) {
+  @media (max-width: variables.$xs) {
     .xs-#{$i} {
       flex: 0 0 math.div(100, math.div(24 , $i)) * 1%;
       max-width: math.div(100, math.div(24 , $i)) * 1%;
@@ -46,7 +46,7 @@
 }
 
 @for $i from 1 through 24 {
-  @media (min-width: shared.$xs) {
+  @media (min-width: variables.$xs) {
     .sm-#{$i} {
       flex: 0 0 math.div(100%, math.div(24 , $i));
       max-width: math.div(100%, math.div(24 , $i));
@@ -55,7 +55,7 @@
 }
 
 @for $i from 1 through 24 {
-  @media (min-width: shared.$md) {
+  @media (min-width: variables.$md) {
     .md-#{$i} {
       flex: 0 0 math.div(100%, math.div(24 , $i));
       max-width: math.div(100%, math.div(24 , $i));
@@ -64,7 +64,7 @@
 }
 
 @for $i from 1 through 24 {
-  @media (min-width: shared.$lg) {
+  @media (min-width: variables.$lg) {
     .lg-#{$i} {
       flex: 0 0 math.div(100, math.div(24 , $i)) * 1%;
       max-width: math.div(100, math.div(24 , $i)) * 1%;
@@ -73,7 +73,7 @@
 }
 
 @for $i from 1 through 24 {
-  @media (min-width: shared.$xl) {
+  @media (min-width: variables.$xl) {
     .xl-#{$i} {
       flex: 0 0 math.div(100, math.div(24 , $i)) * 1%;
       max-width: math.div(100, math.div(24 , $i)) * 1%;
@@ -82,7 +82,7 @@
 }
 
 @for $i from 1 through 24 {
-  @media (min-width: shared.$xxl) {
+  @media (min-width: variables.$xxl) {
     .xxl-#{$i} {
       flex: 0 0 math.div(100, math.div(24 , $i)) * 1%;
       max-width: math.div(100, math.div(24 , $i)) * 1%;
@@ -91,37 +91,37 @@
 }
 
 @for $j from 0 to 100 {
-  @media (max-width: shared.$xxl) {
+  @media (max-width: variables.$xxl) {
     .order-xxl-#{$j} {
       order: $j;
     }
   }
 
-  @media (max-width: shared.$xl) {
+  @media (max-width: variables.$xl) {
     .order-xl-#{$j} {
       order: $j;
     }
   }
 
-  @media (max-width: shared.$lg) {
+  @media (max-width: variables.$lg) {
     .order-lg-#{$j} {
       order: $j;
     }
   }
 
-  @media (max-width: shared.$md) {
+  @media (max-width: variables.$md) {
     .order-md-#{$j} {
       order: $j;
     }
   }
 
-  @media (max-width: shared.$xs) {
+  @media (max-width: variables.$xs) {
     .order-sm-#{$j} {
       order: $j;
     }
   }
 
-  @media (max-width: shared.$xs) {
+  @media (max-width: variables.$xs) {
     .order-xs-#{$j} {
       order: $j;
     }

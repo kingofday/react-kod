@@ -32,7 +32,7 @@
   }
 
   &.bordered {
-    @media (max-width: shared.$xs) {
+    @media (max-width: variables.$xs) {
       .btn.tab:not(.active) {
         border: none !important;
         background-color: var(--hover);
@@ -56,6 +56,6 @@
   }
 
   &.hide-scroll-bar {
-    @include shared.hideScrollBar;
+    @include variables.hideScrollBar;
   }
 }

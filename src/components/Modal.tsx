@@ -6,6 +6,7 @@ import BreakPoints from "../helpers/BreakPoints";
 import useOnClickOutside from "../helpers/useOnClickOutside";
 import MaximizeIcon from "./Shared/maximizeIcon";
 import MinimizeIcon from "./Shared/minimizeIcon";
+import Container from "./Container";
 
 export interface IModalProps {
   open: boolean;
@@ -73,21 +74,37 @@ const Modal = ({
   }, []);
   return isOpen ? (
     createPortal(
-      <div className={`modal${fullscreen || (fullScreenIcon && isFullScreen) ? " fullscreen" : ""} ${className ?? ""}`} {...props}>
+      <div
+        className={`modal${
+          fullscreen || (fullScreenIcon && isFullScreen) ? " fullscreen" : ""
+        } ${className ?? ""}`}
+        {...props}
+      >
         <div
-          className={`modal-body ${typeof window !== "undefined" && window.innerWidth < BreakPoints.sm ? "animate-slide-up" : ""} card-sm ${
-            title ? "with-title" : ""
-          } ${bodyClass ?? ""}`}
+          className={`modal-body ${
+            typeof window !== "undefined" && window.innerWidth < BreakPoints.sm
+              ? "animate-slide-up"
+              : ""
+          } card-sm ${title ? "with-title" : ""} ${bodyClass ?? ""}`}
           ref={modalRef}
           {...(props.id ? { id: props.id + "-body" } : {})}
         >
           {!hideCloseButton && !title ? (
             <div className="modal-operation">
-              <Button className="btn-close" variant="square" onClick={handleClose} ariaLabel={strings?.close}>
+              <Button
+                className="btn-close"
+                variant="square"
+                onClick={handleClose}
+                ariaLabel={strings?.close}
+              >
                 {<CloseIcon size={20} />}
               </Button>
               {fullScreenIcon ? (
-                <Button className="btn-fullScreen-title" variant="square" onClick={() => toggleFullScreen(!isFullScreen)}>
+                <Button
+                  className="btn-fullScreen-title"
+                  variant="square"
+                  onClick={() => toggleFullScreen(!isFullScreen)}
+                >
                   {isFullScreen ? <MinimizeIcon /> : <MaximizeIcon />}
                 </Button>
               ) : null}
@@ -95,25 +112,39 @@ const Modal = ({
           ) : null}
           {title ? (
             <div className="modal-title">
-              <div className="title">
-                {titleIcon ? <span className="icon">{titleIcon}</span> : null}
-                {title}
-              </div>
-              {!hideCloseButton ? (
-                <div className="modal-operation-title">
-                  {fullScreenIcon ? (
-                    <Button className="btn-fullScreen-title" variant="square" onClick={() => toggleFullScreen(!isFullScreen)}>
-                      {isFullScreen ? <MinimizeIcon /> : <MaximizeIcon />}
-                    </Button>
-                  ) : null}
-                  <Button className="btn-close-title" variant="square" onClick={handleClose} ariaLabel={strings?.close}>
-                    {<CloseIcon size={20} />}
-                  </Button>
+              <Container>
+                <div className="title">
+                  {titleIcon ? <span className="icon">{titleIcon}</span> : null}
+                  {title}
                 </div>
-              ) : null}
+                {!hideCloseButton ? (
+                  <div className="modal-operation-title">
+                    {fullScreenIcon ? (
+                      <Button
+                        className="btn-fullScreen-title"
+                        variant="square"
+                        onClick={() => toggleFullScreen(!isFullScreen)}
+                      >
+                        {isFullScreen ? <MinimizeIcon /> : <MaximizeIcon />}
+                      </Button>
+                    ) : null}
+                    <Button
+                      className="btn-close-title"
+                      variant="square"
+                      onClick={handleClose}
+                      ariaLabel={strings?.close}
+                    >
+                      {<CloseIcon size={20} />}
+                    </Button>
+                  </div>
+                ) : null}
+              </Container>
             </div>
           ) : null}
-          <div className="modal-content" {...(props.id ? { id: props.id + "-content" } : {})}>
+          <div
+            className="modal-content"
+            {...(props.id ? { id: props.id + "-content" } : {})}
+          >
             {children}
           </div>
           {footer || onOk || onCancel ? (
@@ -123,12 +154,22 @@ const Modal = ({
               ) : (
                 <>
                   {onCancel ? (
-                    <Button onClick={onCancel} variant="secondary" ariaLabel={strings?.cancel} danger>
+                    <Button
+                      onClick={onCancel}
+                      variant="secondary"
+                      ariaLabel={strings?.cancel}
+                      danger
+                    >
                       {cancelText}
                     </Button>
                   ) : null}
                   {onOk ? (
-                    <Button onClick={onOk} variant="solid" ariaLabel={strings?.submit} loading={onOkLoading}>
+                    <Button
+                      onClick={onOk}
+                      variant="solid"
+                      ariaLabel={strings?.submit}
+                      loading={onOkLoading}
+                    >
                       {okText}
                     </Button>
                   ) : null}

@@ -1,4 +1,4 @@
-@use "../shared";
+@use "../variables";
 
 @mixin tabTitle {
   display: inline-flex;
@@ -73,11 +73,11 @@
         height: 3px;
         background-color: var(--blue);
       }
-      &.pending {
-        opacity: 0.7!important;
-      }
       &:hover:not(.active){
         background-color: inherit;
+      }
+      &.pending {
+        opacity: 0.7!important;
       }
     }
   }
@@ -178,12 +178,12 @@
     }
   }
   .hide-scroll-bar {
-    @include shared.hideScrollBar;
+    @include variables.hideScrollBar;
   }
   .mobile_mode {
     display: none !important;
   }
-  @media (max-width: shared.$xl) {
+  @media (max-width: variables.$xl) {
     .mobile_mode {
       display: inline-block !important;
     }
