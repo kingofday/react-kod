@@ -149,32 +149,34 @@ const Modal = ({
           </div>
           {footer || onOk || onCancel ? (
             <div className="footer">
-              {footer ? (
-                footer
-              ) : (
-                <>
-                  {onCancel ? (
-                    <Button
-                      onClick={onCancel}
-                      variant="secondary"
-                      ariaLabel={strings?.cancel}
-                      danger
-                    >
-                      {cancelText}
-                    </Button>
-                  ) : null}
-                  {onOk ? (
-                    <Button
-                      onClick={onOk}
-                      variant="solid"
-                      ariaLabel={strings?.submit}
-                      loading={onOkLoading}
-                    >
-                      {okText}
-                    </Button>
-                  ) : null}
-                </>
-              )}
+              <Container>
+                {footer ? (
+                  footer
+                ) : (
+                  <>
+                    {onCancel ? (
+                      <Button
+                        onClick={onCancel}
+                        variant="secondary"
+                        ariaLabel={strings?.cancel}
+                        danger
+                      >
+                        {cancelText}
+                      </Button>
+                    ) : null}
+                    {onOk ? (
+                      <Button
+                        onClick={onOk}
+                        variant="solid"
+                        ariaLabel={strings?.submit}
+                        loading={onOkLoading}
+                      >
+                        {okText}
+                      </Button>
+                    ) : null}
+                  </>
+                )}
+              </Container>
             </div>
           ) : null}
         </div>

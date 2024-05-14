@@ -16,19 +16,23 @@ const ModalExample = () => {
         onChange={(e) => setChb(e.target.checked)}
         checked={chb}
       >
-       Full Screen
+        Full Screen
       </Checkbox>
-      <br/>
-      <br/>
-      <br/>
+      <br />
+      <br />
+      <br />
       <button onClick={handleOpen}>Toggle modal</button>
       <Modal
         id="test"
         fullscreen={chb}
         open={open}
-        // title={"تست رسپانسیو مدال"}
-        // titleIcon="#"
+        title={"تست رسپانسیو مدال"}
+        titleIcon="#"
         onClose={() => toggle(false)}
+        okText="OK"
+        cancelText="Canel"
+        onOk={() => console.log("ok")}
+        onCancel={() => console.log("cancel")}
       >
         <div
           style={{
@@ -38,7 +42,7 @@ const ModalExample = () => {
             gap: 40,
           }}
         >
-          <div>
+          <div style={{ height: 1000 }}>
             <MultiSelect
               values={value}
               placeholder={"please select"}

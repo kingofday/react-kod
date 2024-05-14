@@ -27,10 +27,10 @@ function App() {
       
       <SelectExample />
       <PopupExample />*/}
-      {/* <ModalExample/>  */}
+      <ModalExample/> 
       {/* <SpinnerSample/>
-      <ContainerExample/> */}
-      <ButtonsExample/>
+      <ContainerExample/> 
+      <ButtonsExample/>*/}
     </div>
   );
 }
