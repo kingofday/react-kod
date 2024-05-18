@@ -55,6 +55,7 @@ const TabButtons = ({
     >
       {tabs.map((t) => (
         <TabButton
+          key={t.key}
           tabKey={t.key}
           tab={t}
           disabled={t.disabled}
