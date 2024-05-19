@@ -5,21 +5,24 @@ interface IContainer {
   id?: string;
   className?: string;
   children: ReactNode;
-  style?:CSSProperties,
-  [key:string]:any
+  autoPadding?: boolean;
+  style?: CSSProperties;
+  [key: string]: any;
 }
 const Container = ({
-    id,
-    className,
-    children,
-    style,
-    ...rest
+  id,
+  className,
+  children,
+  style,
+  autoPadding = true,
+  ...rest
 }: IContainer) => {
   return (
     <div
       id={id}
       className={mergeClasses([
         "container",
+        [autoPadding, "auto-padding"],
         [!!className, className!],
       ])}
       {...rest}

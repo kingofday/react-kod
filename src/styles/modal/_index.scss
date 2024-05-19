@@ -94,15 +94,6 @@
     padding: 0.625rem 1.25rem;
     border-top: 1px solid var(--border);
   }
-  @media (max-width: variables.$containerMaxWidth) {
-    .modal-body {
-      .modal-title {
-        .container {
-          padding: 1rem 1.25rem;
-        }
-      }
-    }
-  }
   @media (max-width: variables.$xl) {
     align-items: flex-end;
     padding: 0;
