@@ -90,9 +90,14 @@
     align-items: center;
     height: 65px;
     justify-content: flex-end;
-    gap: 0.625rem;
-    padding: 0.625rem 1.25rem;
     border-top: 1px solid var(--border);
+    .container{
+      gap: 0.625rem;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      width: 100%;
+    }
   }
   @media (max-width: variables.$xl) {
     align-items: flex-end;
