@@ -91,12 +91,26 @@
     height: 65px;
     justify-content: flex-end;
     border-top: 1px solid var(--border);
-    .container{
+    .container {
       gap: 0.625rem;
       display: flex;
       align-items: center;
       justify-content: flex-end;
       width: 100%;
+    }
+  }
+  &:not(.fullscreen) {
+    .modal-body {
+      > .modal-title {
+        .container {
+          padding: 1rem 1.25rem;
+        }
+      }
+    }
+    .footer {
+      .container {
+        padding: 1rem 1.25rem;
+      }
     }
   }
   @media (max-width: variables.$xl) {
