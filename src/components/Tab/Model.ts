@@ -25,7 +25,7 @@ export interface ITabItem {
     hideScrollBar?: boolean;
     onChange?: (key: string, tab?: ITabItem) => void;
     afterChange?: (key: string) => void;
-    threshold?: number;
+    thresholdCentralizeTab?: number;
   }
   export interface ITabButton {
     icon?: ReactNode;

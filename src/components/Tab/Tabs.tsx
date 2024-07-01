@@ -1,14 +1,8 @@
-import {
-  ForwardRefExoticComponent,
-  ReactElement,
-  forwardRef,
-  useEffect,
-  useRef,
-  useState,
-} from "react";
+import { ForwardRefExoticComponent, ReactElement, forwardRef, useEffect, useRef, useState } from "react";
 import { Select } from "../Inputs";
 import { ITabProps } from "./Model";
 import TabButton from "./TabButton";
+import useInteractive from "./useIntractive";
 type TabsProps = {
   defaultActiveTab?: string;
   activeTab?: string;
@@ -23,16 +17,13 @@ type TabsProps = {
   afterChange?: (key: string) => void;
   swipable?: boolean;
   changeToInputSelectInMobile?: boolean;
-  threshold?: number;
+  thresholdCentralizeTab?: number;
   [key: string]: any;
 };
 interface RenderedTabs {
   [key: string]: boolean;
 }
-const Tabs: ForwardRefExoticComponent<TabsProps> = forwardRef<
-  HTMLDivElement,
-  TabsProps
->(
+const Tabs: ForwardRefExoticComponent<TabsProps> = forwardRef<HTMLDivElement, TabsProps>(
   (
     {
       items,
@@ -44,9 +35,9 @@ const Tabs: ForwardRefExoticComponent<TabsProps> = forwardRef<
       visibility,
       hideScrollBar,
       afterChange,
-      swipable,
+      swipable = true,
       activeTab,
-      threshold = 0,
+      thresholdCentralizeTab = 0,
       onChange,
       changeToInputSelectInMobile,
       ...rest
@@ -55,7 +46,6 @@ const Tabs: ForwardRefExoticComponent<TabsProps> = forwardRef<
   ) => {
     const clientTouchX = useRef<number | null>(null);
     const wrapperList = useRef<HTMLDivElement | null>(null);
-
     const tabProps: ITabProps[] = children
       ? children
           .filter((x): x is ReactElement<ITabProps> => x !== null)
@@ -78,79 +68,38 @@ const Tabs: ForwardRefExoticComponent<TabsProps> = forwardRef<
         {}
       )
     );
-    const [activeKey, setActiveKey] = useState<string>(
-      activeTab ?? defaultActiveTab ?? tabProps[0].key
-    );
+    const [activeKey, setActiveKey] = useState<string>(activeTab ?? defaultActiveTab ?? tabProps[0].key);
+    const { centralizeTab, handleTouchEnd, handleTouchMove, handleTouchStart } = useInteractive({
+      clientTouchX,
+      wrapperList,
+      setActiveKey,
+      activeKey,
+      listTabs: tabProps,
+      renderedTabs,
+      thresholdCentralizeTab,
+    });
+
     const handleSelect = (key: string) => {
-      const parentTabElement = wrapperList?.current as
-        | HTMLDivElement
-        | undefined;
-      const activeElement = parentTabElement?.querySelector(`.tab-${key} `) as
-        | HTMLDivElement
-        | undefined;
+      const parentTabElement = wrapperList?.current as HTMLDivElement | undefined;
+      const activeElement = parentTabElement?.querySelector(`.tab-${key} `) as HTMLDivElement | undefined;
       if (parentTabElement && activeElement) {
-        parentTabElement.scrollLeft =
-          activeElement.offsetLeft -
-          (parentTabElement.offsetWidth - activeElement.offsetWidth) / 2 -
-          threshold;
+        parentTabElement.scrollLeft = activeElement.offsetLeft - (parentTabElement.offsetWidth - activeElement.offsetWidth) / 2 - thresholdCentralizeTab;
       }
       renderedTabs.current[key] = true;
       if (onChange) onChange(key);
       else setActiveKey(key);
+      centralizeTab(key);
     };
-    const handleTouchStart = (e: React.TouchEvent) => {
-      clientTouchX.current = e.touches[0].clientX;
-    };
-    const handleTouchMove = (e: React.TouchEvent) => {
-      if (clientTouchX.current === null) return;
 
-      const currentX = e.touches[0].clientX;
-      const deltaX = currentX - clientTouchX.current;
-      if (deltaX < -100) {
-        const swipedTab =
-          activeKey === tabProps[tabProps.length - 1].key
-            ? tabProps[0].key
-            : tabProps[tabProps.findIndex((c) => c.key === activeKey) + 1].key;
-        renderedTabs.current[swipedTab] = true;
-        setActiveKey(swipedTab);
-        clientTouchX.current = null;
-      } else if (deltaX > 100) {
-        const swipedTab =
-          activeKey === tabProps[0].key
-            ? tabProps[tabProps.length - 1].key
-            : tabProps[tabProps.findIndex((c) => c.key === activeKey) - 1].key;
-        renderedTabs.current[swipedTab] = true;
-        setActiveKey(swipedTab);
-        clientTouchX.current = null;
-      }
-    };
-    const handleTouchEnd = () => {
-      clientTouchX.current = null;
-    };
     useEffect(() => {
       if (!onChange) afterChange?.(activeKey);
     }, [activeKey]);
     useEffect(() => {
-      if (activeTab && !renderedTabs.current[activeTab])
-        renderedTabs.current[activeTab] = true;
+      if (activeTab && !renderedTabs.current[activeTab]) renderedTabs.current[activeTab] = true;
     }, [activeTab]);
     return (
-      <div
-        className={`tabs ${variant} ${alignTitles}${
-          className ? ` ${className}` : ""
-        }${visibility ? " visibility" : ""}`}
-        ref={forwardedRef}
-        {...rest}
-      >
-        <div
-          ref={wrapperList}
-          className={`${
-            changeToInputSelectInMobile ? "desktop_mode" : ""
-          } tab-nav-list horizontal-scroll-bar ${
-            hideScrollBar ? " hide-scroll-bar" : ""
-          }`}
-          role="tablist"
-        >
+      <div className={`tabs ${variant} ${alignTitles}${className ? ` ${className}` : ""}${visibility ? " visibility" : ""}`} ref={forwardedRef} {...rest}>
+        <div ref={wrapperList} className={`${changeToInputSelectInMobile ? "desktop_mode" : ""} tab-nav-list horizontal-scroll-bar ${hideScrollBar ? " hide-scroll-bar" : ""}`} role="tablist">
           {tabProps.map((item) => (
             <TabButton
               key={item.key}
@@ -166,11 +115,7 @@ const Tabs: ForwardRefExoticComponent<TabsProps> = forwardRef<
           ))}
         </div>
         {changeToInputSelectInMobile && (
-          <Select
-            value={activeTab ?? activeKey}
-            onChange={handleSelect}
-            className="mobile_mode"
-          >
+          <Select value={activeTab ?? activeKey} onChange={handleSelect} className="mobile_mode">
             {tabProps.map((item) => (
               <Select.Option key={item.key} value={item.key}>
                 {item.title}
@@ -178,23 +123,10 @@ const Tabs: ForwardRefExoticComponent<TabsProps> = forwardRef<
             ))}
           </Select>
         )}
-        <ul
-          className="tab-content-list"
-          onTouchStart={swipable ? handleTouchStart : undefined}
-          onTouchMove={swipable ? handleTouchMove : undefined}
-          onTouchEnd={swipable ? handleTouchEnd : undefined}
-        >
+        <ul className="tab-content-list" onTouchStart={swipable ? handleTouchStart : undefined} onTouchMove={swipable ? handleTouchMove : undefined} onTouchEnd={swipable ? handleTouchEnd : undefined}>
           {tabProps.map((x) => (
-            <li
-              className={`tab-content ${
-                (activeTab ?? activeKey) !== x.key ? "d-none" : ""
-              }`}
-              key={x.key}
-            >
-              {(renderedTabs.current[x.key] as boolean) ||
-              (activeTab ?? activeKey) === x.key
-                ? x.children
-                : null}
+            <li className={`tab-content ${(activeTab ?? activeKey) !== x.key ? "d-none" : ""}`} key={x.key}>
+              {(renderedTabs.current[x.key] as boolean) || (activeTab ?? activeKey) === x.key ? x.children : null}
             </li>
           ))}
         </ul>

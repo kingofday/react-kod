@@ -11,13 +11,14 @@ const TabButtons = ({
   variant = "pill",
   hideScrollBar,
   tabs,
-  threshold = 0,
+  thresholdCentralizeTab = 0,
 }: ITabButtonsProps) => {
   const [innerActiveKey, chnageActiveKey] = useState(
     initialActiveKey ?? (tabs.length ? tabs[0].key : "")
   );
   const wrapperList = useRef<HTMLDivElement | null>(null);
   const [, startTransition] = useTransition();
+  
   const centralizeTab = (key: string) => {
     const parentTabElement = wrapperList?.current as HTMLDivElement | undefined;
     const activeElement = parentTabElement?.querySelector(
@@ -27,7 +28,7 @@ const TabButtons = ({
       parentTabElement.scrollLeft =
         activeElement.offsetLeft -
         (parentTabElement.offsetWidth - activeElement.offsetWidth) / 2 -
-        threshold;
+        thresholdCentralizeTab;
     }
   };
 
