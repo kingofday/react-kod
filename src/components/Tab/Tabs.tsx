@@ -2,7 +2,6 @@ import { ForwardRefExoticComponent, ReactElement, forwardRef, useEffect, useRef,
 import { Select } from "../Inputs";
 import { ITabProps } from "./Model";
 import TabButton from "./TabButton";
-import useInteractive from "./useCentralizeTab";
 import useCentralizeTab from "./useCentralizeTab";
 type TabsProps = {
   defaultActiveTab?: string;
