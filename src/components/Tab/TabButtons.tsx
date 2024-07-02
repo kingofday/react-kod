@@ -1,6 +1,7 @@
 import { useCallback, useRef, useState, useTransition } from "react";
 import TabButton from "./TabButton";
 import { ITabButtonsProps, ITabItem } from "./Model";
+import useCentralizeTab from "./useCentralizeTab";
 const TabButtons = ({
   id,
   initialActiveKey,
@@ -19,18 +20,8 @@ const TabButtons = ({
   const wrapperList = useRef<HTMLDivElement | null>(null);
   const [, startTransition] = useTransition();
   
-  const centralizeTab = (key: string) => {
-    const parentTabElement = wrapperList?.current as HTMLDivElement | undefined;
-    const activeElement = parentTabElement?.querySelector(
-      `.tab-btn-${key} `
-    ) as HTMLUListElement | undefined;
-    if (parentTabElement && activeElement) {
-      parentTabElement.scrollLeft =
-        activeElement.offsetLeft -
-        (parentTabElement.offsetWidth - activeElement.offsetWidth) / 2 -
-        thresholdCentralizeTab;
-    }
-  };
+  const centralizeTab = useCentralizeTab({ wrapperList, thresholdCentralizeTab })
+
 
   const handleSelect = useCallback((key: string) => {
     chnageActiveKey(key);

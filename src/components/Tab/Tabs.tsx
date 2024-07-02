@@ -2,7 +2,8 @@ import { ForwardRefExoticComponent, ReactElement, forwardRef, useEffect, useRef,
 import { Select } from "../Inputs";
 import { ITabProps } from "./Model";
 import TabButton from "./TabButton";
-import useInteractive from "./useIntractive";
+import useInteractive from "./useCentralizeTab";
+import useCentralizeTab from "./useCentralizeTab";
 type TabsProps = {
   defaultActiveTab?: string;
   activeTab?: string;
@@ -15,7 +16,6 @@ type TabsProps = {
   hideScrollBar?: boolean;
   onChange?: (key: string) => void;
   afterChange?: (key: string) => void;
-  swipable?: boolean;
   changeToInputSelectInMobile?: boolean;
   thresholdCentralizeTab?: number;
   [key: string]: any;
@@ -35,7 +35,6 @@ const Tabs: ForwardRefExoticComponent<TabsProps> = forwardRef<HTMLDivElement, Ta
       visibility,
       hideScrollBar,
       afterChange,
-      swipable = true,
       activeTab,
       thresholdCentralizeTab = 0,
       onChange,
@@ -44,7 +43,6 @@ const Tabs: ForwardRefExoticComponent<TabsProps> = forwardRef<HTMLDivElement, Ta
     },
     forwardedRef
   ) => {
-    const clientTouchX = useRef<number | null>(null);
     const wrapperList = useRef<HTMLDivElement | null>(null);
     const tabProps: ITabProps[] = children
       ? children
@@ -69,15 +67,7 @@ const Tabs: ForwardRefExoticComponent<TabsProps> = forwardRef<HTMLDivElement, Ta
       )
     );
     const [activeKey, setActiveKey] = useState<string>(activeTab ?? defaultActiveTab ?? tabProps[0].key);
-    const { centralizeTab, handleTouchEnd, handleTouchMove, handleTouchStart } = useInteractive({
-      clientTouchX,
-      wrapperList,
-      setActiveKey,
-      activeKey,
-      listTabs: tabProps,
-      renderedTabs,
-      thresholdCentralizeTab,
-    });
+    const centralizeTab = useCentralizeTab({ wrapperList, thresholdCentralizeTab })
 
     const handleSelect = (key: string) => {
       const parentTabElement = wrapperList?.current as HTMLDivElement | undefined;
@@ -123,7 +113,7 @@ const Tabs: ForwardRefExoticComponent<TabsProps> = forwardRef<HTMLDivElement, Ta
             ))}
           </Select>
         )}
-        <ul className="tab-content-list" onTouchStart={swipable ? handleTouchStart : undefined} onTouchMove={swipable ? handleTouchMove : undefined} onTouchEnd={swipable ? handleTouchEnd : undefined}>
+        <ul className="tab-content-list" >
           {tabProps.map((x) => (
             <li className={`tab-content ${(activeTab ?? activeKey) !== x.key ? "d-none" : ""}`} key={x.key}>
               {(renderedTabs.current[x.key] as boolean) || (activeTab ?? activeKey) === x.key ? x.children : null}
