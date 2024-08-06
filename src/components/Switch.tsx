@@ -44,8 +44,8 @@ const Switch = ({
         {...rest}
       />
       <div className="switch-labels">
-        <span id={id ? labelId : " "}>{label}</span>
-        {description && <p id={descriptionId}>{description}</p>}
+        <span className="lbl" id={id ? labelId : undefined}>{label}</span>
+        {description && <p className="desc" id={descriptionId}>{description}</p>}
       </div>
     </label>
   );
