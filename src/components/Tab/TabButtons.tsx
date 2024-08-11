@@ -19,24 +19,35 @@ const TabButtons = ({
   );
   const wrapperList = useRef<HTMLDivElement | null>(null);
   const [, startTransition] = useTransition();
-  
-  const centralizeTab = useCentralizeTab({ wrapperList, thresholdCentralizeTab })
 
+  const centralizeTab = useCentralizeTab({
+    wrapperList,
+    thresholdCentralizeTab,
+  });
 
-  const handleSelect = useCallback((key: string) => {
-    chnageActiveKey(key);
-    startTransition(() => {
-      afterChange?.(key);
+  const handleSelect = useCallback(
+    (key: string) => {
+      chnageActiveKey(key);
+      startTransition(() => {
+        afterChange?.(key);
+        centralizeTab(key);
+      });
+    },
+    [afterChange]
+  );
+  const outSideHandleClick = useCallback(
+    (key: string, item: ITabItem) => {
+      onChange?.(key, item);
       centralizeTab(key);
-    });
-  }, []);
-  const outSideHandleClick = useCallback((key: string, item: ITabItem) => {
-    onChange?.(key, item);
-    centralizeTab(key);
-  }, []);
-  const handleClick = useCallback((key: string, tab: ITabItem) => {
-    onChange ? outSideHandleClick(key, tab) : handleSelect(key);
-  }, []);
+    },
+    [onChange]
+  );
+  const handleClick = useCallback(
+    (key: string, tab: ITabItem) => {
+      onChange ? outSideHandleClick(key, tab) : handleSelect(key);
+    },
+    [onChange, handleSelect, outSideHandleClick]
+  );
   return (
     <div
       ref={wrapperList}
