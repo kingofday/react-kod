@@ -19,6 +19,8 @@ export * from './Drawer';
 export { default as Drawer } from './Drawer';
 export * from './Menu';
 export { default as Menu } from './Menu';
+export * from './SingleMenu';
+export { default as SingleMenu } from './SingleMenu';
 export * from './Modal';
 export { default as Modal } from './Modal';
 export * from './Pagination';

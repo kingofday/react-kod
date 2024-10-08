@@ -1,5 +1,5 @@
 import React from 'react';
-import { Select } from "react-kod"
+import { Select, SingleMenu } from "react-kod"
 import "./index.css";
 import "react-kod/dist/styles.css";
 import MultiSelectExample from './Components/MultiSelectExample';
@@ -12,6 +12,8 @@ import TabButtonsExample from './Components/TabButtonsExample';
 import TabsExample from './Components/TabsExample';
 import ContainerExample from './Components/ContainerExample';
 import ButtonsExample from './Components/ButtonsExample';
+import MenuExample from './Components/MenuExample';
+import SingleMenuExample from './Components/SingleMenuExample';
 const Option = Select.Option;
 const CustomInput = (props: React.InputHTMLAttributes<HTMLInputElement>) => {
   return <input type="text" {...props} style={{ padding: 10, borderRadius: 4, border: "solid 1px #ccc" }} />
@@ -27,10 +29,12 @@ function App() {
       
       <SelectExample />
       <PopupExample />*/}
-      <ModalExample/> 
+      {/* <ModalExample/>  */}
       {/* <SpinnerSample/>
       <ContainerExample/> 
-      <ButtonsExample/>*/}
+      <ButtonsExample/>
+      <MenuExample/>*/}
+      <SingleMenuExample />
     </div>
   );
 }

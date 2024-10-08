@@ -26,6 +26,7 @@ export interface ITabItem {
     onChange?: (key: string, tab?: ITabItem) => void;
     afterChange?: (key: string) => void;
     thresholdCentralizeTab?: number;
+    [key:string]:any
   }
   export interface ITabButton {
     icon?: ReactNode;

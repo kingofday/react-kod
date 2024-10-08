@@ -56,28 +56,33 @@ const TabButtons = ({
         className ? " " + className : ""
       }${hideScrollBar ? " hide-scroll-bar" : ""}`}
     >
-      {tabs.map((t) => (
+      {tabs.map(({ key, icon, className, text, disabled, ...rest }) => (
         <TabButton
-          key={t.key}
-          tabKey={t.key}
-          tab={t}
-          disabled={t.disabled}
-          onClick={() => handleClick(t.key, t)}
+          key={key}
+          tabKey={key}
+          tab={{
+            key,
+            icon,
+            className,
+            text,
+            disabled,
+            ...rest,
+          }}
+          disabled={disabled}
+          onClick={() => handleClick(key, {
+            key,
+            icon,
+            className,
+            text,
+            disabled,
+            ...rest,
+          })}
           activeTabKey={onChange ? activeKey ?? "" : innerActiveKey}
-          className={t.className}
+          className={className}
+          {...rest}
         >
-          {t.text}
+          {text}
         </TabButton>
-        // <Button
-        //   {...t}
-        //   key={t.key}
-        //   icon={t.icon}
-        //   className={`${`tab-btn-${t.key} `}${t.className ?? ""}${(onChange ? activeKey : innerActiveKey) === t.key ? " active" : ""}${t.disabled ? " disabled" : ""}`}
-        //   variant="tab"
-        //   onClick={() => (t.disabled ? undefined : (onChange ? outSideHandleClick(t.key, t) : handleClick(t.key)))}
-        // >
-        //   {t.text}
-        // </Button>
       ))}
     </div>
   );
