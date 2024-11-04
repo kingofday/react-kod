@@ -6,7 +6,7 @@
 
   &.ink-bar {
     gap: 0;
-
+    border-bottom: 1px solid var(--border);
     .btn.tab {
       white-space: nowrap;
       color: var(--text);
