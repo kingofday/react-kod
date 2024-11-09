@@ -2,10 +2,10 @@
     padding: 20px;
     border-radius: 6px;
     border: 1px solid var(--border);
+    background-color: var(--bg);
     height: 100%;
     width: 100%;
     &.with-shadow {
-        background-color: var(--bg);
         box-shadow: 0px 2px 10px var(--cardShadow);
     }
     &.hoverable {
