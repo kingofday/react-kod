@@ -1,38 +1,37 @@
 .card {
+  padding: 16px;
+  border-radius: 8px;
+  background-color: var(--bg);
+  height: 100%;
+  width: 100%;
+  &.with-shadow {
     padding: 20px;
-    border-radius: 6px;
     border: 1px solid var(--border);
-    background-color: var(--bg);
-    height: 100%;
-    width: 100%;
-    &.with-shadow {
-        box-shadow: 0px 2px 10px var(--cardShadow);
-    }
-    &.hoverable {
-        border: none;
-        padding: 10px;
+    box-shadow: 0px 2px 10px var(--cardShadow);
+  }
+  &.hoverable {
+    border: none;
+    padding: 10px;
 
-        &:hover {
-            background-color: var(--hover);
-        }
+    &:hover {
+      background-color: var(--hover);
     }
+  }
+  > .title {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    font-size: 18px;
+    font-weight: bold;
+    align-items: center;
 
-    > .title {
-        display: flex;
-        justify-content: space-between;
-        margin-bottom: 20px;
-        font-size: 18px;
-        font-weight: bold;
-        align-items: center;
-
-        .extra {
-            color: var(--blue);
-            font-size: 12px;
-        }
+    .extra {
+      color: var(--blue);
+      font-size: 12px;
     }
-
-    .content {
-        text-align: justify;
-        direction: rtl;
-    }
+  }
+  .content {
+    text-align: justify;
+    direction: rtl;
+  }
 }
