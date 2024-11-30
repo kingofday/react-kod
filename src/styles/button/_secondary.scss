@@ -6,9 +6,15 @@
   }
 
   &:focus {
-    background-color: $active;
-    border-color: $active;
-    color: #fff;
+    @if ($active == transparent) {
+      background-color: transparent;
+      border-color: $hover;
+      color: $hover;
+    } @else {
+      background-color: $active;
+      border-color: $active== "" $active;
+      color: #fff;
+    }
   }
 
   &:disabled {
@@ -29,7 +35,7 @@
   &.danger {
     color: var(--red);
     border-color: var(--red);
-    @include sedo(var(--redHover), var(--redActive));
+    @include sedo(var(--redHover), transparent);
 
     svg {
       color: var(--red);
