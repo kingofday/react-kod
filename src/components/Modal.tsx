@@ -81,10 +81,10 @@ const Modal = ({
         {...props}
       >
         <div
-          className={`modal-body ${
+          className={`modal-body  ${
             typeof window !== "undefined" && window.innerWidth < BreakPoints.sm
-              ? "animate-slide-up"
-              : ""
+              ? "enter-animation-mobile"
+              : "enter-animation-desktop"
           } card-sm ${title ? "with-title" : ""} ${bodyClass ?? ""}`}
           ref={modalRef}
           {...(props.id ? { id: props.id + "-body" } : {})}
