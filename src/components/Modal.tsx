@@ -73,11 +73,18 @@ const Modal = ({
   }, []);
   return isOpen ? (
     createPortal(
-      <div className={`modal${fullscreen || (fullScreenIcon && isFullScreen) ? " fullscreen" : ""} ${className ?? ""}`} {...props}>
+      <div
+        className={`modal  ${
+          fullscreen || (fullScreenIcon && isFullScreen) ? " fullscreen" : ""
+        } ${className ?? ""}`}
+        {...props}
+      >
         <div
-          className={`modal-body ${typeof window !== "undefined" && window.innerWidth < BreakPoints.sm ? "animate-slide-up" : ""} card-sm ${
-            title ? "with-title" : ""
-          } ${bodyClass ?? ""}`}
+          className={`modal-body  ${
+            typeof window !== "undefined" && window.innerWidth < BreakPoints.sm
+              ? "enter-animation-mobile"
+              : "enter-animation-desktop"
+          } card-sm ${title ? "with-title" : ""} ${bodyClass ?? ""}`}
           ref={modalRef}
           {...(props.id ? { id: props.id + "-body" } : {})}
         >
