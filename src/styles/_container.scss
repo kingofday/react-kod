@@ -4,8 +4,6 @@
     margin-right: auto;
     margin-left: auto;
     &.auto-padding{
-        padding-top: 1rem;
-        padding-bottom: 1rem;
         @media(max-width: variables.$containerMaxWidth){
             padding: 1rem 1.25rem;
         }
