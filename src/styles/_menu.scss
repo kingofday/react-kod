@@ -1,4 +1,4 @@
-@use "./shared" as v;
+@use "./variables" as v;
 
 @mixin active {
   // border-bottom: solid 2px var(--blue);
@@ -39,11 +39,26 @@
   }
 }
 
-.menu {
+.menu2 {
   display: inline-flex;
   position: relative;
+  &.trigger-hover {
+    .item:hover {
+      flex-direction: column;
 
+      .sub-menu {
+        height: auto;
+      }
+    }
+  }
   .item {
+    cursor: pointer;
+    > input[type="checkbox"] {
+      display: none;
+    }
+    > input[type="checkbox"]:checked ~ .sub-menu {
+      height: auto;
+    }
     .disabled {
       > .menu-content {
         cursor: not-allowed;
@@ -87,7 +102,7 @@
         a {
           display: flex;
           align-items: center;
-          gap: v.$spacing1;
+          gap: 0.25rem;
           text-decoration: none;
           color: inherit;
           height: 100%;
@@ -126,14 +141,14 @@
         cursor: pointer;
       }
 
-      &.collapsed {
-        flex-direction: column;
+      // &.collapsed {
+      //   flex-direction: column;
 
-        .sub-menu {
-          //display: flex;
-          height: auto;
-        }
-      }
+      //   .sub-menu {
+      //     //display: flex;
+      //     height: auto;
+      //   }
+      // }
     }
 
     // >.item .menu-content.selected {
@@ -149,7 +164,7 @@
   &.horizontal {
     flex-direction: row;
     height: 60px;
-    gap: v.$spacing2;
+    gap: 0.625rem;
 
     > .item.selected > .menu-content {
       @include active;
@@ -174,14 +189,14 @@
         height: 100%;
         display: flex;
         align-items: center;
-        padding: v.$spacing2;
+        padding: 0.625rem;
         gap: 0.625rem;
         color: var(--text);
 
         a {
           display: flex;
           align-items: center;
-          gap: v.$spacing1;
+          gap: 0.25rem;
           text-decoration: none;
           color: inherit;
           height: 100%;
@@ -201,7 +216,7 @@
           }
         }
       }
-      &:is(.disabled) .menu-content *{
+      &:is(.disabled) .menu-content * {
         color: inherit;
         svg path {
           stroke: inherit;
@@ -215,20 +230,7 @@
       &:not(.disabled) {
         cursor: pointer;
       }
-
-      &.collapsed {
-        flex-direction: column;
-
-        .sub-menu {
-          //display: flex;
-          height: auto;
-        }
-      }
     }
-
-    // >.item .menu-content.selected {
-    //   @include active;
-    // }
 
     .sub-menu {
       top: 100%;

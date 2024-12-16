@@ -1,3 +1,4 @@
+@use "./variables";
 @mixin progress($color, $bgColor) {
   progress::-webkit-progress-bar {
     background-color: $bgColor;
@@ -92,5 +93,11 @@
     &.warning {
       @include progress(var(--orange), var(--bg));
     }
+  }
+  @media (max-width: variables.$xl){
+    left: 0.625rem;
+    top: 0.625rem;
+    width: calc(100% - 1.25rem);
+    transform:none;
   }
 }

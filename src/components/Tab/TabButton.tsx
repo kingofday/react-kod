@@ -35,6 +35,7 @@ const TabButton = ({
               })
           : undefined
       }
+      role="tab"
       {...rest}
     >
       {children}

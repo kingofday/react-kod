@@ -1,4 +1,4 @@
-import { ReactNode, useEffect, useRef, useState } from "react";
+import { CSSProperties, ReactNode, useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 export interface ITooltip {
   delay?: number;
@@ -6,6 +6,7 @@ export interface ITooltip {
   title?: ReactNode;
   direction?: "top" | "bottom";
   className?: string;
+  style?:CSSProperties;
   wrapperClassName?: string;
   rtl?: boolean;
   fontSize?: number;
@@ -18,6 +19,7 @@ const Tooltip = ({
   wrapperClassName,
   className,
   fontSize,
+  style,
   direction = "top",
 }: ITooltip) => {
   const ref = useRef<HTMLDivElement>(null);
@@ -114,6 +116,7 @@ const Tooltip = ({
               top: position.top,
               right: position.right,
               fontSize: `${fontSize}px`,
+              ...(style?style:{})
             }}
             className={`tooltip-tip${className ? ` ${className}` : ""}`}
           >

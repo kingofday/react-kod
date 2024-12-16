@@ -1,3 +1,15 @@
+@mixin sedo($hover, $active) {
+  &:hover {
+    background-color: $hover;
+  }
+  &:active {
+    background-color: $active;
+  }
+  &:disabled {
+    background-color: var(--border);
+    color: var(--disabledText);
+  }
+}
 &.link {
   background-color: transparent;
   padding-left: 0;

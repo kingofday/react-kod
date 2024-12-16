@@ -1,0 +1,11 @@
+@use "./variables";
+.container{
+    max-width: variables.$containerMaxWidth;
+    margin-right: auto;
+    margin-left: auto;
+    &.auto-padding{
+        @media(max-width: variables.$containerMaxWidth){
+            padding: 1rem 1.25rem;
+        }
+    }
+}
