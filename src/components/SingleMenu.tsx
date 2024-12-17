@@ -162,7 +162,7 @@ const SingleMenu = ({
                       {label}
                     </Link>
                   ) : (
-                    <div className="item-content">
+                    <div className="item-content" {...rest}>
                       {icon}
                       {label}
                     </div>
