@@ -54,3 +54,49 @@ export const DefaultTab: Story = {
     );
   },
 };
+export const BorderedTab: Story = {
+  render: () => {
+    return (
+      <TabButtons
+        // onChange={(tab) => handleChangeTab(tab as PageObjects, "category")}
+        // activeKey={tabState.objectTab ?? "symbol"}
+        variant="bordered"
+        key="category_tab_buttons"
+        tabs={[
+          {
+            key: "symbol",
+            text: "stocks",
+          },
+          {
+            key: "fund",
+            text: "fund",
+          },
+          {
+            key: "fund2",
+            text: "fund",
+          },
+          {
+            key: "fund3",
+            text: "fund2",
+          },
+          {
+            key: "fund4",
+            text: "fund4",
+          },
+          {
+            key: "fund5",
+            text: "fund5",
+          },
+          {
+            key: "fund6",
+            text: "fund6",
+          },
+          {
+            key: "fund7",
+            text: "fund7",
+          },
+        ]}
+      />
+    );
+  },
+};

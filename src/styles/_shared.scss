@@ -28,11 +28,11 @@
   --textBtn: #fff;
   --cardShadow:rgba(0, 0, 0, 0.2);
   //=== co colors
-  --blueRgb: 41, 98, 255;
+  --blueRgb: 0, 126, 229;
   --blue: rgb(var(--blueRgb));
-  --blueHoverRgb: 36, 86, 224;
+  --blueHoverRgb: 0, 100, 181;
   --blueHover: rgb(var(--blueHoverRgb));
-  --blueActiveRgb: 31, 73, 191;
+  --blueActiveRgb: 0, 84, 154;
   --blueActive: rgb(var(--blueActiveRgb));
   --redRgb: 242, 54, 69;
   --red: rgb(var(--redRgb));
@@ -106,6 +106,13 @@
   --picsRgb: 127, 158, 243;
   --pics: rgb(var(--picsRgb));
   --cardShadow: rgba(f, f, f, 0.2);
+  //=== co colors
+  --blueRgb: 31, 158, 255;
+  --blue: rgb(var(--blueRgb));
+  --blueHoverRgb: 0, 126, 229;
+  --blueHover: rgb(var(--blueHoverRgb));
+  --blueActiveRgb: 0, 100, 181;
+  --blueActive: rgb(var(--blueActiveRgb));
 }
 
 .chevron {

@@ -18,6 +18,9 @@ export const Solid: Story = {
 export const Secondary: Story = {
   render: () => <Button variant="secondary" >Button</Button>,
 };
+export const SecondaryDanger: Story = {
+  render: () => <Button variant="secondary" danger>Button</Button>,
+};
 export const SecondarySquare: Story = {
   render: () => <Button variant="secondary-square" >B</Button>,
 };
