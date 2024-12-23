@@ -1,65 +1,36 @@
 import { mergeClasses } from "../helpers/strings";
 import useLockBodyScroll from "../helpers/useLockBodyScroll";
-import { forwardRef, ReactNode, useImperativeHandle, useState } from "react";
+import { ReactNode, useEffect, useState } from "react";
 
 type FullScreenProps = {
   children: ReactNode;
   id?: string;
   className?: string;
+  isFullScreen: boolean;
 };
-export interface FullScreenRefrence {
-  handleToggle: () => void;
-  isFullScreen?: boolean;
-  //   buttonFullScreenToggle?: JSX.Element;
-}
-const FullScreen: React.ForwardRefRenderFunction<
-  FullScreenRefrence,
-  FullScreenProps
-> = ({ children, id, className }, ref) => {
-  const [isFullScreen, setToggle] = useState(false);
+
+const FullScreen = ({
+  children,
+  id,
+  className,
+  isFullScreen,
+}: FullScreenProps) => {
   const [returningToDefault, setReturningToDefault] = useState(false);
 
-  const handleToggle = () => {
-    if (isFullScreen) {
-      setReturningToDefault(true);
-      setTimeout(() => {
-        setToggle(false);
-        setReturningToDefault(false);
-      }, 500); // Match this duration with `resize-down` animation time
-    } else {
-      setToggle(true);
-    }
-  };
+  useEffect(() => {
+    let timeoutId: NodeJS.Timeout;
 
-  useImperativeHandle(ref, () => ({
-    handleToggle,
-    isFullScreen,
-    // buttonFullScreenToggle: (
-    //   <>
-    //     {isFullScreen ? (
-    //       <Button
-    //         size="small"
-    //         id="min-full-screen"
-    //         variant="gray"
-    //         onClick={handleToggle}
-    //         ariaLabel="minimize"
-    //       >
-    //         <MinimizeIcon size={18} />
-    //       </Button>
-    //     ) : (
-    //       <Button
-    //         size="small"
-    //         id="max-full-screen"
-    //         variant="gray"
-    //         onClick={handleToggle}
-    //         ariaLabel="maximize"
-    //       >
-    //         <MaximizeIcon size={18} />
-    //       </Button>
-    //     )}
-    //   </>
-    // ),
-  }));
+    if (!isFullScreen) {
+      setReturningToDefault(true);
+      timeoutId = setTimeout(() => {
+        setReturningToDefault(false);
+      }, 500);
+    }
+
+    return () => {
+      clearTimeout(timeoutId);
+    };
+  }, [isFullScreen]);
 
   useLockBodyScroll(isFullScreen);
 
@@ -79,4 +50,4 @@ const FullScreen: React.ForwardRefRenderFunction<
   );
 };
 
-export default forwardRef(FullScreen);
+export default FullScreen;

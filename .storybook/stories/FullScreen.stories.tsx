@@ -1,8 +1,6 @@
 import React, { useRef, useState } from "react";
 import type { Meta, StoryObj } from "@storybook/react";
-import FullScreen, {
-  FullScreenRefrence,
-} from "../../src/components/FullScreen";
+import FullScreen from "../../src/components/FullScreen";
 import Button from "../../src/components/Button";
 const meta: Meta<typeof FullScreen> = {
   title: "/FullScreen",
@@ -12,16 +10,40 @@ export default meta;
 type Story = StoryObj<typeof FullScreen>;
 export const DeafultFullScreen: Story = {
   render: () => {
-    const fullScreenRef = useRef<FullScreenRefrence>(null);
-    console.log(fullScreenRef);
+    const [isFullScreen, setToggle] = useState(false);
+
     const handleToggleFullScreen = () => {
-      if (fullScreenRef.current) fullScreenRef.current.handleToggle();
+      setToggle((prev) => !prev);
     };
 
     return (
       <>
-        <Button onClick={handleToggleFullScreen}>Show</Button>
-        <FullScreen ref={fullScreenRef}>Some content</FullScreen>
+        <FullScreen isFullScreen={isFullScreen}>
+          {isFullScreen ? (
+            <Button
+              size="small"
+              id="min-full-screen"
+              variant="gray"
+              onClick={handleToggleFullScreen}
+              ariaLabel="minimize"
+            >
+              min
+              {/* <MinimizeIcon size={18} /> */}
+            </Button>
+          ) : (
+            <Button
+              size="small"
+              id="max-full-screen"
+              variant="gray"
+              onClick={handleToggleFullScreen}
+              ariaLabel="maximize"
+            >
+              max
+              {/* <MaximizeIcon size={18} /> */}
+            </Button>
+          )}
+          ome content
+        </FullScreen>
       </>
     );
   },
