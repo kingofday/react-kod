@@ -1,7 +1,5 @@
-import Button from "@/src/components/Button";
-import CloseIcon from "@/src/components/Shared/ClosedIcon";
-import { mergeClasses } from "@/src/helpers/strings";
-import useLockBodyScroll from "@/src/helpers/useLockBodyScroll";
+import { mergeClasses } from "../helpers/strings";
+import useLockBodyScroll from "../helpers/useLockBodyScroll";
 import { forwardRef, ReactNode, useImperativeHandle, useState } from "react";
 
 type FullScreenProps = {
@@ -12,6 +10,7 @@ type FullScreenProps = {
 export interface FullScreenRefrence {
   handleToggle: () => void;
   isFullScreen?: boolean;
+  //   buttonFullScreenToggle?: JSX.Element;
 }
 const FullScreen: React.ForwardRefRenderFunction<
   FullScreenRefrence,
@@ -35,6 +34,31 @@ const FullScreen: React.ForwardRefRenderFunction<
   useImperativeHandle(ref, () => ({
     handleToggle,
     isFullScreen,
+    // buttonFullScreenToggle: (
+    //   <>
+    //     {isFullScreen ? (
+    //       <Button
+    //         size="small"
+    //         id="min-full-screen"
+    //         variant="gray"
+    //         onClick={handleToggle}
+    //         ariaLabel="minimize"
+    //       >
+    //         <MinimizeIcon size={18} />
+    //       </Button>
+    //     ) : (
+    //       <Button
+    //         size="small"
+    //         id="max-full-screen"
+    //         variant="gray"
+    //         onClick={handleToggle}
+    //         ariaLabel="maximize"
+    //       >
+    //         <MaximizeIcon size={18} />
+    //       </Button>
+    //     )}
+    //   </>
+    // ),
   }));
 
   useLockBodyScroll(isFullScreen);
@@ -50,11 +74,6 @@ const FullScreen: React.ForwardRefRenderFunction<
       ])}
       data-status={isFullScreen ? "full-screen" : "default"}
     >
-      <div className={"wrapperOperation"}>
-        <Button className={"closeBtn"} onClick={handleToggle}>
-          <CloseIcon size={24} />
-        </Button>
-      </div>
       {children}
     </div>
   );

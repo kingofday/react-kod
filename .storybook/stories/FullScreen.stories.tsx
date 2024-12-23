@@ -10,20 +10,17 @@ const meta: Meta<typeof FullScreen> = {
 };
 export default meta;
 type Story = StoryObj<typeof FullScreen>;
-export const DefaultModal: Story = {
+export const DeafultFullScreen: Story = {
   render: () => {
-    const [isFullScreen, toggleFullScreen] = useState(false);
     const fullScreenRef = useRef<FullScreenRefrence>(null);
+    console.log(fullScreenRef);
     const handleToggleFullScreen = () => {
       if (fullScreenRef.current) fullScreenRef.current.handleToggle();
     };
-    const handleFullScreen = (e: any) => {
-      e.stopPropagation();
-      toggleFullScreen(true);
-    };
+
     return (
       <>
-        <Button onClick={handleFullScreen}>Show</Button>
+        <Button onClick={handleToggleFullScreen}>Show</Button>
         <FullScreen ref={fullScreenRef}>Some content</FullScreen>
       </>
     );
