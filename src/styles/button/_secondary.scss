@@ -1,16 +1,20 @@
 @mixin sedo($hover, $active) {
+  &:focus {
+    @if ($active == transparent) {
+      background-color: transparent;
+      border-color: $hover;
+      color: $hover;
+    } @else {
+      background-color: $active;
+      border-color: $active== "" $active;
+      color: #fff;
+    }
+  }
   &:hover {
     background-color: $hover;
     border-color: $hover;
     color: #fff;
   }
-
-  &:focus {
-    background-color: $active;
-    border-color: $active;
-    color: #fff;
-  }
-
   &:disabled {
     background-color: var(--border);
     color: var(--disabledText);
@@ -29,7 +33,7 @@
   &.danger {
     color: var(--red);
     border-color: var(--red);
-    @include sedo(var(--redHover), var(--redActive));
+    @include sedo(var(--redHover), transparent);
 
     svg {
       color: var(--red);

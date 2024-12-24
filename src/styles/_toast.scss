@@ -28,7 +28,7 @@
   &:has(.toast) {
     display: flex;
   }
-  &.d-flex{
+  &.d-flex {
     display: flex;
   }
   .toast {
@@ -49,6 +49,7 @@
     .toast-content {
       display: inline-flex;
       flex-direction: column;
+      flex: 1;
       .title {
         display: flex;
         justify-content: space-between;
@@ -94,10 +95,10 @@
       @include progress(var(--orange), var(--bg));
     }
   }
-  @media (max-width: variables.$xl){
+  @media (max-width: variables.$xl) {
     left: 0.625rem;
     top: 0.625rem;
     width: calc(100% - 1.25rem);
-    transform:none;
+    transform: none;
   }
 }

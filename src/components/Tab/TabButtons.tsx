@@ -12,6 +12,7 @@ const TabButtons = ({
   variant = "pill",
   hideScrollBar,
   tabs,
+  size,
   thresholdCentralizeTab = 0,
 }: ITabButtonsProps) => {
   const [innerActiveKey, chnageActiveKey] = useState(
@@ -79,6 +80,7 @@ const TabButtons = ({
           })}
           activeTabKey={onChange ? activeKey ?? "" : innerActiveKey}
           className={className}
+          size={size??"small"}
           {...rest}
         >
           {text}
