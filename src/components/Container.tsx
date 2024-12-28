@@ -25,6 +25,7 @@ const Container = ({
         [autoPadding, "auto-padding"],
         [!!className, className!],
       ])}
+      style={style}
       {...rest}
     >
       {children}

@@ -1,6 +1,7 @@
 {
   "name": "react-kod",
-  "version": "1.7.2",
+  "version": "1.10.10",
+
   "private": false,
   "license": "MIT",
   "main": "./dist/cjs/index.js",
