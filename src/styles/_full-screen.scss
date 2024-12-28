@@ -1,0 +1,78 @@
+.full-screen {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+  
+    &.isFullscreen {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 9999;
+      background-color: var(--bg);
+      animation: resize 0.5s alternate;
+  
+      .wrapperOperation {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        position: absolute;
+        height: 10px;
+  
+        .closeBtn {
+          transition: transform 0.3s cubic-bezier(0.6, -0.28, 0.735, 0.045);
+          transform: translateY(-40px);
+          opacity: 0;
+          padding: 10px;
+          z-index: 10;
+          display: flex;
+          max-width: 37px;
+          max-height: 45px;
+          background-color: black;
+          box-shadow: 0 0 4px #8080809c;
+          border-radius: 100%;
+  
+          svg {
+            color: white;
+            stroke-width: 4px;
+          }
+        }
+  
+        &:hover .close-btn {
+          transform: translateY(10px);
+          opacity: 1;
+        }
+      }
+    }
+  
+    &.returningToDefault {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 9999;
+      animation: resize-down 0.5s forwards;
+    }
+  
+    @keyframes resize {
+      from {
+        transform: scale(0.7) translate3d(-300px, 0px, 0);
+      }
+      to {
+        transform: scale(1) translate3d(0px, 0px, 0);
+      }
+    }
+  
+    @keyframes resize-down {
+      from {
+        transform: scale(1) translate3d(0px, 0px, 0);
+      }
+      to {
+        transform: scale(0.7) translate3d(-300px, 0px, 0);
+      }
+    }
+  }
+  
