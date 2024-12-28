@@ -113,16 +113,7 @@
       }
     }
   }
-  .enter-animation-desktop {
-    -webkit-animation-name: enterAnimationDesktop;
-    animation-name: enterAnimationDesktop;
-    -webkit-animation-duration: 1s;
-    animation-duration: 1s;
-    -webkit-animation-duration: 1s;
-    animation-duration: 1s;
-    -webkit-animation-fill-mode: both;
-    animation-fill-mode: both;
-  }
+  
   .enter-animation-mobile {
     -webkit-animation-name: enterAnimationMobile;
     animation-name: enterAnimationMobile;
@@ -175,30 +166,7 @@
     }
   }
   @import "./full-screen";
-  @-webkit-keyframes enterAnimationDesktop {
-    0% {
-      opacity: 0;
-      -webkit-transform: translate3d(0, 100%, 0);
-      transform: translate3d(0, 100%, 0);
-    }
-    to {
-      opacity: 1;
-      -webkit-transform: translateZ(0);
-      transform: translateZ(0);
-    }
-  }
-  @keyframes enterAnimationDesktop {
-    0% {
-      opacity: 0;
-      -webkit-transform: translate3d(0, 100%, 0);
-      transform: translate3d(0, 100%, 0);
-    }
-    to {
-      opacity: 1;
-      -webkit-transform: translateZ(0);
-      transform: translateZ(0);
-    }
-  }
+
   @-webkit-keyframes enterAnimationMobile {
     0% {
       -webkit-transform: translate3d(0, 100%, 0);
