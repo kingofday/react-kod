@@ -1,4 +1,11 @@
-import { ForwardRefExoticComponent, ReactElement, forwardRef, useEffect, useRef, useState } from "react";
+import {
+  ForwardRefExoticComponent,
+  ReactElement,
+  forwardRef,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import { Select } from "../Inputs";
 import { ITabProps } from "./Model";
 import TabButton from "./TabButton";
@@ -22,7 +29,10 @@ type TabsProps = {
 interface RenderedTabs {
   [key: string]: boolean;
 }
-const Tabs: ForwardRefExoticComponent<TabsProps> = forwardRef<HTMLDivElement, TabsProps>(
+const Tabs: ForwardRefExoticComponent<TabsProps> = forwardRef<
+  HTMLDivElement,
+  TabsProps
+>(
   (
     {
       items,
@@ -65,14 +75,26 @@ const Tabs: ForwardRefExoticComponent<TabsProps> = forwardRef<HTMLDivElement, Ta
         {}
       )
     );
-    const [activeKey, setActiveKey] = useState<string>(activeTab ?? defaultActiveTab ?? tabProps[0].key);
-    const centralizeTab = useCentralizeTab({ wrapperList, thresholdCentralizeTab })
+    const [activeKey, setActiveKey] = useState<string>(
+      activeTab ?? defaultActiveTab ?? tabProps[0].key
+    );
+    const centralizeTab = useCentralizeTab({
+      wrapperList,
+      thresholdCentralizeTab,
+    });
 
     const handleSelect = (key: string) => {
-      const parentTabElement = wrapperList?.current as HTMLDivElement | undefined;
-      const activeElement = parentTabElement?.querySelector(`.tab-${key} `) as HTMLDivElement | undefined;
+      const parentTabElement = wrapperList?.current as
+        | HTMLDivElement
+        | undefined;
+      const activeElement = parentTabElement?.querySelector(`.tab-${key} `) as
+        | HTMLDivElement
+        | undefined;
       if (parentTabElement && activeElement) {
-        parentTabElement.scrollLeft = activeElement.offsetLeft - (parentTabElement.offsetWidth - activeElement.offsetWidth) / 2 - thresholdCentralizeTab;
+        parentTabElement.scrollLeft =
+          activeElement.offsetLeft -
+          (parentTabElement.offsetWidth - activeElement.offsetWidth) / 2 -
+          thresholdCentralizeTab;
       }
       renderedTabs.current[key] = true;
       if (onChange) onChange(key);
@@ -84,27 +106,49 @@ const Tabs: ForwardRefExoticComponent<TabsProps> = forwardRef<HTMLDivElement, Ta
       if (!onChange) afterChange?.(activeKey);
     }, [activeKey]);
     useEffect(() => {
-      if (activeTab && !renderedTabs.current[activeTab]) renderedTabs.current[activeTab] = true;
+      if (activeTab && !renderedTabs.current[activeTab])
+        renderedTabs.current[activeTab] = true;
     }, [activeTab]);
     return (
-      <div className={`tabs ${variant} ${alignTitles}${className ? ` ${className}` : ""}${visibility ? " visibility" : ""}`} ref={forwardedRef} {...rest}>
-        <div ref={wrapperList} className={`${changeToInputSelectInMobile ? "desktop_mode" : ""} tab-nav-list horizontal-scroll-bar ${hideScrollBar ? " hide-scroll-bar" : ""}`} role="tablist">
-          {tabProps.map((item) => (
-            <TabButton
-              key={item.key}
-              activeTabKey={activeTab ?? activeKey}
-              tabKey={item.key}
-              onClick={() => handleSelect(item.key)}
-              disabled={item.disabled}
-              icon={item.icon}
-              className={item.className}
-            >
-              {item.title}
-            </TabButton>
-          ))}
+      <div
+        className={`tabs ${variant} ${alignTitles}${
+          className ? ` ${className}` : ""
+        }${visibility ? " visibility" : ""}`}
+        ref={forwardedRef}
+        {...rest}
+      >
+        <div
+          ref={wrapperList}
+          className={`${
+            changeToInputSelectInMobile ? "desktop_mode" : ""
+          } tab-nav-list horizontal-scroll-bar ${
+            hideScrollBar ? " hide-scroll-bar" : ""
+          }`}
+          role="tablist"
+        >
+          {tabProps.map(
+            ({ key, title, children, className, disabled, icon, ...rest }) => (
+              <TabButton
+                key={key}
+                activeTabKey={activeTab ?? activeKey}
+                tabKey={key}
+                onClick={() => handleSelect(key)}
+                disabled={disabled}
+                icon={icon}
+                className={className}
+                {...rest}
+              >
+                {title}
+              </TabButton>
+            )
+          )}
         </div>
         {changeToInputSelectInMobile && (
-          <Select value={activeTab ?? activeKey} onChange={handleSelect} className="mobile_mode">
+          <Select
+            value={activeTab ?? activeKey}
+            onChange={handleSelect}
+            className="mobile_mode"
+          >
             {tabProps.map((item) => (
               <Select.Option key={item.key} value={item.key}>
                 {item.title}
@@ -112,10 +156,18 @@ const Tabs: ForwardRefExoticComponent<TabsProps> = forwardRef<HTMLDivElement, Ta
             ))}
           </Select>
         )}
-        <ul className="tab-content-list" >
+        <ul className="tab-content-list">
           {tabProps.map((x) => (
-            <li className={`tab-content ${(activeTab ?? activeKey) !== x.key ? "d-none" : ""}`} key={x.key}>
-              {(renderedTabs.current[x.key] as boolean) || (activeTab ?? activeKey) === x.key ? x.children : null}
+            <li
+              className={`tab-content ${
+                (activeTab ?? activeKey) !== x.key ? "d-none" : ""
+              }`}
+              key={x.key}
+            >
+              {(renderedTabs.current[x.key] as boolean) ||
+              (activeTab ?? activeKey) === x.key
+                ? x.children
+                : null}
             </li>
           ))}
         </ul>

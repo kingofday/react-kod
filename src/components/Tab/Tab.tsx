@@ -1,7 +1,7 @@
 import { ITabProps } from "./Model";
 
 const Tab = ({
-  children,
+  children
 }: ITabProps): JSX.Element => {
   return <div className="tab-content">{children}</div>;
 };
