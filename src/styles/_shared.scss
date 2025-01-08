@@ -1,0 +1,150 @@
+:root {
+  --bgRgb: 255, 255, 255;
+  --bg: rgb(var(--bgRgb));
+  --textRgb: 50, 62, 84;
+  --text: rgb(var(--textRgb));
+  --hoverRgb: 243, 245, 249;
+  --hover: rgb(var(--hoverRgb));
+  --borderRgb: 224, 227, 235;
+  --border: rgb(var(--borderRgb));
+  --iconRgb: 120, 123, 134;
+  --icon: rgb(var(--iconRgb));
+  --selectedRgb: 213, 241, 255;
+  --selected: rgb(var(--selectedRgb));
+  --tooltipRgb: 42, 46, 57;
+  --tooltip: rgb(var(--tooltipRgb));
+  --grayRgb: 163, 166, 175;
+  --gray: rgb(var(--grayRgb));
+  --modalBgRgb: 254, 254, 254;
+  --modalBg: rgb(var(--modalBgRgb));
+  --disabledTextRgb: 178, 181, 190;
+  --disabledText: rgb(var(--disabledTextRgb));
+  --disabledBorderRgb: 209, 212, 220;
+  --disabledBorder: rgb(var(--disabledBorderRgb));
+  --disabledBgRgb: 240, 243, 250;
+  --disabledBg: rgb(var(--disabledBgRgb));
+  --picsRgb: 20, 51, 102;
+  --pics: rgb(var(--picsRgb));
+  --textBtn: #fff;
+  --cardShadow:rgba(0, 0, 0, 0.2);
+  //=== co colors
+  --blueRgb: 0, 126, 229;
+  --blue: rgb(var(--blueRgb));
+  --blueHoverRgb: 0, 100, 181;
+  --blueHover: rgb(var(--blueHoverRgb));
+  --blueActiveRgb: 0, 84, 154;
+  --blueActive: rgb(var(--blueActiveRgb));
+  --redRgb: 242, 54, 69;
+  --red: rgb(var(--redRgb));
+  --redHoverRgb: 206, 46, 59;
+  --redHover: rgb(var(--redHoverRgb));
+  --redActiveRgb: 169, 38, 48;
+  --redActive: rgb(var(--redActiveRgb));
+  --red2Rgb: 246, 53, 56;
+  --red2: rgb(var(--red2Rgb));
+  --red2HoverRgb: 209, 45, 48;
+  --red2Hover: rgb(var(--red2HoverRgb));
+  --red3Rgb: 139, 68, 78;
+  --red3: rgb(var(--red3Rgb));
+  --red3HoverRgb: 118, 58, 66;
+  --red3Hover: rgb(var(--red3HoverRgb));
+  --redTooltipRgb: 249, 117, 127;
+  --redTooltip: rgb(var(--redTooltipRgb));
+  --greenRgb: 8, 153, 129;
+  --green: rgb(var(--greenRgb));
+  --greenHoverRgb: 7, 130, 110;
+  --greenHover: rgb(var(--greenHoverRgb));
+  --greenActiveRgb: 6, 107, 90;
+  --greenActive: rgb(var(--greenActiveRgb));
+  --green2Rgb: 48, 204, 90;
+  --green2: rgb(var(--green2Rgb));
+  --green2HoverRgb: 41, 174, 77;
+  --green2Hover: rgb(var(--green2HoverRgb));
+  --green3Rgb: 53, 118, 78;
+  --green3: rgb(var(--green3Rgb));
+  --green3HoverRgb: 45, 100, 66;
+  --green3Hover: rgb(var(--green3HoverRgb));
+  --greenTooltipRgb: 51, 186, 153;
+  --greenTooltip: rgb(var(--greenTooltipRgb));
+  --orangeRgb: 255, 152, 0;
+  --orange: rgb(var(--orangeRgb));
+  --turquiseRgb: 38, 198, 218;
+  --turquise: rgb(var(--turquiseRgb));
+  --purpleRgb: 149, 117, 205;
+  --purple: rgb(var(--purpleRgb));
+  --pinkRgb: 255, 64, 129;
+  --pink: rgb(var(--pinkRgb));
+  --yellowRgb: 224, 188, 0;
+  --yellow: rgb(var(--yellowRgb));
+}
+
+.dark {
+  --bgRgb: 19, 23, 34;
+  --bg: rgb(var(--bgRgb));
+  --textRgb: 209, 212, 220;
+  --text: rgb(var(--textRgb));
+  --hoverRgb: 47, 50, 65;
+  --hover: rgb(var(--hoverRgb));
+  --borderRgb: 67, 70, 81;
+  --border: rgb(var(--borderRgb));
+  --iconRgb: 120, 123, 134;
+  --icon: rgb(var(--iconRgb));
+  --selectedRgb: 33, 56, 77;
+  --selected: rgb(var(--selectedRgb));
+  --tooltipRgb: 54, 58, 69;
+  --tooltip: rgb(var(--tooltipRgb));
+  --grayRgb: 79, 82, 93;
+  --gray: rgb(var(--grayRgb));
+  --modalBgRgb: 30, 34, 45;
+  --modalBg: rgb(var(--modalBgRgb));
+  --disabledTextRgb: 80, 83, 94;
+  --disabledText: rgb(var(--disabledTextRgb));
+  --disabledBorderRgb: 80, 83, 94;
+  --disabledBorder: rgb(var(--disabledBorderRgb));
+  --disabledBgRgb: 42, 46, 57;
+  --disabledBg: rgb(var(--disabledBgRgb));
+  --picsRgb: 127, 158, 243;
+  --pics: rgb(var(--picsRgb));
+  --cardShadow: rgba(f, f, f, 0.2);
+  //=== co colors
+  --blueRgb: 31, 158, 255;
+  --blue: rgb(var(--blueRgb));
+  --blueHoverRgb: 0, 126, 229;
+  --blueHover: rgb(var(--blueHoverRgb));
+  --blueActiveRgb: 0, 100, 181;
+  --blueActive: rgb(var(--blueActiveRgb));
+}
+
+.chevron {
+  path {
+    stroke: var(--text);
+  }
+}
+
+.cursor-p {
+  cursor: pointer;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(startYposition);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(endYposition);
+  }
+}
+
+@keyframes fadeOut {
+  0% {
+    opacity: 1;
+    transform: translateY(startYposition);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translateY(endYposition);
+  }
+}
