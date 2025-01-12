@@ -56,13 +56,19 @@ const Tabs: ForwardRefExoticComponent<TabsProps> = forwardRef<
     const tabProps: ITabProps[] = children
       ? children
           .filter((x): x is ReactElement<ITabProps> => x !== null)
-          .map((x) => ({
-            key: x.key as string,
-            children: x.props.children,
-            title: x.props.title,
-            icon: x.props.icon,
-            disabled: x.props.disabled,
-          }))
+          .map((x) => {
+            const { key, title, children, className, disabled, icon, ...rest } =
+              x.props;
+            return {
+              key: x.key as string,
+              children: children,
+              title: title,
+              icon: icon,
+              disabled: disabled,
+              className: className,
+              ...rest,
+            };
+          })
       : items
       ? items
       : [];
