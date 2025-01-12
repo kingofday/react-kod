@@ -57,7 +57,7 @@
 
     &.error {
         .input-wrapper {
-            border-color: var(--red);
+            border-color: var(--red)!important;
         }
     }
 
