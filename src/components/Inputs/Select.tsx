@@ -20,6 +20,10 @@ interface SelectProps extends Omit<InputHTMLAttributes<HTMLInputElement>, "onCha
   popupTargetId?: string;
   children?: ReactElement<SelectOptionItemProps> | ReactElement<SelectOptionItemProps>[];
   onChange?: (value: string) => void;
+  optionsWrapperProps?:{
+    [key:string]:any
+  },
+  [key:string]:any
 }
 const Select = ({
   id,
@@ -39,6 +43,8 @@ const Select = ({
   emptyLabel,
   emptyComponent,
   disabled = false,
+  optionsWrapperProps,
+  ...rest
 }: SelectProps) => {
   const [isOpen, toggle] = useState(false);
   const popupRef = useRef<HTMLUListElement | null>(null);
@@ -111,6 +117,7 @@ const Select = ({
     <div
       ref={ref}
       className={`select-control${allowClear && selectedOption ? " clearable" : ""}${className ? ` ${className}` : ""}${isOpen ? " is-open" : ""}${disabled ? " disabled" : ""}`}
+      {...rest}
     >
       {label ? <label htmlFor={name}>{label}</label> : null}
       <div className={`input-wrapper `} onClick={disabled ? undefined : () => toggle((s) => !s)}>
@@ -119,7 +126,7 @@ const Select = ({
         {allowClear && selectedOption && <CloseIcon className="clear-icon" onClick={disabled ? undefined : (e: any) => clear(e)} />}
       </div>
       {isOpen && (createPortal(
-        <ul ref={popupRef} className={`select-options${listClassName ? ` ${listClassName}` : ""}`} style={popupStyle}>
+        <ul ref={popupRef} className={`select-options${listClassName ? ` ${listClassName}` : ""}`} style={popupStyle} {...optionsWrapperProps}>
           {searchable ? (
             <li className="search-wrapper">
               <input ref={searchRef} type="text" onChange={onSearch} placeholder={searchText} />
