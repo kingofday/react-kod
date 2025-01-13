@@ -216,19 +216,19 @@ const Select = ({
             ) : null}
             {searchedOptions.length > 0 ? (
               searchedOptions?.map(
-                ({ value, disabled, text, children, ...optRest }, idx) => (
+                ({ value:optValue, disabled, text, children, ...optRest }, idx) => (
                   <li
-                    key={value}
+                    key={optValue}
                     className={`${disabled ? "disabled" : ""}${
-                      value === value ? " selected" : ""
+                      optValue === value ? " selected" : ""
                     }`}
-                    onClick={() => (disabled ? undefined : onSelect(value))}
+                    onClick={() => (disabled ? undefined : onSelect(optValue))}
                     {...optRest}
                   >
                     <Opt
                       key={idx}
                       text={text}
-                      value={value}
+                      value={optValue}
                       disabled={disabled}
                     >
                       {children}
