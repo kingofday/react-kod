@@ -1,4 +1,13 @@
-import { InputHTMLAttributes, ReactElement, useEffect, useState, useRef, ReactNode, ChangeEvent, CSSProperties } from "react";
+import {
+  InputHTMLAttributes,
+  ReactElement,
+  useEffect,
+  useState,
+  useRef,
+  ReactNode,
+  ChangeEvent,
+  CSSProperties,
+} from "react";
 import Opt, { SelectOptionItemProps } from "../Shared/Option";
 import ChevronDown from "../Shared/ChevronDown";
 import CloseIcon from "../Shared/ClosedIcon";
@@ -6,24 +15,27 @@ import useOnClickOutside from "../../helpers/useOnClickOutside";
 import { createPortal } from "react-dom";
 import Empty from "../Shared/Empty";
 type Pos = "auto" | number;
-interface SelectProps extends Omit<InputHTMLAttributes<HTMLInputElement>, "onChange"> {
+interface SelectProps
+  extends Omit<InputHTMLAttributes<HTMLInputElement>, "onChange"> {
   label?: ReactNode;
   defaultValue?: any;
   className?: string;
   listClassName?: string;
   placeholder?: string;
-  emptyLabel?:string;
-  emptyComponent?:ReactNode;
+  emptyLabel?: string;
+  emptyComponent?: ReactNode;
   searchable?: boolean;
   allowClear?: boolean;
   searchText?: string;
   popupTargetId?: string;
-  children?: ReactElement<SelectOptionItemProps> | ReactElement<SelectOptionItemProps>[];
+  children?:
+    | ReactElement<SelectOptionItemProps>
+    | ReactElement<SelectOptionItemProps>[];
   onChange?: (value: string) => void;
-  optionsWrapperProps?:{
-    [key:string]:any
-  },
-  [key:string]:any
+  optionsWrapperProps?: {
+    [key: string]: any;
+  };
+  [key: string]: any;
 }
 const Select = ({
   id,
@@ -51,10 +63,19 @@ const Select = ({
   const popupTarget = useRef<HTMLElement | null>(null);
   const ref = useRef<HTMLDivElement>(null);
   const searchRef = useRef<HTMLInputElement>(null);
-  const [popupStyle, setPopupStyle] = useState<CSSProperties | undefined>(undefined);
-  const options = children ? (Array.isArray(children) ? children?.map((x) => x.props) : [children.props]) : [];
-  const selectedOption = options.find((x) => (typeof value !== "undefined" ? x.value === value : x.value === defaultValue));
-  const [searchedOptions, setSearchedOptions] = useState<SelectOptionItemProps[]>(options);
+  const [popupStyle, setPopupStyle] = useState<CSSProperties | undefined>(
+    undefined
+  );
+  const options = children
+    ? Array.isArray(children)
+      ? children?.map((x) => x.props)
+      : [children.props]
+    : [];
+  const selectedOption = options.find((x) =>
+    typeof value !== "undefined" ? x.value === value : x.value === defaultValue
+  );
+  const [searchedOptions, setSearchedOptions] =
+    useState<SelectOptionItemProps[]>(options);
   const clear = (e: any) => {
     e.stopPropagation();
     toggle(false);
@@ -74,18 +95,36 @@ const Select = ({
     const scrollLeft = window.scrollX || document.documentElement.scrollLeft;
     const inputOffsetTop = ref.current?.offsetTop ?? 0;
     const inputOffsetLeft = ref.current?.offsetLeft ?? 0;
-    const offsetHeight = popupTargetId && popupTarget.current ?popupTarget.current.offsetHeight-popupTarget.current.clientHeight:0
-    const offsetWidth = popupTargetId && popupTarget.current ?popupTarget.current.offsetWidth-popupTarget.current.clientWidth:0
+    const offsetHeight =
+      popupTargetId && popupTarget.current
+        ? popupTarget.current.offsetHeight - popupTarget.current.clientHeight
+        : 0;
+    const offsetWidth =
+      popupTargetId && popupTarget.current
+        ? popupTarget.current.offsetWidth - popupTarget.current.clientWidth
+        : 0;
 
     if (inputRect.top + popupRect.height > h) {
-      top = ((popupTargetId && parentRect) ? inputOffsetTop : (inputRect.top + scrollTop)) - popupRect.height - offsetHeight;
+      top =
+        (popupTargetId && parentRect
+          ? inputOffsetTop
+          : inputRect.top + scrollTop) -
+        popupRect.height -
+        offsetHeight;
+    } else {
+      top =
+        (popupTargetId && parentRect
+          ? inputOffsetTop
+          : inputRect.top + scrollTop) +
+        inputRect.height -
+        offsetHeight;
     }
-    else {
-      top = (popupTargetId && parentRect ? inputOffsetTop : (inputRect.top + scrollTop)) + inputRect.height - offsetHeight;
-    }
-    left = (popupTargetId && parentRect ? inputOffsetLeft : (inputRect.left + scrollLeft)) - offsetWidth;
-    setPopupStyle(({ top, left, right: "auto", width: inputRect.width }));
-  }
+    left =
+      (popupTargetId && parentRect
+        ? inputOffsetLeft
+        : inputRect.left + scrollLeft) - offsetWidth;
+    setPopupStyle({ top, left, right: "auto", width: inputRect.width });
+  };
   const handleClose = () => {
     toggle(false);
   };
@@ -95,59 +134,116 @@ const Select = ({
   };
   const onSearch = (e: ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
-    if (value.length) setSearchedOptions(options.filter((x) => x.value !== "" && ~(x.text ?? (x.children as string)).indexOf(value)));
+    if (value.length)
+      setSearchedOptions(
+        options.filter(
+          (x) =>
+            x.value !== "" && ~(x.text ?? (x.children as string)).indexOf(value)
+        )
+      );
     else setSearchedOptions(options);
   };
 
   useOnClickOutside([ref, popupRef], handleClose);
 
   useEffect(() => {
-    popupTarget.current = popupTargetId ? document.getElementById(popupTargetId) : document.body;
-  }, [popupTargetId])
+    popupTarget.current = popupTargetId
+      ? document.getElementById(popupTargetId)
+      : document.body;
+  }, [popupTargetId]);
   useEffect(() => {
-    setSearchedOptions(children ? (Array.isArray(children) ? children?.map((x) => x.props) : [children.props]) : []);
+    setSearchedOptions(
+      children
+        ? Array.isArray(children)
+          ? children?.map((x) => x.props)
+          : [children.props]
+        : []
+    );
   }, [children]);
   useEffect(() => {
     if (isOpen) {
       adjustPosition();
-      searchRef.current?.focus({preventScroll:true});
+      searchRef.current?.focus({ preventScroll: true });
     }
-  }, [isOpen])
+  }, [isOpen]);
   return (
     <div
       ref={ref}
-      className={`select-control${allowClear && selectedOption ? " clearable" : ""}${className ? ` ${className}` : ""}${isOpen ? " is-open" : ""}${disabled ? " disabled" : ""}`}
+      className={`select-control${
+        allowClear && selectedOption ? " clearable" : ""
+      }${className ? ` ${className}` : ""}${isOpen ? " is-open" : ""}${
+        disabled ? " disabled" : ""
+      }`}
       {...rest}
     >
       {label ? <label htmlFor={name}>{label}</label> : null}
-      <div className={`input-wrapper `} onClick={disabled ? undefined : () => toggle((s) => !s)}>
-        {selectedOption?.text ?? selectedOption?.children ?? (placeholder ? <span className="placeholder">{placeholder}</span> : null) ?? <span>&nbsp;</span>}
+      <div
+        className={`input-wrapper `}
+        onClick={disabled ? undefined : () => toggle((s) => !s)}
+      >
+        {selectedOption?.text ??
+          selectedOption?.children ??
+          (placeholder ? (
+            <span className="placeholder">{placeholder}</span>
+          ) : null) ?? <span>&nbsp;</span>}
         <ChevronDown className="indicator" />
-        {allowClear && selectedOption && <CloseIcon className="clear-icon" onClick={disabled ? undefined : (e: any) => clear(e)} />}
+        {allowClear && selectedOption && (
+          <CloseIcon
+            className="clear-icon"
+            onClick={disabled ? undefined : (e: any) => clear(e)}
+          />
+        )}
       </div>
-      {isOpen && (createPortal(
-        <ul ref={popupRef} className={`select-options${listClassName ? ` ${listClassName}` : ""}`} style={popupStyle} {...optionsWrapperProps}>
-          {searchable ? (
-            <li className="search-wrapper">
-              <input ref={searchRef} type="text" onChange={onSearch} placeholder={searchText} />
-            </li>
-          ) : null}
-          {searchedOptions.length > 0 ?
-          searchedOptions?.map((x, idx) => (
-            <li
-              key={x.value}
-              className={`${x.disabled ? "disabled" : ""}${x.value === value ? " selected" : ""}`}
-              onClick={() => (x.disabled ? undefined : onSelect(x.value))}
-            >
-              <Opt key={idx} text={x.text} value={x.value} disabled={x.disabled}>
-                {x.children}
-              </Opt>
-            </li>
-          )):
-          emptyComponent ? emptyComponent :<Empty label={emptyLabel}/>
-          }
-        </ul>, popupTarget.current ?? document.body)
-      )}
+      {isOpen &&
+        createPortal(
+          <ul
+            ref={popupRef}
+            className={`select-options${
+              listClassName ? ` ${listClassName}` : ""
+            }`}
+            style={popupStyle}
+            {...optionsWrapperProps}
+          >
+            {searchable ? (
+              <li className="search-wrapper">
+                <input
+                  ref={searchRef}
+                  type="text"
+                  onChange={onSearch}
+                  placeholder={searchText}
+                />
+              </li>
+            ) : null}
+            {searchedOptions.length > 0 ? (
+              searchedOptions?.map(
+                ({ value, disabled, text, children, ...optRest }, idx) => (
+                  <li
+                    key={value}
+                    className={`${disabled ? "disabled" : ""}${
+                      value === value ? " selected" : ""
+                    }`}
+                    onClick={() => (disabled ? undefined : onSelect(value))}
+                    {...optRest}
+                  >
+                    <Opt
+                      key={idx}
+                      text={text}
+                      value={value}
+                      disabled={disabled}
+                    >
+                      {children}
+                    </Opt>
+                  </li>
+                )
+              )
+            ) : emptyComponent ? (
+              emptyComponent
+            ) : (
+              <Empty label={emptyLabel} />
+            )}
+          </ul>,
+          popupTarget.current ?? document.body
+        )}
       <input type="hidden" value={value} name={name} id={id} />
     </div>
   );
