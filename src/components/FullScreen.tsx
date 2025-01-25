@@ -1,6 +1,6 @@
-import { mergeClasses } from "../helpers/strings";
-import useLockBodyScroll from "../helpers/useLockBodyScroll";
-import { ReactNode, useEffect, useState } from "react";
+import { mergeClasses } from '../helpers/strings';
+import useLockBodyScroll from '../helpers/useLockBodyScroll';
+import { ReactNode, useEffect, useRef, useState } from 'react';
 
 type FullScreenProps = {
   children: ReactNode;
@@ -16,17 +16,17 @@ const FullScreen = ({
   isFullScreen,
 }: FullScreenProps) => {
   const [returningToDefault, setReturningToDefault] = useState(false);
-
+  const isFirstLoad = useRef(true);
   useEffect(() => {
     let timeoutId: NodeJS.Timeout;
 
-    if (!isFullScreen) {
+    if (!isFullScreen && !isFirstLoad.current) {
       setReturningToDefault(true);
       timeoutId = setTimeout(() => {
         setReturningToDefault(false);
       }, 500);
     }
-
+    isFirstLoad.current = false;
     return () => {
       clearTimeout(timeoutId);
     };
@@ -39,11 +39,11 @@ const FullScreen = ({
       id={id}
       className={mergeClasses([
         className,
-        "full-screen",
-        [isFullScreen, "isFullscreen"],
-        [returningToDefault, "returningToDefault"],
+        'full-screen',
+        [isFullScreen, 'isFullscreen'],
+        [returningToDefault, 'returningToDefault'],
       ])}
-      data-status={isFullScreen ? "full-screen" : "default"}
+      data-status={isFullScreen ? 'full-screen' : 'default'}
     >
       {children}
     </div>

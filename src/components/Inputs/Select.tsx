@@ -178,7 +178,7 @@ const Select = ({
     >
       {label ? <label htmlFor={name}>{label}</label> : null}
       <div
-        className={`input-wrapper `}
+        className={`input-wrapper`}
         onClick={disabled ? undefined : () => toggle((s) => !s)}
       >
         {selectedOption?.text ??
