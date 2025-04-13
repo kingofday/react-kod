@@ -5,7 +5,7 @@ react-kod is a free and light component Package
 
 ## Installation
 
-react-kod requires react "^18.2.0", react-dome "^18.2.0" to run.
+react-kod requires react "^19.0.0", react-dome "^19.0.0" to run.
 
 run this command:
 ```
