@@ -51,8 +51,8 @@ const Modal = ({
   footer,
   strings,
   fullscreen = false,
-  animationType="slideInUp",
   fullScreenIcon = false,
+  animationType = "slideInUp",
   ...props
 }: IModalProps) => {
   const modalRef = useRef<HTMLDivElement>(null);
@@ -84,9 +84,11 @@ const Modal = ({
       >
         <div
           className={`modal-body  ${
-            typeof window !== "undefined" && animationType === "slideInUp"
-              ? "enter-animation-slideInUp"
-              : "enter-animation-slideInLeft"
+            typeof window !== "undefined" && window.innerWidth < BreakPoints.sm
+              ? animationType === "slideInUp"
+                ? "enter-animation-slideInUp"
+                : "enter-animation-slideInLeft"
+              : ""
           } card-sm ${title ? "with-title" : ""} ${bodyClass ?? ""}`}
           ref={modalRef}
           {...(props.id ? { id: props.id + "-body" } : {})}
