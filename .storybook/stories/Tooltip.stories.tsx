@@ -8,7 +8,7 @@ export default meta;
 export const Normal: StoryObj = {
     render: () => {
         return <div style={{direction:"rtl",margin:"10px",marginRight:"10px"}}>
-            <Tooltip title="titletitle title title const titletitle title title const ">
+            <Tooltip title="نسبت ارزش خرید (فروش) حقیقی به تعداد خریدار (فروشنده) حقیقی">
             Show Tooltip
         </Tooltip>
         </div>

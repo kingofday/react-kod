@@ -1,12 +1,13 @@
 import { CSSProperties, ReactNode, useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
+
 export interface ITooltip {
   delay?: number;
   children?: ReactNode;
   title?: ReactNode;
   direction?: "top" | "bottom";
   className?: string;
-  style?:CSSProperties;
+  style?: CSSProperties;
   wrapperClassName?: string;
   rtl?: boolean;
   fontSize?: number;
@@ -42,7 +43,9 @@ const Tooltip = ({
     top: "auto",
     left: "auto",
   });
+
   let timeout: number;
+
   const showTip = (): void => {
     if (!children || !title) return;
     if (!delay) setActive(true);
@@ -51,52 +54,58 @@ const Tooltip = ({
         setActive(true);
       }, delay);
   };
+
   const hideTip = (): void => {
     clearInterval(timeout);
     setActive(false);
   };
+
   useEffect(() => {
     if (!loaded) {
       toggleLoading(true);
       return;
     }
-    if (!isActive) return;
-    if (ref.current && tipRef.current) {
-      let rect = ref.current?.getBoundingClientRect();
-      let tipRect = tipRef.current?.getBoundingClientRect();
-      let left: number | string = rect.x + rect.width / 2 - tipRect.width / 2;
-      let right: number | string = "auto";
-      let top: string | number =
-        direction === "top"
-          ? rect.top - tipRect.height - 10
-          : rect.top + rect.height + 10;
-      setPosition({
-        left: left,
-        right: right,
-        top: top,
-      });
-      setTrianglePosition({
-        left: rect.x + rect.width / 2,
-        top: direction === "top" ? rect.top - 11 : rect.top + rect.height + 4,
-      });
+    if (!isActive || !ref.current || !tipRef.current) return;
+
+    const rect = ref.current.getBoundingClientRect();
+    const tipRect = tipRef.current.getBoundingClientRect();
+
+    let left: number | string = rect.x + rect.width / 2 - tipRect.width / 2;
+    let right: number | string = "auto";
+    let top: number | string =
+      direction === "top"
+        ? rect.top - tipRect.height - 10
+        : rect.top + rect.height + 10;
+
+    if (rect.left <= 50) {
+      left = rect.x;
+    } else if (rect.x + tipRect.width > window.innerWidth) {
+      left = rect.x - rect.width / 2 - tipRect.width / 2;
     }
-  }, [loaded, isActive]);
 
-  useEffect(() => {
-    if (ref.current && tipRef.current) {
-      const rect = ref.current?.getBoundingClientRect();
-      const tipRect = tipRef.current?.getBoundingClientRect();
-
-      if (rect.left <= 50) {
-        setPosition((prev) => ({ ...prev, left: Number(rect?.x) }));
-      } else if (rect?.x + tipRect?.width > window.innerWidth) {
-        setPosition((prev) => ({
-          ...prev,
-          left: rect?.x - rect.width / 2 - tipRect.width / 2,
-        }));
+    setPosition((prev) => {
+      if (
+        prev.top === top &&
+        prev.left === left &&
+        prev.right === right
+      ) {
+        return prev;
       }
-    }
-  }, [position]);
+      return { top, left, right };
+    });
+
+    const newTrianglePosition = {
+      left: rect.x + rect.width / 2,
+      top: direction === "top" ? rect.top - 11 : rect.top + rect.height + 4,
+    };
+
+    setTrianglePosition((prev) => {
+      if (prev.top === newTrianglePosition.top && prev.left === newTrianglePosition.left) {
+        return prev;
+      }
+      return newTrianglePosition;
+    });
+  }, [loaded, isActive, direction]);
 
   return (
     <div
@@ -116,7 +125,7 @@ const Tooltip = ({
               top: position.top,
               right: position.right,
               fontSize: `${fontSize}px`,
-              ...(style?style:{})
+              ...(style || {}),
             }}
             className={`tooltip-tip${className ? ` ${className}` : ""}`}
           >
