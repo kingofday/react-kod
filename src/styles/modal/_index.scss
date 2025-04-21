@@ -114,9 +114,9 @@
     }
   }
   
-  .enter-animation-mobile {
-    -webkit-animation-name: enterAnimationMobile;
-    animation-name: enterAnimationMobile;
+  .enter-animation-slideInUp {
+    -webkit-animation-name: slideInUp;
+    animation-name: slideInUp;
     -webkit-animation-duration: 1s;
     animation-duration: 1s;
     -webkit-animation-duration: 1s;
@@ -124,6 +124,16 @@
     -webkit-animation-fill-mode: both;
     animation-fill-mode: both;
   }
+  .enter-animation-slideInLeft {
+    -webkit-animation-name: slideInLeft;
+    animation-name: slideInLeft;
+      -webkit-animation-duration: 1s;
+    animation-duration: 1s;
+    -webkit-animation-duration: 1s;
+    animation-duration: 1s;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+}
   @media (max-width: variables.$xl) {
     align-items: flex-end;
     padding: 0;
@@ -167,7 +177,7 @@
   }
   @import "./full-screen";
 
-  @-webkit-keyframes enterAnimationMobile {
+  @-webkit-keyframes slideInUp {
     0% {
       -webkit-transform: translate3d(0, 100%, 0);
       transform: translate3d(0, 100%, 0);
@@ -178,7 +188,7 @@
       transform: translateZ(0);
     }
   }
-  @keyframes enterAnimationMobile {
+  @keyframes slideInUp {
     0% {
       -webkit-transform: translate3d(0, 100%, 0);
       transform: translate3d(0, 100%, 0);
@@ -190,6 +200,34 @@
     }
   }
 }
+
+@-webkit-keyframes slideInLeft {
+    0% {
+        -webkit-transform: translate3d(-100%,0,0);
+        transform: translate3d(-100%,0,0);
+        visibility: visible
+    }
+
+    to {
+        -webkit-transform: translateZ(0);
+        transform: translateZ(0)
+    }
+}
+
+@keyframes slideInLeft {
+    0% {
+        -webkit-transform: translate3d(-100%,0,0);
+        transform: translate3d(-100%,0,0);
+        visibility: visible
+    }
+
+    to {
+        -webkit-transform: translateZ(0);
+        transform: translateZ(0)
+    }
+}
+
+
 
 .modal-scroll-effect {
   overflow: hidden !important;

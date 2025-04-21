@@ -30,6 +30,7 @@ export interface IModalProps {
     cancel: "انصراف";
     submit: "تایید";
   };
+  animationType?: "slideInUp" | "slideInLeft";
   [key: string]: unknown;
 }
 
@@ -51,6 +52,7 @@ const Modal = ({
   strings,
   fullscreen = false,
   fullScreenIcon = false,
+  animationType = "slideInUp",
   ...props
 }: IModalProps) => {
   const modalRef = useRef<HTMLDivElement>(null);
@@ -83,7 +85,9 @@ const Modal = ({
         <div
           className={`modal-body  ${
             typeof window !== "undefined" && window.innerWidth < BreakPoints.sm
-              ? "enter-animation-mobile"
+              ? animationType === "slideInUp"
+                ? "enter-animation-slideInUp"
+                : "enter-animation-slideInLeft"
               : ""
           } card-sm ${title ? "with-title" : ""} ${bodyClass ?? ""}`}
           ref={modalRef}
