@@ -36,7 +36,7 @@
     @media (max-width: variables.$xs) {
       .btn.tab:not(.active) {
         border: none !important;
-        background-color: var(--hover);
+        background-color: transparent;
         color: var(--text);
       }
     }
