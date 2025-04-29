@@ -1,3 +1,5 @@
+@use "../variables";
+
 &.tab {
   background-color: transparent;
   padding: 0.25rem 0.625rem;
@@ -15,6 +17,9 @@
     &:hover {
       background-color: var(--hover);
       color: var(--text);
+      @media (max-width: variables.$xl) {
+        background-color: transparent;
+      }
     }
   }
 }

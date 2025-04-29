@@ -149,10 +149,6 @@
         &:not(.active):hover {
           background-color: var(--hover);
 
-          @media (max-width: variables.$xl) {
-            background-color: transparent;
-          }
-
         }
       }
     }

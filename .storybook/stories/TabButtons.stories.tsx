@@ -14,7 +14,7 @@ export const DefaultTab: Story = {
       <TabButtons
         // onChange={(tab) => handleChangeTab(tab as PageObjects, "category")}
         // activeKey={tabState.objectTab ?? "symbol"}
-        variant="ink-bar"
+        variant="pill"
         key="category_tab_buttons"
         tabs={[
           {
