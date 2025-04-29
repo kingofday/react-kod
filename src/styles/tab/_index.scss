@@ -41,6 +41,7 @@
 .tabs {
   display: flex;
   flex-direction: column;
+
   &.center {
     align-items: center;
 
@@ -51,18 +52,18 @@
     }
   }
 
-  > .tab-nav-list {
+  >.tab-nav-list {
     display: flex;
     overflow-x: auto;
     overflow-y: hidden;
     max-width: 100%;
     padding: 0 2px;
 
-    > button {
+    >button {
       color: var(--text);
       white-space: nowrap;
 
-      > * {
+      >* {
         font-size: inherit;
       }
 
@@ -73,30 +74,32 @@
         height: 3px;
         background-color: var(--blue);
       }
-      &:hover:not(.active){
+
+      &:hover:not(.active) {
         background-color: inherit;
       }
+
       &.pending {
-        opacity: 0.7!important;
+        opacity: 0.7 !important;
       }
     }
   }
 
   &.normal {
-    > .tab-nav-list {
+    >.tab-nav-list {
       border-bottom: 1px solid var(--border);
 
-      > button {
+      >button {
         @include tabTitle;
       }
     }
   }
 
   &.pill {
-    > .tab-nav-list {
+    >.tab-nav-list {
       gap: 10px;
 
-      > button {
+      >button {
         display: inline-flex;
         justify-content: center;
         align-items: center;
@@ -120,14 +123,14 @@
   }
 
   &.bordered-pill {
-    > .tab-nav-list {
+    >.tab-nav-list {
       gap: 10px;
       border-radius: 6px;
       border: solid 1px var(--border);
       padding: 5px;
       display: inline-flex;
 
-      > button {
+      >button {
         display: inline-flex;
         justify-content: center;
         align-items: center;
@@ -145,6 +148,11 @@
 
         &:not(.active):hover {
           background-color: var(--hover);
+
+          @media (max-width: variables.$xl) {
+            background-color: transparent;
+          }
+
         }
       }
     }
@@ -177,16 +185,20 @@
       }
     }
   }
+
   .hide-scroll-bar {
     @include variables.hideScrollBar;
   }
+
   .mobile_mode {
     display: none !important;
   }
+
   @media (max-width: variables.$xl) {
     .mobile_mode {
       display: inline-block !important;
     }
+
     .desktop_mode {
       display: none !important;
     }
