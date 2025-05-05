@@ -3,9 +3,9 @@ import { Meta, StoryObj } from "@storybook/react";
 import Menu, { MenuItem } from "../../src/components/Menu";
 
 const meta: Meta<typeof Menu> = {
-  title: "Components/Menu",
+  title: "Menu",
   component: Menu,
-  tags: ["autodocs"],
+  tags: ["menu"],
   argTypes: {
     variant: {
       control: "radio",
@@ -48,6 +48,16 @@ const sampleItems: MenuItem[] = [
     disabled: true,
   },
 ];
+
+export const HorizontalMenu: Story = {
+  args: {
+    sampleItems,
+    variant: "horizontal",
+    defaultSelectedKeys: ["stock"],
+    trigger: "click",
+    //   link: Link,
+  },
+};
 
 export const Default: Story = {
   args: {
