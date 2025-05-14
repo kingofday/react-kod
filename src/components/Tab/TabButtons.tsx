@@ -1,7 +1,8 @@
-import { useCallback, useRef, useState, useTransition } from "react";
-import TabButton from "./TabButton";
-import { ITabButtonsProps, ITabItem } from "./Model";
-import useCentralizeTab from "./useCentralizeTab";
+import { useCallback, useRef, useState, useTransition } from 'react';
+import TabButton from './TabButton';
+import { ITabButtonsProps, ITabItem } from './Model';
+import useCentralizeTab from './useCentralizeTab';
+import { mergeClass } from '../../helpers/strings';
 const TabButtons = ({
   id,
   initialActiveKey,
@@ -9,14 +10,15 @@ const TabButtons = ({
   className,
   onChange,
   afterChange,
-  variant = "pill",
+  variant = 'pill',
+  mobileVariant,
   hideScrollBar,
   tabs,
   size,
   thresholdCentralizeTab = 0,
 }: ITabButtonsProps) => {
   const [innerActiveKey, chnageActiveKey] = useState(
-    initialActiveKey ?? (tabs.length ? tabs[0].key : "")
+    initialActiveKey ?? (tabs.length ? tabs[0].key : '')
   );
   const wrapperList = useRef<HTMLDivElement | null>(null);
   const [, startTransition] = useTransition();
@@ -53,9 +55,14 @@ const TabButtons = ({
     <div
       ref={wrapperList}
       id={id}
-      className={`tab-buttons horizontal-scroll-bar ${variant}${
-        className ? " " + className : ""
-      }${hideScrollBar ? " hide-scroll-bar" : ""}`}
+      className={mergeClass(
+        'tab-buttons',
+        'horizontal-scroll-bar',
+        `${mobileVariant ? 'desktop-' : ''}${variant}`,
+        className,
+        [!!mobileVariant, `mobile-${mobileVariant}`],
+        [!!hideScrollBar, 'hide-scroll-bar']
+      )}
     >
       {tabs.map(({ key, icon, className, text, disabled, ...rest }) => (
         <TabButton
@@ -70,17 +77,19 @@ const TabButtons = ({
             ...rest,
           }}
           disabled={disabled}
-          onClick={() => handleClick(key, {
-            key,
-            icon,
-            className,
-            text,
-            disabled,
-            ...rest,
-          })}
-          activeTabKey={onChange ? activeKey ?? "" : innerActiveKey}
+          onClick={() =>
+            handleClick(key, {
+              key,
+              icon,
+              className,
+              text,
+              disabled,
+              ...rest,
+            })
+          }
+          activeTabKey={onChange ? activeKey ?? '' : innerActiveKey}
           className={className}
-          size={size??"small"}
+          size={size ?? 'small'}
           {...rest}
         >
           {text}

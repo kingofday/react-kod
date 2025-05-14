@@ -1,27 +1,56 @@
+@use "../variables" as v;
+
 @mixin circle {
     width: 34px;
     height: 34px;
     padding: 0;
     border-radius: 50%;
+
     &.small {
         height: 26px;
     }
+
     &.large {
         height: 60px;
     }
+
     background-color: var(--bg);
+
     &:hover,
     &:focus {
         background-color: var(--hover);
     }
+
     &:disabled {
         color: var(--disabledText);
     }
 }
+
 &.circle {
     @include circle;
 }
+
 &.secondary-circle {
     @include circle;
-    border:solid 1px var(--border);
+    border: solid 1px var(--border);
+}
+
+@media(min-width: v.$xl) {
+    &.desktop-circle {
+        @include styles;
+    }
+
+    &.desktop-secondary-circle {
+        @include styles;
+    }
+}
+
+@media(max-width: v.$xl) {
+    &.mobile-circle {
+        @include styles;
+    }
+
+    &.mobile-secondary-circle {
+        @include styles;
+    }
 }

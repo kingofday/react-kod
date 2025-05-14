@@ -1,31 +1,56 @@
+@use "../variables" as v;
+
 @mixin sedo($hover, $active) {
   &:hover {
     background-color: $hover;
   }
+
   &:active {
     background-color: $active;
   }
+
   &:disabled {
     background-color: var(--border);
     color: var(--disabledText);
   }
 }
-&.link {
+
+@mixin styles {
   background-color: transparent;
   padding-left: 0;
   padding-right: 0;
   line-height: normal;
+
   &:hover {
     color: var(--blueHover);
   }
+
   &:active {
     color: var(--blueActive);
   }
+
   &:disabled {
     color: var(--disabledText);
   }
+
   &.danger {
     color: var(--red);
     @include sedo(var(--redHover), var(--redActive));
+  }
+}
+
+&.link {
+  @include styles;
+}
+
+@media(min-width: v.$xl) {
+  &.desktop-link {
+    @include styles;
+  }
+}
+
+@media(max-width: v.$xl) {
+  &.mobile-link {
+    @include styles;
   }
 }

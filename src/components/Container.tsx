@@ -1,5 +1,5 @@
 import { CSSProperties, ReactNode } from "react";
-import { mergeClasses } from "../helpers/strings";
+import { mergeClass } from "../helpers/strings";
 
 interface IContainer {
   id?: string;
@@ -20,11 +20,11 @@ const Container = ({
   return (
     <div
       id={id}
-      className={mergeClasses([
+      className={mergeClass(
         "container",
         [autoPadding, "auto-padding"],
         [!!className, className!],
-      ])}
+      )}
       style={style}
       {...rest}
     >

@@ -1,7 +1,7 @@
 import { MouseEvent, ReactNode, RefObject } from "react";
 import Button from "./Button";
 import Card from "./Card";
-import { BasicElementProps } from "../helpers/Models";
+import { BasicElementProps } from "../helpers/model";
 type Item = {
     onClick: (e: MouseEvent) => void;
     icon: ReactNode;

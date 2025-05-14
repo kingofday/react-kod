@@ -1,6 +1,6 @@
 import { useTransition } from "react";
 import Button from "../Button";
-import { mergeClasses } from "../../helpers/strings";
+import { mergeClass } from "../../helpers/strings";
 import { ITabButton } from "./Model";
 
 const TabButton = ({
@@ -19,13 +19,13 @@ const TabButton = ({
     <Button
       key={tabKey}
       icon={icon}
-      className={mergeClasses([
+      className={mergeClass(
         `tab-btn-${tabKey}`,
         className,
         [tabKey === activeTabKey, "active"],
         [!!disabled, "disabled"],
         [isPending, "pending"],
-      ])}
+      )}
       variant="tab"
       onClick={
         (onClick && !disabled && !isPending)

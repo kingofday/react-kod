@@ -22,8 +22,8 @@ function App() {
 
   return (
     <div className="App" dir='rtl' style={{ height: 1000, paddingTop: 250, paddingBottom: 30 }}>
-      {/* <TabButtonsExample />  
-      <TabsExample /> */}
+       <TabButtonsExample />  
+      {/*<TabsExample /> */}
       {/* <MultiSelectExample />  */}
       {/* <SliderRangeExample/>
       
@@ -34,7 +34,7 @@ function App() {
       <ContainerExample/> 
       <ButtonsExample/>
       <MenuExample/>*/}
-      <SingleMenuExample />
+      {/* <SingleMenuExample /> */}
     </div>
   );
 }

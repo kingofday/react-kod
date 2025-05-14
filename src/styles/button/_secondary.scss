@@ -1,20 +1,26 @@
+@use "../variables" as v;
+
 @mixin sedo($hover, $active) {
   &:focus {
-    @if ($active == transparent) {
+    @if ($active ==transparent) {
       background-color: transparent;
       border-color: $hover;
       color: $hover;
-    } @else {
+    }
+
+    @else {
       background-color: $active;
-      border-color: $active== "" $active;
+      border-color: $active==""$active;
       color: #fff;
     }
   }
+
   &:hover {
     background-color: $hover;
     border-color: $hover;
     color: #fff;
   }
+
   &:disabled {
     background-color: var(--border);
     color: var(--disabledText);
@@ -22,7 +28,7 @@
   }
 }
 
-&.secondary {
+@mixin styles {
   border-width: 1px;
   border-style: solid;
   background-color: transparent;
@@ -44,10 +50,26 @@
         color: var(--bg);
       }
     }
+
     &:focus {
       svg {
         color: var(--bg);
       }
     }
+  }
+}
+
+&.secondary {
+  @include styles;
+}
+@media(min-width: v.$xl) {
+  &.desktop-secondary {
+    @include styles;
+  }
+}
+
+@media(max-width: v.$xl) {
+  &.mobile-secondary {
+    @include styles;
   }
 }

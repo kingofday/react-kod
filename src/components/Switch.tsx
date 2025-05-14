@@ -1,4 +1,4 @@
-import { mergeClasses } from "../helpers/strings";
+import { mergeClass } from "../helpers/strings";
 
 export interface ISwitch {
   id?: string;
@@ -30,7 +30,7 @@ const Switch = ({
   return (
     <label
       htmlFor={id}
-      className={mergeClasses(["switch", className, [!!disabled, "disabled"]])}
+      className={mergeClass("switch", className, [!!disabled, "disabled"])}
     >
       <input
         id={id}
