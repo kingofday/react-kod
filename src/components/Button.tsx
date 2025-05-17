@@ -28,6 +28,7 @@ export interface IButtonProps {
   danger?: boolean;
   spinnerType?: SpinnerType;
   size?: 'small' | 'medium' | 'large';
+  mobilSize?: 'small' | 'medium' | 'large';
   variant?: ButttonVariant;
   mobileVariant?: ButttonVariant;
   onClick?: MouseEventHandler<HTMLButtonElement> | undefined;
@@ -53,6 +54,7 @@ const Button: ForwardRefExoticComponent<IButtonProps> = forwardRef<
       mobileVariant,
       danger,
       size,
+      mobilSize,
       ariaLabel,
       onClick,
       onMouseEnter,
@@ -68,6 +70,7 @@ const Button: ForwardRefExoticComponent<IButtonProps> = forwardRef<
         className={mergeClass(
           'btn',
           size,
+          [!!mobilSize, `mobile-${mobilSize}`],
           `${mobileVariant ? 'desktop-' : ''}${variant ?? 'solid'}`,
           [!!mobileVariant, `mobile-${mobileVariant}`],
           [!!danger, 'danger'],

@@ -1,5 +1,6 @@
 @use "../variables" as v;
-@mixin inkBar(){
+
+@mixin inkBar {
   gap: 0;
   border-bottom: 1px solid var(--border);
 
@@ -27,11 +28,13 @@
     @include tabTitle;
   }
 }
-@mixin bordered(){
+
+@mixin bordered {
   .btn.tab:not(.active) {
     border: solid 1px var(--border);
   }
 }
+
 .tab-buttons {
   display: flex;
   gap: 0.625rem;
@@ -59,12 +62,12 @@
     &.desktop-ink-bar {
       @include inkBar;
     }
-  
+
     &.desktop-bordered {
       @include bordered;
     }
   }
-  
+
   @media(max-width: v.$xl) {
     &.bordered {
       .btn.tab:not(.active) {
@@ -73,13 +76,15 @@
         color: var(--text);
       }
     }
+
     &.mobile-ink-bar {
       @include inkBar;
     }
-  
+
     &.mobile-bordered {
       @include bordered;
     }
+
     &.hide-scroll-bar {
       @include v.hideScrollBar;
     }

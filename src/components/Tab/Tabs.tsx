@@ -5,19 +5,21 @@ import {
   useEffect,
   useRef,
   useState,
-} from "react";
-import { Select } from "../Inputs";
-import { ITabProps } from "./Model";
-import TabButton from "./TabButton";
-import useCentralizeTab from "./useCentralizeTab";
+} from 'react';
+import { Select } from '../Inputs';
+import { ITabProps } from './Model';
+import TabButton from './TabButton';
+import useCentralizeTab from './useCentralizeTab';
+import { mergeClass } from '../../helpers/strings';
 type TabsProps = {
   defaultActiveTab?: string;
   activeTab?: string;
   className?: string;
   children?: (ReactElement<ITabProps> | null)[];
   items?: ITabProps[];
-  variant?: "pill" | "normal" | "bordered-pill" | "secondary";
-  alignTitles?: "start" | "end" | "center";
+  variant?: 'pill' | 'normal' | 'bordered-pill' | 'secondary';
+  mobileVariant?: 'pill' | 'normal' | 'bordered-pill' | 'secondary';
+  alignTitles?: 'start' | 'end' | 'center';
   visibility?: boolean;
   hideScrollBar?: boolean;
   onChange?: (key: string) => void;
@@ -38,9 +40,10 @@ const Tabs: ForwardRefExoticComponent<TabsProps> = forwardRef<
       items,
       defaultActiveTab,
       children,
-      className = "",
-      variant = "normal",
-      alignTitles = "start",
+      className = '',
+      variant = 'normal',
+      mobileVariant,
+      alignTitles = 'start',
       visibility,
       hideScrollBar,
       afterChange,
@@ -57,10 +60,10 @@ const Tabs: ForwardRefExoticComponent<TabsProps> = forwardRef<
       ? children
           .filter((x): x is ReactElement<ITabProps> => x !== null)
           .map((x) => {
-            const { key, title, children, className, disabled, icon, ...rest } =
+            const { title, children, className, disabled, icon, tabKey, ...rest } =
               x.props;
             return {
-              key: x.key as string,
+              tabKey,
               children: children,
               title: title,
               icon: icon,
@@ -75,14 +78,14 @@ const Tabs: ForwardRefExoticComponent<TabsProps> = forwardRef<
     const renderedTabs = useRef<RenderedTabs>(
       tabProps.reduce(
         (acc, x) => ({
-          [x.key]: x.key === (activeTab ?? defaultActiveTab ?? tabProps[0].key),
+          [x.tabKey]: x.tabKey === (activeTab ?? defaultActiveTab ?? tabProps[0].tabKey),
           ...acc,
         }),
         {}
       )
     );
     const [activeKey, setActiveKey] = useState<string>(
-      activeTab ?? defaultActiveTab ?? tabProps[0].key
+      activeTab ?? defaultActiveTab ?? tabProps[0].tabKey
     );
     const centralizeTab = useCentralizeTab({
       wrapperList,
@@ -117,28 +120,34 @@ const Tabs: ForwardRefExoticComponent<TabsProps> = forwardRef<
     }, [activeTab]);
     return (
       <div
-        className={`tabs ${variant} ${alignTitles}${
-          className ? ` ${className}` : ""
-        }${visibility ? " visibility" : ""}`}
+        className={mergeClass(
+          'tabs',
+          `${!!mobileVariant ? 'desktop-' : ''}${variant}`,
+          [!!mobileVariant, `mobile-${mobileVariant}`],
+          alignTitles,
+          [!!visibility, 'visibility'],
+          className
+        )}
         ref={forwardedRef}
         {...rest}
       >
         <div
           ref={wrapperList}
-          className={`${
-            changeToInputSelectInMobile ? "desktop_mode" : ""
-          } tab-nav-list horizontal-scroll-bar ${
-            hideScrollBar ? " hide-scroll-bar" : ""
-          }`}
+          className={mergeClass(
+            'tab-nav-list',
+            'horizontal-scroll-bar',
+            [!!hideScrollBar, 'hide-scroll-bar'],
+            [!!changeToInputSelectInMobile, 'desktop_mode']
+          )}
           role="tablist"
         >
           {tabProps.map(
-            ({ key, title, children, className, disabled, icon, ...rest }) => (
+            ({ tabKey, title, children, className, disabled, icon, ...rest }) => (
               <TabButton
-                key={key}
+                key={tabKey}
                 activeTabKey={activeTab ?? activeKey}
-                tabKey={key}
-                onClick={() => handleSelect(key)}
+                tabKey={tabKey}
+                onClick={() => handleSelect(tabKey)}
                 disabled={disabled}
                 icon={icon}
                 className={className}
@@ -156,7 +165,7 @@ const Tabs: ForwardRefExoticComponent<TabsProps> = forwardRef<
             className="mobile_mode"
           >
             {tabProps.map((item) => (
-              <Select.Option key={item.key} value={item.key}>
+              <Select.Option key={item.tabKey} value={item.tabKey}>
                 {item.title}
               </Select.Option>
             ))}
@@ -166,12 +175,12 @@ const Tabs: ForwardRefExoticComponent<TabsProps> = forwardRef<
           {tabProps.map((x) => (
             <li
               className={`tab-content ${
-                (activeTab ?? activeKey) !== x.key ? "d-none" : ""
+                (activeTab ?? activeKey) !== x.tabKey ? 'd-none' : ''
               }`}
-              key={x.key}
+              key={x.tabKey}
             >
-              {(renderedTabs.current[x.key] as boolean) ||
-              (activeTab ?? activeKey) === x.key
+              {(renderedTabs.current[x.tabKey] as boolean) ||
+              (activeTab ?? activeKey) === x.tabKey
                 ? x.children
                 : null}
             </li>

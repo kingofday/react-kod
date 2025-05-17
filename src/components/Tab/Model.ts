@@ -1,6 +1,6 @@
 import { ReactNode } from 'react';
 export interface ITabProps {
-  key: string;
+  tabKey: string;
   title: ReactNode;
   children?: ReactNode;
   icon?: ReactNode;
