@@ -32,17 +32,6 @@
   &:disabled {
     cursor: not-allowed;
   }
-
-  @import './solid';
-  @import './secondary';
-  @import './link';
-  @import './square';
-  @import './circle';
-  @import './tab';
-  @import './gray';
-  @import './ghost';
-  @import './link-gray';
-
   @media (max-width: v.$xl) {
     &.mobile-small {
       height: 26px;
@@ -56,4 +45,14 @@
       height: 60px;
     }
   }
+  
+  @import './solid';
+  @import './secondary';
+  @import './link';
+  @import './square';
+  @import './circle';
+  @import './tab';
+  @import './gray';
+  @import './ghost';
+  @import './link-gray';
 }
