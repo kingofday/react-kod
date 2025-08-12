@@ -1,6 +1,6 @@
 {
   "name": "react-kod",
-  "version": "1.17.3",
+  "version": "1.17.4",
   "private": false,
   "license": "MIT",
   "main": "./dist/cjs/index.js",
@@ -27,7 +27,9 @@
   },
   "peerDependencies": {
     "react": "^18",
-    "react-dom": "^18"
+    "react-dom": "^18",
+    "@types/react": "^18",
+    "@types/react-dom": "18"
   },
   "devDependencies": {
     "@babel/preset-env": "^7.22.20",
