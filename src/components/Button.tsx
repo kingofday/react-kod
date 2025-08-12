@@ -1,7 +1,6 @@
 import {
   forwardRef,
   MouseEventHandler,
-  ForwardRefExoticComponent,
 } from 'react';
 import { ReactNode } from 'react';
 import Spinner, { SpinnerType } from './Spinner';
@@ -37,7 +36,7 @@ export interface IButtonProps {
   ariaLabel?: string;
   [key: string]: any;
 }
-const Button: ForwardRefExoticComponent<IButtonProps> = forwardRef<
+const Button = forwardRef<
   HTMLButtonElement,
   IButtonProps
 >(

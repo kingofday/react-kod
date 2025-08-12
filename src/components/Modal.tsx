@@ -1,6 +1,5 @@
 import {
   forwardRef,
-  ForwardRefExoticComponent,
   ReactNode,
   useEffect,
   useRef,
@@ -41,7 +40,7 @@ export interface IModalProps {
   [key: string]: unknown;
 }
 
-const Modal: ForwardRefExoticComponent<IModalProps> = forwardRef<
+const Modal = forwardRef<
   HTMLDivElement,
   IModalProps
 >(
