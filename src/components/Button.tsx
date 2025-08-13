@@ -1,5 +1,6 @@
 import {
   forwardRef,
+  ForwardRefExoticComponent,
   MouseEventHandler,
 } from 'react';
 import { ReactNode } from 'react';
@@ -36,7 +37,7 @@ export interface IButtonProps {
   ariaLabel?: string;
   [key: string]: any;
 }
-const Button = forwardRef<
+const Button: ForwardRefExoticComponent<IButtonProps> = forwardRef<
   HTMLButtonElement,
   IButtonProps
 >(
