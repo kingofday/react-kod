@@ -1,25 +1,54 @@
-@use "../variables";
+@use "../variables" as v;
 
-&.tab {
+@mixin styles {
   background-color: transparent;
   padding: 0.25rem 0.625rem;
   height: auto;
   line-height: normal;
+
   &.active {
     background-color: var(--blue);
     color: var(--bg);
-    svg{
+
+    svg {
       color: var(--bg);
     }
   }
+
   &:not(.active) {
     color: var(--text);
+
     &:hover {
       background-color: var(--hover);
       color: var(--text);
-      @media (max-width: variables.$xl) {
+
+      @media (max-width: v.$xl) {
         background-color: transparent;
       }
     }
+  }
+}
+
+&.tab {
+  @include styles;
+}
+
+@media(min-width: v.$xl) {
+  &.desktop-tab {
+    @include styles;
+  }
+}
+
+@media(max-width: v.$xl) {
+  .tab {
+    &:not(.active) {
+      &:hover {
+        background-color: transparent;
+      }
+    }
+  }
+
+  &.mobile-tab {
+    @include styles;
   }
 }

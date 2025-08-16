@@ -7,6 +7,8 @@ const TabButtonsExample = () => {
       <TabButtons
         activeKey={activeKey}
         onChange={setActiveKey}
+        variant="bordered"
+        mobileVariant="ink-bar"
         tabs={[
           {
             key: "1",

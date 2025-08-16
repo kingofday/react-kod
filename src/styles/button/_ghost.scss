@@ -1,4 +1,6 @@
-&.ghost {
+@use "../variables" as v;
+
+@mixin styles {
   background-color: transparent;
   padding-left: 0;
   padding-right: 0;
@@ -24,5 +26,21 @@
   &.danger {
     color: var(--red);
     @include sedo(var(--redHover), var(--redActive));
+  }
+}
+
+&.ghost {
+  @include styles;
+}
+
+@media(min-width: v.$xl) {
+  &.desktop-ghost {
+    @include styles;
+  }
+}
+
+@media(max-width: v.$xl) {
+  &.mobile-ghost {
+    @include styles;
   }
 }

@@ -1,4 +1,4 @@
-@use "../variables";
+@use "../variables" as v;
 
 @mixin tabTitle {
   display: inline-flex;
@@ -35,6 +35,73 @@
   &.disabled {
     opacity: 0.5;
     cursor: not-allowed;
+  }
+}
+
+@mixin normal {
+  >.tab-nav-list {
+    border-bottom: 1px solid var(--border);
+
+    >button {
+      @include tabTitle;
+    }
+  }
+}
+
+@mixin pill {
+  >.tab-nav-list {
+    gap: 10px;
+
+    >button {
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+      padding: 5px 10px;
+      cursor: pointer;
+      color: var(--text);
+      border-radius: 6px;
+
+      &.active {
+        background-color: var(--blue);
+        color: var(--bg);
+      }
+
+      &:not(.active):hover {
+        background-color: var(--hover);
+      }
+    }
+  }
+}
+
+@mixin borderedPill {
+  >.tab-nav-list {
+    gap: 10px;
+    border-radius: 6px;
+    border: solid 1px var(--border);
+    padding: 5px;
+    display: inline-flex;
+
+    >button {
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+      padding: 5px 10px;
+      cursor: pointer;
+      color: var(--text);
+      border-radius: 6px;
+
+      &.active {
+        background-color: var(--blue);
+        color: var(--bg);
+      }
+
+      &:not(.active):hover {
+        background-color: var(--hover);
+
+      }
+    }
   }
 }
 
@@ -86,72 +153,15 @@
   }
 
   &.normal {
-    >.tab-nav-list {
-      border-bottom: 1px solid var(--border);
-
-      >button {
-        @include tabTitle;
-      }
-    }
+    @include normal;
   }
 
   &.pill {
-    >.tab-nav-list {
-      gap: 10px;
-
-      >button {
-        display: inline-flex;
-        justify-content: center;
-        align-items: center;
-        gap: 10px;
-        padding: 5px 10px;
-        cursor: pointer;
-        color: var(--text);
-        border-radius: 6px;
-
-        // position: relative;
-        &.active {
-          background-color: var(--blue);
-          color: var(--bg);
-        }
-
-        &:not(.active):hover {
-          background-color: var(--hover);
-        }
-      }
-    }
+    @include pill;
   }
 
   &.bordered-pill {
-    >.tab-nav-list {
-      gap: 10px;
-      border-radius: 6px;
-      border: solid 1px var(--border);
-      padding: 5px;
-      display: inline-flex;
-
-      >button {
-        display: inline-flex;
-        justify-content: center;
-        align-items: center;
-        gap: 10px;
-        padding: 5px 10px;
-        cursor: pointer;
-        color: var(--text);
-        border-radius: 6px;
-
-        // position: relative;
-        &.active {
-          background-color: var(--blue);
-          color: var(--bg);
-        }
-
-        &:not(.active):hover {
-          background-color: var(--hover);
-
-        }
-      }
-    }
+    @include borderedPill;
   }
 
   .tab-content-list {
@@ -183,20 +193,47 @@
   }
 
   .hide-scroll-bar {
-    @include variables.hideScrollBar;
+    @include v.hideScrollBar;
   }
 
   .mobile_mode {
     display: none !important;
   }
 
-  @media (max-width: variables.$xl) {
+  //===
+  @media(min-width: v.$xl) {
+    &.desktop-normal {
+      @include normal;
+    }
+
+    &.desktop-pill {
+      @include pill;
+    }
+
+    &.desktop-bordered-pill {
+      @include borderedPill;
+    }
+  }
+
+  @media(max-width: v.$xl) {
     .mobile_mode {
       display: inline-block !important;
     }
 
     .desktop_mode {
       display: none !important;
+    }
+
+    &.mobile-normal {
+      @include normal;
+    }
+
+    &.mobile-pill {
+      @include pill;
+    }
+
+    &.mobile-bordered-pill {
+      @include borderedPill;
     }
   }
 }

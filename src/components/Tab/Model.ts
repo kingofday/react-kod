@@ -1,6 +1,6 @@
-import { ReactNode } from "react";
+import { ReactNode } from 'react';
 export interface ITabProps {
-  key: string;
+  tabKey: string;
   title: ReactNode;
   children?: ReactNode;
   icon?: ReactNode;
@@ -15,9 +15,11 @@ export interface ITabItem {
   disabled?: boolean;
   [key: string]: any;
 }
+export type TMobileVariant = 'pill' | 'bordered' | 'ink-bar';
 export interface ITabButtonsProps {
   id?: string;
-  variant?: "pill" | "bordered" | "ink-bar";
+  variant?: TMobileVariant;
+  mobileVariant?: TMobileVariant;
   initialActiveKey?: string;
   activeKey?: string;
   className?: string;
@@ -26,7 +28,7 @@ export interface ITabButtonsProps {
   onChange?: (key: string, tab?: ITabItem) => void;
   afterChange?: (key: string) => void;
   thresholdCentralizeTab?: number;
-  size?: "small" | "medium" | "large";
+  size?: 'small' | 'medium' | 'large';
   [key: string]: any;
 }
 export interface ITabButton {

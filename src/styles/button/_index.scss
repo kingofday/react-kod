@@ -1,3 +1,5 @@
+@use "../variables" as v;
+
 .btn {
   height: 34px;
   border: none;
@@ -10,9 +12,11 @@
   font-family: inherit;
   font-size: 0.75rem;
   gap: 8px;
+
   .icon {
     display: inline-flex;
   }
+
   &.small {
     height: 26px;
   }
@@ -28,7 +32,20 @@
   &:disabled {
     cursor: not-allowed;
   }
+  @media (max-width: v.$xl) {
+    &.mobile-small {
+      height: 26px;
+    }
 
+    &.mobile-medium {
+      height: 34px;
+    }
+
+    &.mobile-large {
+      height: 60px;
+    }
+  }
+  
   @import './solid';
   @import './secondary';
   @import './link';

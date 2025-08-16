@@ -1,4 +1,4 @@
-import { mergeClasses } from '../helpers/strings';
+import { mergeClass } from '../helpers/strings';
 import useLockBodyScroll from '../helpers/useLockBodyScroll';
 import { ReactNode, useEffect, useRef, useState } from 'react';
 
@@ -37,12 +37,12 @@ const FullScreen = ({
   return (
     <div
       id={id}
-      className={mergeClasses([
+      className={mergeClass(
         className,
         'full-screen',
         [isFullScreen, 'isFullscreen'],
         [returningToDefault, 'returningToDefault'],
-      ])}
+      )}
       data-status={isFullScreen ? 'full-screen' : 'default'}
     >
       {children}

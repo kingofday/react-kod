@@ -1,4 +1,39 @@
-@use "../variables";
+@use "../variables" as v;
+
+@mixin inkBar {
+  gap: 0;
+  border-bottom: 1px solid var(--border);
+
+  .btn.tab {
+    white-space: nowrap;
+    color: var(--text);
+    white-space: nowrap;
+
+    svg {
+      color: inherit;
+    }
+
+    >* {
+      font-size: inherit;
+    }
+
+    &:after {
+      transition: width 0.2s linear;
+      bottom: 0;
+      position: absolute;
+      height: 3px;
+      background-color: var(--blue);
+    }
+
+    @include tabTitle;
+  }
+}
+
+@mixin bordered {
+  .btn.tab:not(.active) {
+    border: solid 1px var(--border);
+  }
+}
 
 .tab-buttons {
   display: flex;
@@ -6,46 +41,11 @@
   padding: 0 2px;
 
   &.ink-bar {
-    gap: 0;
-    border-bottom: 1px solid var(--border);
-
-    .btn.tab {
-      white-space: nowrap;
-      color: var(--text);
-      white-space: nowrap;
-
-      svg {
-        color: inherit;
-      }
-
-      >* {
-        font-size: inherit;
-      }
-
-      &:after {
-        transition: width 0.2s linear;
-        bottom: 0;
-        position: absolute;
-        height: 3px;
-        background-color: var(--blue);
-      }
-
-      @include tabTitle;
-    }
+    @include inkBar;
   }
 
   &.bordered {
-    @media (max-width: variables.$xs) {
-      .btn.tab:not(.active) {
-        border: none !important;
-        background-color: var(--hover);
-        color: var(--text);
-      }
-    }
-
-    .btn.tab:not(.active) {
-      border: solid 1px var(--border);
-    }
+    @include bordered;
   }
 
   .btn {
@@ -58,9 +58,35 @@
     }
   }
 
-  @media (max-width: variables.$xl) {
+  @media(min-width: v.$xl) {
+    &.desktop-ink-bar {
+      @include inkBar;
+    }
+
+    &.desktop-bordered {
+      @include bordered;
+    }
+  }
+
+  @media(max-width: v.$xl) {
+    &.bordered {
+      .btn.tab:not(.active) {
+        border: none !important;
+        background-color: var(--hover);
+        color: var(--text);
+      }
+    }
+
+    &.mobile-ink-bar {
+      @include inkBar;
+    }
+
+    &.mobile-bordered {
+      @include bordered;
+    }
+
     &.hide-scroll-bar {
-      @include variables.hideScrollBar;
+      @include v.hideScrollBar;
     }
   }
 }

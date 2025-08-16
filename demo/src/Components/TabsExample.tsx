@@ -5,9 +5,9 @@ const TabsExample = () => {
   return (
     <div id="">
       <h2>Normal Tabs</h2>
-      <Tabs variant="normal" activeTab={activeKey} onChange={setActiveKey}>
+      <Tabs mobileVariant="bordered-pill" variant="normal" activeTab={activeKey} onChange={setActiveKey}>
         {[1, 2, 3, 4, 5, 6, 7, 8].map((x) => (
-          <Tab key={x.toString()} title={`tab ${x} with long title`}>
+          <Tab tabKey={x.toString()} title={`tab ${x} with long title`}>
             <>Tab {x} content</>
           </Tab>
         ))}
@@ -15,7 +15,7 @@ const TabsExample = () => {
         <h2>Pill Tabs</h2>
       <Tabs variant="pill" activeTab={activeKey} onChange={setActiveKey}>
         {[1, 2, 3, 4, 5, 6, 7, 8].map((x) => (
-          <Tab key={x.toString()} title={`tab ${x} with long title`}>
+          <Tab tabKey={x.toString()} title={`tab ${x} with long title`}>
             <>Tab {x} content</>
           </Tab>
         ))}
@@ -23,7 +23,7 @@ const TabsExample = () => {
       <h2>Bordered-Pill Tabs</h2>
       <Tabs variant="bordered-pill" activeTab={activeKey} onChange={setActiveKey}>
         {[1, 2, 3, 4, 5, 6, 7, 8].map((x) => (
-          <Tab key={x.toString()} title={`tab ${x} with long title`}>
+          <Tab tabKey={x.toString()} title={`tab ${x} with long title`}>
             <>Tab {x} content</>
           </Tab>
         ))}
@@ -31,7 +31,7 @@ const TabsExample = () => {
       <h2>Secondary Tabs</h2>
       <Tabs variant="secondary" activeTab={activeKey} onChange={setActiveKey}>
         {[1, 2, 3, 4, 5, 6, 7, 8].map((x) => (
-          <Tab key={x.toString()} title={`tab ${x} with long title`}>
+          <Tab tabKey={x.toString()} title={`tab ${x} with long title`}>
             <>Tab {x} content</>
           </Tab>
         ))}
