@@ -1,6 +1,7 @@
 @use "./variables" as v;
 
 @mixin active {
+
   // border-bottom: solid 2px var(--blue);
   &:after {
     content: "";
@@ -42,6 +43,7 @@
 .menu2 {
   display: inline-flex;
   position: relative;
+
   &.trigger-hover {
     .item:hover {
       flex-direction: column;
@@ -51,22 +53,26 @@
       }
     }
   }
+
   .item {
     cursor: pointer;
-    > input[type="checkbox"] {
+
+    >input[type="checkbox"] {
       display: none;
     }
-    > input[type="checkbox"]:checked ~ .sub-menu {
+
+    >input[type="checkbox"]:checked~.sub-menu {
       height: auto;
     }
+
     .disabled {
-      > .menu-content {
+      >.menu-content {
         cursor: not-allowed;
       }
     }
   }
 
-  > .item > .menu-content {
+  >.item>.menu-content {
     &:hover {
       @include hover;
     }
@@ -76,7 +82,7 @@
     display: inline-flex;
     flex-direction: column;
 
-    .item.selected:not(:has(.sub-menu)) > .menu-content {
+    .item.selected:not(:has(.sub-menu))>.menu-content {
       color: var(--blue);
     }
 
@@ -109,13 +115,13 @@
           width: 100%;
         }
 
-        > svg path {
+        >svg path {
           stroke: var(--text);
         }
       }
 
       &:hover {
-        > .menu-content {
+        >.menu-content {
           color: var(--blue);
 
           svg path {
@@ -166,10 +172,10 @@
     height: 60px;
     gap: 0.625rem;
 
-    > .item.selected > .menu-content {
+    >.item.selected>.menu-content {
       @include active;
 
-      > .indicator {
+      >.indicator {
         path {
           stroke: var(--blue);
         }
@@ -203,28 +209,46 @@
           width: 100%;
         }
 
-        > svg path {
+        >svg path {
           stroke: var(--text);
         }
+
         &:hover {
           color: var(--blue);
+
           & * {
             color: var(--blue);
           }
+
           svg path {
             stroke: var(--blue);
           }
         }
       }
+
       &:is(.disabled) .menu-content * {
         color: inherit;
+
         svg path {
           stroke: inherit;
         }
       }
+
       &.disabled {
         opacity: 0.5;
         cursor: not-allowed;
+
+        &:hover {
+          color: var(--text);
+
+          & * {
+            color: var(--text);
+          }
+
+          svg path {
+            stroke: var(--text);
+          }
+        }
       }
 
       &:not(.disabled) {
