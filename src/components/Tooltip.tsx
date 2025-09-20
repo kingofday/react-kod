@@ -9,6 +9,7 @@ export interface ITooltip {
   className?: string;
   style?: CSSProperties;
   wrapperClassName?: string;
+  wrapperStyle?: CSSProperties;
   rtl?: boolean;
   fontSize?: number;
 }
@@ -21,6 +22,7 @@ const Tooltip = ({
   className,
   fontSize,
   style,
+  wrapperStyle,
   direction = "top",
 }: ITooltip) => {
   const ref = useRef<HTMLDivElement>(null);
@@ -111,6 +113,7 @@ const Tooltip = ({
     <div
       ref={ref}
       className={`tooltip-wrapper ${wrapperClassName ?? ""}`}
+      style={wrapperStyle}
       onMouseEnter={showTip}
       onMouseLeave={hideTip}
     >
