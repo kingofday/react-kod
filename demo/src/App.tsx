@@ -22,10 +22,12 @@ function App() {
 
   return (
     <div className="App" dir='rtl' style={{ height: 1000, paddingTop: 250, paddingBottom: 30 }}>
-      <TabButtonsExample /> 
+      <SingleMenuExample />
+      {/* <TabButtonsExample /> */}
+       {/* <SliderRangeExample/> */}
       {/* <TabsExample />  */}
       {/* <MultiSelectExample />  */}
-      {/* <SliderRangeExample/>
+      {/* 
       
       <SelectExample />
       <PopupExample />*/}

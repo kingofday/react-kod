@@ -123,8 +123,7 @@ const SingleMenu = ({
       >
         {anchor}
       </Button>
-      {statusOpen &&
-        createPortal(
+      {createPortal(
           <ul
             ref={popupRef}
             className={`wrapper-items ${
