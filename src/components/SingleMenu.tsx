@@ -1,4 +1,4 @@
-import { CSSProperties, ElementType, ReactNode, useEffect, useRef, useState } from "react";
+import { CSSProperties, ElementType, ReactNode, useEffect, useMemo, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import Button from "./Button";
 import useOnClickOutside from "../helpers/useOnClickOutside";
@@ -123,7 +123,7 @@ const SingleMenu = ({
       >
         {anchor}
       </Button>
-      {createPortal(
+      {statusOpen && createPortal(
           <ul
             ref={popupRef}
             className={`wrapper-items ${
